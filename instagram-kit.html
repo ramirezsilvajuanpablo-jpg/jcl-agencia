@@ -1,0 +1,1132 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JCL — Instagram Kit</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#05091A;--bg2:#080F24;--bg3:#0C1530;
+  --blue:#1565C0;--cyan:#00C8FF;--orange:#FF8C00;
+  --violet:#7C3AED;--teal:#00ACC1;
+  --text:#EEF2FF;--muted:#6B7FA3;
+  --border:rgba(0,200,255,0.15);
+  --glass:rgba(8,15,36,0.75);
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;min-height:100vh;overflow-x:hidden}
+
+/* HEADER */
+.header{
+  background:linear-gradient(135deg,var(--bg2) 0%,var(--bg3) 100%);
+  border-bottom:1px solid var(--border);
+  padding:40px 60px 50px;
+  position:relative;
+  overflow:hidden;
+}
+.header::before{
+  content:'';position:absolute;top:-80px;right:-80px;
+  width:400px;height:400px;
+  background:radial-gradient(circle,rgba(0,200,255,0.12) 0%,transparent 70%);
+  border-radius:50%;
+}
+.header::after{
+  content:'';position:absolute;bottom:-100px;left:100px;
+  width:300px;height:300px;
+  background:radial-gradient(circle,rgba(255,140,0,0.1) 0%,transparent 70%);
+  border-radius:50%;
+}
+.header-inner{position:relative;z-index:1;max-width:1200px;margin:0 auto}
+.header-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(0,200,255,0.08);border:1px solid rgba(0,200,255,0.25);
+  border-radius:20px;padding:6px 14px;margin-bottom:20px;
+  font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--cyan);
+}
+.header-badge span{width:6px;height:6px;background:var(--cyan);border-radius:50%;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.5;transform:scale(0.8)}}
+.header h1{font-family:'Syne',sans-serif;font-size:clamp(32px,5vw,56px);font-weight:800;line-height:1.1;margin-bottom:12px}
+.gradient-text{background:linear-gradient(135deg,var(--cyan) 0%,var(--blue) 40%,var(--violet) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.header p{color:var(--muted);font-size:16px;max-width:500px;line-height:1.6}
+.header-logo{
+  position:absolute;right:60px;top:50%;transform:translateY(-50%);
+  background:#fff;border-radius:12px;padding:10px 16px;
+  box-shadow:0 8px 32px rgba(0,0,0,0.4);
+}
+.header-logo img{height:40px;display:block}
+
+/* NAV */
+.kit-nav{
+  position:sticky;top:0;z-index:100;
+  background:rgba(5,9,26,0.92);backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);
+  padding:0 60px;
+}
+.kit-nav ul{
+  display:flex;gap:0;list-style:none;max-width:1200px;margin:0 auto;
+}
+.kit-nav a{
+  display:block;padding:16px 24px;color:var(--muted);text-decoration:none;
+  font-size:13px;font-weight:500;letter-spacing:0.5px;
+  border-bottom:2px solid transparent;transition:all 0.2s;white-space:nowrap;
+}
+.kit-nav a:hover,.kit-nav a.active{color:var(--cyan);border-bottom-color:var(--cyan)}
+
+/* SECTIONS */
+.section{max-width:1200px;margin:0 auto;padding:80px 60px}
+.section-tag{
+  font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--cyan);
+  letter-spacing:2px;text-transform:uppercase;margin-bottom:12px;
+}
+.section-title{font-family:'Syne',sans-serif;font-size:clamp(24px,4vw,38px);font-weight:800;margin-bottom:8px}
+.section-sub{color:var(--muted);font-size:15px;margin-bottom:48px;line-height:1.6}
+
+/* ===== BIO SECTION ===== */
+.bio-card{
+  background:var(--glass);border:1px solid var(--border);
+  border-radius:20px;overflow:hidden;backdrop-filter:blur(20px);
+}
+.bio-phone{
+  background:linear-gradient(180deg,#000 0%,#111 100%);
+  border-radius:20px;overflow:hidden;margin:0 auto;
+  width:320px;box-shadow:0 24px 80px rgba(0,0,0,0.6);
+}
+.phone-status{
+  background:#000;padding:12px 20px 4px;
+  display:flex;justify-content:space-between;align-items:center;
+}
+.phone-status span{font-size:10px;color:#fff;font-weight:600}
+.ig-header{
+  background:#000;padding:12px 16px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.ig-header-title{color:#fff;font-size:14px;font-weight:700}
+.ig-actions{display:flex;gap:12px}
+.ig-actions svg{width:20px;height:20px;fill:none;stroke:#fff;stroke-width:1.8}
+.ig-profile{background:#000;padding:16px}
+.ig-avatar-row{display:flex;align-items:center;gap:16px;margin-bottom:12px}
+.ig-avatar{
+  width:72px;height:72px;border-radius:50%;
+  background:linear-gradient(135deg,var(--cyan),var(--violet));
+  padding:2px;flex-shrink:0;
+}
+.ig-avatar-inner{
+  width:100%;height:100%;border-radius:50%;
+  background:#111;display:flex;align-items:center;justify-content:center;
+  overflow:hidden;
+}
+.ig-avatar-inner img{width:68px;height:68px;object-fit:cover;border-radius:50%}
+.ig-stats{display:flex;gap:0;flex:1}
+.ig-stat{text-align:center;flex:1}
+.ig-stat-num{display:block;color:#fff;font-size:14px;font-weight:700}
+.ig-stat-lbl{display:block;color:#999;font-size:10px}
+.ig-name{color:#fff;font-size:13px;font-weight:700;margin-bottom:2px}
+.ig-category{color:#999;font-size:11px;margin-bottom:8px}
+.ig-bio-text{color:#fff;font-size:12px;line-height:1.5;white-space:pre-line}
+.ig-bio-text .accent{color:var(--cyan)}
+.ig-bio-text .orange{color:var(--orange)}
+.ig-link{color:#78B8FF;font-size:12px;margin-top:6px}
+.ig-btns{display:flex;gap:6px;margin-top:12px}
+.ig-btn{
+  flex:1;background:#333;border:none;border-radius:6px;
+  color:#fff;font-size:11px;font-weight:600;padding:7px;cursor:pointer;
+}
+.ig-btn.primary{background:linear-gradient(135deg,var(--blue),var(--cyan));color:#000}
+.ig-highlights{
+  background:#000;padding:12px 16px;
+  display:flex;gap:12px;overflow-x:auto;
+}
+.ig-hl{display:flex;flex-direction:column;align-items:center;gap:4px;flex-shrink:0}
+.ig-hl-ring{
+  width:54px;height:54px;border-radius:50%;padding:2px;
+  background:linear-gradient(135deg,var(--orange),var(--violet),var(--cyan));
+}
+.ig-hl-inner{
+  width:100%;height:100%;border-radius:50%;
+  background:#222;display:flex;align-items:center;justify-content:center;
+  font-size:20px;
+}
+.ig-hl-label{color:#fff;font-size:9px;text-align:center;max-width:54px}
+.ig-posts-grid{
+  background:#000;
+  display:grid;grid-template-columns:repeat(3,1fr);gap:1px;
+}
+.ig-post{aspect-ratio:1;overflow:hidden;position:relative}
+.ig-post img{width:100%;height:100%;object-fit:cover}
+.ig-post-placeholder{
+  width:100%;height:100%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:11px;text-align:center;padding:8px;color:#fff;font-weight:600;
+  line-height:1.3;
+}
+
+/* Bio copy panel */
+.bio-panel{padding:32px 40px}
+.copy-block{
+  background:rgba(0,200,255,0.05);border:1px solid var(--border);
+  border-radius:12px;padding:20px 24px;margin-bottom:20px;position:relative;
+}
+.copy-block h4{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--cyan);margin-bottom:10px;font-family:'JetBrains Mono',monospace}
+.copy-block pre{
+  font-family:'Inter',sans-serif;font-size:14px;line-height:1.7;
+  color:var(--text);white-space:pre-wrap;
+}
+.copy-block .em{color:var(--orange);font-weight:600}
+.copy-btn{
+  position:absolute;top:16px;right:16px;
+  background:rgba(0,200,255,0.1);border:1px solid rgba(0,200,255,0.25);
+  border-radius:8px;padding:6px 12px;color:var(--cyan);
+  font-size:11px;font-weight:600;cursor:pointer;transition:all 0.2s;
+  font-family:'JetBrains Mono',monospace;letter-spacing:0.5px;
+}
+.copy-btn:hover{background:rgba(0,200,255,0.2)}
+.bio-grid{display:grid;grid-template-columns:320px 1fr;gap:48px;align-items:start}
+
+/* ANNOTATIONS */
+.annotation{
+  background:rgba(0,200,255,0.06);border-left:3px solid var(--cyan);
+  border-radius:0 8px 8px 0;padding:12px 16px;margin-bottom:12px;
+}
+.annotation strong{color:var(--cyan);font-size:12px;display:block;margin-bottom:3px;font-family:'JetBrains Mono',monospace}
+.annotation span{color:var(--muted);font-size:13px}
+
+/* ===== HIGHLIGHTS ===== */
+.highlights-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+.hl-card{
+  background:var(--glass);border:1px solid var(--border);
+  border-radius:16px;overflow:hidden;backdrop-filter:blur(10px);
+  transition:transform 0.3s,border-color 0.3s;
+}
+.hl-card:hover{transform:translateY(-4px);border-color:rgba(0,200,255,0.3)}
+.hl-cover{
+  aspect-ratio:9/16;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;position:relative;overflow:hidden;
+  padding:24px;
+}
+.hl-cover-bg{position:absolute;inset:0;opacity:0.15}
+.hl-cover-icon{font-size:48px;margin-bottom:16px;position:relative;z-index:1}
+.hl-cover-title{
+  font-family:'Syne',sans-serif;font-size:18px;font-weight:800;
+  text-align:center;position:relative;z-index:1;line-height:1.2;
+}
+.hl-cover-sub{
+  font-size:10px;letter-spacing:2px;text-transform:uppercase;
+  opacity:0.6;margin-top:8px;position:relative;z-index:1;text-align:center;
+}
+.hl-cover-logo{
+  position:absolute;bottom:20px;right:16px;z-index:1;
+  font-family:'Syne',sans-serif;font-size:12px;font-weight:800;
+  opacity:0.5;letter-spacing:1px;
+}
+.hl-meta{padding:20px}
+.hl-meta h3{font-family:'Syne',sans-serif;font-size:16px;font-weight:800;margin-bottom:8px}
+.hl-meta p{font-size:13px;color:var(--muted);line-height:1.5;margin-bottom:12px}
+.hl-colors{display:flex;gap:8px;flex-wrap:wrap}
+.color-chip{
+  display:inline-flex;align-items:center;gap:6px;
+  background:rgba(255,255,255,0.05);border:1px solid var(--border);
+  border-radius:20px;padding:4px 10px;font-size:11px;
+  font-family:'JetBrains Mono',monospace;
+}
+.color-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.hl-icon-notes{margin-top:12px;font-size:12px;color:var(--muted);line-height:1.6}
+.hl-icon-notes li{margin-bottom:4px}
+
+/* ===== POSTS GRID ===== */
+.posts-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.post-card{
+  background:var(--glass);border:1px solid var(--border);
+  border-radius:16px;overflow:hidden;backdrop-filter:blur(10px);
+  transition:transform 0.3s;
+}
+.post-card:hover{transform:translateY(-4px)}
+.post-visual{
+  aspect-ratio:1;display:flex;align-items:center;justify-content:center;
+  position:relative;overflow:hidden;padding:20px;
+}
+.post-num{
+  position:absolute;top:12px;left:12px;
+  background:rgba(0,0,0,0.6);border-radius:20px;
+  padding:4px 10px;font-family:'JetBrains Mono',monospace;
+  font-size:10px;color:var(--cyan);letter-spacing:1px;
+}
+.post-type-badge{
+  position:absolute;top:12px;right:12px;
+  border-radius:20px;padding:4px 10px;font-size:9px;font-weight:700;
+  letter-spacing:1px;text-transform:uppercase;
+}
+.type-edu{background:rgba(0,172,193,0.2);color:var(--teal);border:1px solid rgba(0,172,193,0.3)}
+.type-auth{background:rgba(124,58,237,0.2);color:var(--violet);border:1px solid rgba(124,58,237,0.3)}
+.type-sell{background:rgba(255,140,0,0.2);color:var(--orange);border:1px solid rgba(255,140,0,0.3)}
+.post-title-overlay{
+  font-family:'Syne',sans-serif;font-weight:800;font-size:15px;
+  text-align:center;line-height:1.3;position:relative;z-index:1;
+}
+.post-meta{padding:16px}
+.post-meta .post-tag{
+  font-family:'JetBrains Mono',monospace;font-size:10px;
+  letter-spacing:1.5px;text-transform:uppercase;margin-bottom:6px;
+}
+.post-meta h4{font-family:'Syne',sans-serif;font-size:14px;font-weight:800;margin-bottom:6px}
+.post-meta p{font-size:12px;color:var(--muted);line-height:1.5;margin-bottom:10px}
+.post-copy{
+  background:rgba(0,0,0,0.3);border-radius:8px;padding:10px 12px;
+  font-size:11px;color:var(--text);line-height:1.6;
+  border-left:2px solid var(--cyan);
+}
+.post-copy .hook{color:var(--orange);font-weight:600}
+.post-tags{display:flex;gap:4px;flex-wrap:wrap;margin-top:8px}
+.post-hashtag{
+  background:rgba(0,200,255,0.08);border-radius:4px;
+  padding:2px 6px;font-size:10px;color:var(--cyan);
+  font-family:'JetBrains Mono',monospace;
+}
+
+/* GRID VISUAL PREVIEW */
+.grid-preview-wrap{
+  display:flex;justify-content:center;margin-bottom:60px;
+}
+.grid-preview{
+  background:#000;border-radius:20px;padding:12px;
+  box-shadow:0 24px 80px rgba(0,0,0,0.5);width:320px;
+}
+.grid-preview-header{
+  display:flex;align-items:center;gap:8px;padding:0 4px 10px;
+  border-bottom:1px solid #222;margin-bottom:10px;
+}
+.grid-preview-avatar{
+  width:28px;height:28px;border-radius:50%;
+  background:linear-gradient(135deg,var(--cyan),var(--violet));
+  padding:1.5px;
+}
+.grid-preview-name{color:#fff;font-size:12px;font-weight:700}
+.grid-mini{display:grid;grid-template-columns:repeat(3,1fr);gap:2px}
+.grid-mini-cell{
+  aspect-ratio:1;border-radius:4px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:9px;font-weight:700;color:rgba(255,255,255,0.9);
+  text-align:center;padding:4px;line-height:1.2;position:relative;overflow:hidden;
+}
+.grid-mini-cell .pos{
+  position:absolute;top:3px;left:4px;
+  font-size:8px;color:rgba(255,255,255,0.5);
+  font-family:'JetBrains Mono',monospace;
+}
+
+/* PALETTE */
+.palette-section{
+  background:var(--glass);border:1px solid var(--border);
+  border-radius:20px;padding:32px;margin-bottom:48px;backdrop-filter:blur(10px);
+}
+.palette-title{font-family:'Syne',sans-serif;font-weight:800;font-size:18px;margin-bottom:20px}
+.palette-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+.palette-swatch{border-radius:12px;overflow:hidden;border:1px solid var(--border)}
+.palette-color{height:80px;display:flex;align-items:center;justify-content:center;font-size:20px}
+.palette-info{background:var(--bg2);padding:10px;text-align:center}
+.palette-hex{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--cyan)}
+.palette-name{font-size:11px;color:var(--muted);margin-top:2px}
+.palette-use{font-size:10px;color:rgba(107,127,163,0.7);margin-top:2px}
+
+/* STRATEGY */
+.strategy-card{
+  background:var(--glass);border:1px solid var(--border);
+  border-radius:16px;padding:24px;backdrop-filter:blur(10px);margin-bottom:16px;
+}
+.strategy-header{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.strategy-icon{
+  width:40px;height:40px;border-radius:10px;
+  display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;
+}
+.strategy-header h3{font-family:'Syne',sans-serif;font-size:16px;font-weight:800}
+.strategy-list{list-style:none}
+.strategy-list li{
+  display:flex;gap:10px;padding:8px 0;
+  border-bottom:1px solid rgba(255,255,255,0.04);font-size:13px;color:var(--muted);line-height:1.5;
+}
+.strategy-list li:last-child{border-bottom:none}
+.strategy-list li::before{content:'→';color:var(--cyan);flex-shrink:0;margin-top:1px}
+
+/* FOOTER */
+.kit-footer{
+  border-top:1px solid var(--border);padding:40px 60px;
+  text-align:center;color:var(--muted);font-size:13px;
+}
+.kit-footer strong{color:var(--cyan)}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  .bio-grid{grid-template-columns:1fr}
+  .highlights-grid{grid-template-columns:repeat(2,1fr)}
+  .palette-grid{grid-template-columns:repeat(3,1fr)}
+  .section{padding:60px 24px}
+  .header{padding:32px 24px 40px}
+  .kit-nav{padding:0 24px}
+  .header-logo{display:none}
+  .kit-footer{padding:32px 24px}
+}
+@media(max-width:600px){
+  .highlights-grid{grid-template-columns:1fr 1fr}
+  .posts-grid{grid-template-columns:1fr}
+  .palette-grid{grid-template-columns:repeat(2,1fr)}
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-inner">
+    <div class="header-badge"><span></span> Instagram Kit — JCL Agencia</div>
+    <h1>Instagram Kit <span class="gradient-text">JCL</span></h1>
+    <p>Estrategia completa de presencia en Instagram: bio optimizada, portadas para destacados y plan editorial para los primeros 9 posts.</p>
+  </div>
+  <div class="header-logo">
+    <img src="JCL.png" alt="JCL" onerror="this.parentElement.innerHTML='<span style=\'font-family:Syne,sans-serif;font-weight:800;font-size:18px;color:#1565C0\'>JCL</span>'">
+  </div>
+</div>
+
+<!-- NAV -->
+<nav class="kit-nav">
+  <ul>
+    <li><a href="#bio" class="active">Bio</a></li>
+    <li><a href="#paleta">Paleta</a></li>
+    <li><a href="#destacados">Destacados</a></li>
+    <li><a href="#grilla">Grilla 9 Posts</a></li>
+    <li><a href="#estrategia">Estrategia</a></li>
+  </ul>
+</nav>
+
+<!-- ===== BIO ===== -->
+<section id="bio">
+<div class="section">
+  <div class="section-tag">01 — Perfil</div>
+  <h2 class="section-title">Biografía Optimizada</h2>
+  <p class="section-sub">Bio diseñada para convertir visitas en seguidores y seguidores en clientes. Cada línea tiene un propósito.</p>
+
+  <div class="bio-card">
+    <div class="bio-grid">
+      <!-- Phone mockup -->
+      <div class="bio-panel" style="padding:32px 32px 32px 40px">
+        <div class="bio-phone">
+          <div class="phone-status">
+            <span>9:41</span>
+            <span>⚡ 100%</span>
+          </div>
+          <div class="ig-header">
+            <div style="display:flex;align-items:center;gap:8px">
+              <span style="color:#fff;font-size:16px">←</span>
+              <span class="ig-header-title">jclagencia</span>
+            </div>
+            <div class="ig-actions">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>
+            </div>
+          </div>
+          <div class="ig-profile">
+            <div class="ig-avatar-row">
+              <div class="ig-avatar">
+                <div class="ig-avatar-inner">
+                  <img src="JCL.png" alt="JCL" onerror="this.style.display='none';this.parentElement.innerHTML='<div style=\'color:#fff;font-family:Syne,sans-serif;font-weight:800;font-size:16px\'>JCL</div>'">
+                </div>
+              </div>
+              <div class="ig-stats">
+                <div class="ig-stat"><span class="ig-stat-num">–</span><span class="ig-stat-lbl">Posts</span></div>
+                <div class="ig-stat"><span class="ig-stat-num">–</span><span class="ig-stat-lbl">Seguidores</span></div>
+                <div class="ig-stat"><span class="ig-stat-num">–</span><span class="ig-stat-lbl">Siguiendo</span></div>
+              </div>
+            </div>
+            <div class="ig-name">JCL Agencia 🤖</div>
+            <div class="ig-category">Marketing Digital · IA</div>
+            <div class="ig-bio-text">
+<span class="accent">📈 Marketing + IA para negocios reales</span>
+Hacemos crecer marcas con estrategia digital
+e Inteligencia Artificial.
+<span class="orange">▸ Más leads · Más ventas · Menos fricción</span>
+Consultamos en 48h ↓</div>
+            <div class="ig-link">🔗 bit.ly/jclagencia</div>
+            <div class="ig-btns">
+              <button class="ig-btn primary">Contactar</button>
+              <button class="ig-btn">Email</button>
+              <button class="ig-btn">···</button>
+            </div>
+          </div>
+          <div class="ig-highlights">
+            <div class="ig-hl">
+              <div class="ig-hl-ring" style="background:linear-gradient(135deg,#1565C0,#00C8FF)">
+                <div class="ig-hl-inner">🚀</div>
+              </div>
+              <span class="ig-hl-label">Servicios</span>
+            </div>
+            <div class="ig-hl">
+              <div class="ig-hl-ring" style="background:linear-gradient(135deg,#7C3AED,#00C8FF)">
+                <div class="ig-hl-inner">🤖</div>
+              </div>
+              <span class="ig-hl-label">IA Tools</span>
+            </div>
+            <div class="ig-hl">
+              <div class="ig-hl-ring" style="background:linear-gradient(135deg,#FF8C00,#FF5722)">
+                <div class="ig-hl-inner">📊</div>
+              </div>
+              <span class="ig-hl-label">Resultados</span>
+            </div>
+            <div class="ig-hl">
+              <div class="ig-hl-ring" style="background:linear-gradient(135deg,#00ACC1,#1565C0)">
+                <div class="ig-hl-inner">👥</div>
+              </div>
+              <span class="ig-hl-label">Equipo</span>
+            </div>
+          </div>
+          <div class="ig-posts-grid">
+            <div class="ig-post"><div class="ig-post-placeholder" style="background:linear-gradient(135deg,#05091A,#0C1530)">Post 1</div></div>
+            <div class="ig-post"><div class="ig-post-placeholder" style="background:linear-gradient(135deg,#0C1530,#1565C0)">Post 2</div></div>
+            <div class="ig-post"><div class="ig-post-placeholder" style="background:linear-gradient(135deg,#1565C0,#00C8FF)">Post 3</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bio copy + annotations -->
+      <div class="bio-panel" style="padding:32px 40px 32px 0">
+        <div class="copy-block">
+          <h4>Bio lista para copiar</h4>
+          <button class="copy-btn" onclick="copyBio()">Copiar</button>
+          <pre>📈 Marketing + IA para negocios reales
+Hacemos crecer marcas con estrategia digital
+e Inteligencia Artificial.
+<span class="em">▸ Más leads · Más ventas · Menos fricción</span>
+Consultamos en 48h ↓</pre>
+        </div>
+
+        <div class="annotation">
+          <strong>Línea 1 — Propuesta de valor clara</strong>
+          <span>"Marketing + IA para negocios reales" → posiciona la especialidad en 6 palabras. El emoji 📈 atrae la atención sin ser genérico.</span>
+        </div>
+        <div class="annotation">
+          <strong>Líneas 2–3 — Credibilidad y diferenciación</strong>
+          <span>Combina los dos pilares del servicio. Directo. Sin jerga técnica innecesaria.</span>
+        </div>
+        <div class="annotation">
+          <strong>Línea 4 — Beneficios concretos (▸ separador)</strong>
+          <span>Los 3 outcomes que todo cliente quiere: más leads, más ventas, menos fricción. El símbolo ▸ actúa como viñeta premium sin ser bullet point genérico.</span>
+        </div>
+        <div class="annotation">
+          <strong>Línea 5 — CTA + urgencia suave</strong>
+          <span>"Consultamos en 48h" genera expectativa y lleva el ojo al link. La flecha ↓ guía visualmente hacia el link.</span>
+        </div>
+
+        <div class="copy-block" style="margin-top:20px">
+          <h4>Nombre de usuario sugerido</h4>
+          <pre>@jclagencia  ·  @jclmarketing  ·  @agenciajcl</pre>
+        </div>
+
+        <div class="copy-block">
+          <h4>Nombre de perfil (no username)</h4>
+          <pre>JCL Agencia 🤖 | Marketing + IA</pre>
+        </div>
+
+        <div class="copy-block">
+          <h4>Categoría de negocio</h4>
+          <pre>Agencia de marketing digital</pre>
+        </div>
+
+        <div class="copy-block">
+          <h4>Link en bio (usa un link árbol)</h4>
+          <pre>Opción A: Linktree → links a web, WhatsApp, servicios
+Opción B: Página propia → jclagencia.com
+Opción C: WhatsApp directo → wa.me/34XXXXXXXXX</pre>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ===== PALETA ===== -->
+<section id="paleta">
+<div class="section" style="padding-top:0">
+  <div class="section-tag">02 — Identidad Visual</div>
+  <h2 class="section-title">Paleta de Color JCL</h2>
+  <p class="section-sub">Colores extraídos del logo y sistema de diseño de JCL para usar consistentemente en todos los posts.</p>
+
+  <div class="palette-section">
+    <div class="palette-title">Colores Primarios</div>
+    <div class="palette-grid">
+      <div class="palette-swatch">
+        <div class="palette-color" style="background:#05091A">🌑</div>
+        <div class="palette-info">
+          <div class="palette-hex">#05091A</div>
+          <div class="palette-name">Fondo Principal</div>
+          <div class="palette-use">Backgrounds de posts</div>
+        </div>
+      </div>
+      <div class="palette-swatch">
+        <div class="palette-color" style="background:#1565C0">💙</div>
+        <div class="palette-info">
+          <div class="palette-hex">#1565C0</div>
+          <div class="palette-name">Azul JCL</div>
+          <div class="palette-use">Color principal de marca</div>
+        </div>
+      </div>
+      <div class="palette-swatch">
+        <div class="palette-color" style="background:#00C8FF">⚡</div>
+        <div class="palette-info">
+          <div class="palette-hex">#00C8FF</div>
+          <div class="palette-name">Cyan Acento</div>
+          <div class="palette-use">Highlights, CTAs</div>
+        </div>
+      </div>
+      <div class="palette-swatch">
+        <div class="palette-color" style="background:#FF8C00">🔥</div>
+        <div class="palette-info">
+          <div class="palette-hex">#FF8C00</div>
+          <div class="palette-name">Naranja Urgencia</div>
+          <div class="palette-use">CTAs, datos clave</div>
+        </div>
+      </div>
+      <div class="palette-swatch">
+        <div class="palette-color" style="background:#7C3AED">💜</div>
+        <div class="palette-info">
+          <div class="palette-hex">#7C3AED</div>
+          <div class="palette-name">Violeta IA</div>
+          <div class="palette-use">Posts de tecnología</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="strategy-card">
+    <div class="strategy-header">
+      <div class="strategy-icon" style="background:rgba(0,200,255,0.1)">🎨</div>
+      <h3>Reglas de uso de color en Instagram</h3>
+    </div>
+    <ul class="strategy-list">
+      <li>Fondo siempre oscuro (#05091A o #080F24) — nunca fondos blancos. Mantiene identidad premium.</li>
+      <li>Texto principal siempre en blanco (#EEF2FF) — máximo contraste sobre fondos oscuros.</li>
+      <li>Un color de acento por post — no mezclar cyan + naranja + violeta en el mismo post. Elegir uno.</li>
+      <li>Gradiente de firma: usa linear-gradient(135deg, #1565C0, #00C8FF) en bordes, líneas y elementos destacados.</li>
+      <li>El naranja (#FF8C00) solo para números, porcentajes y frases de impacto — no para decoración.</li>
+    </ul>
+  </div>
+</div>
+</section>
+
+<!-- ===== DESTACADOS ===== -->
+<section id="destacados">
+<div class="section" style="padding-top:0">
+  <div class="section-tag">03 — Historias Destacadas</div>
+  <h2 class="section-title">Portadas de Highlights</h2>
+  <p class="section-sub">4 categorías de Historias Destacadas con diseño, colores y contenido sugerido. Formato 1080×1920px para Canva o Figma.</p>
+
+  <div class="highlights-grid">
+
+    <!-- SERVICIOS -->
+    <div class="hl-card">
+      <div class="hl-cover" style="background:linear-gradient(180deg,#080F24 0%,#0C1A3E 100%)">
+        <div class="hl-cover-bg" style="background:radial-gradient(circle at 50% 30%,#1565C0,transparent 60%)"></div>
+        <div class="hl-cover-icon">🚀</div>
+        <div class="hl-cover-title">Servicios</div>
+        <div class="hl-cover-sub">Lo que hacemos</div>
+        <div class="hl-cover-logo">JCL</div>
+        <div style="position:absolute;bottom:40px;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,#1565C0,transparent)"></div>
+      </div>
+      <div class="hl-meta">
+        <h3>Servicios</h3>
+        <p>Muestra cada servicio de JCL con una historia breve explicando qué incluye y para quién es.</p>
+        <div class="hl-colors">
+          <div class="color-chip"><div class="color-dot" style="background:#1565C0"></div>#1565C0</div>
+          <div class="color-chip"><div class="color-dot" style="background:#00C8FF"></div>#00C8FF</div>
+          <div class="color-chip"><div class="color-dot" style="background:#05091A"></div>#05091A</div>
+        </div>
+        <ul class="hl-icon-notes">
+          <li>Ícono: 🚀 sobre fondo azul oscuro</li>
+          <li>Gradiente: azul → fondo oscuro vertical</li>
+          <li>Línea de luz cyan en la parte inferior</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- IA TOOLS -->
+    <div class="hl-card">
+      <div class="hl-cover" style="background:linear-gradient(180deg,#0A0520 0%,#150A35 100%)">
+        <div class="hl-cover-bg" style="background:radial-gradient(circle at 50% 30%,#7C3AED,transparent 60%)"></div>
+        <div class="hl-cover-icon">🤖</div>
+        <div class="hl-cover-title">IA Tools</div>
+        <div class="hl-cover-sub">Tecnología que usamos</div>
+        <div class="hl-cover-logo">JCL</div>
+        <div style="position:absolute;bottom:40px;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,#7C3AED,transparent)"></div>
+      </div>
+      <div class="hl-meta">
+        <h3>IA Tools</h3>
+        <p>Contenido educativo sobre las herramientas de IA que usa JCL: Claude, GPT-4o, N8N, Midjourney…</p>
+        <div class="hl-colors">
+          <div class="color-chip"><div class="color-dot" style="background:#7C3AED"></div>#7C3AED</div>
+          <div class="color-chip"><div class="color-dot" style="background:#00C8FF"></div>#00C8FF</div>
+          <div class="color-chip"><div class="color-dot" style="background:#0A0520"></div>#0A0520</div>
+        </div>
+        <ul class="hl-icon-notes">
+          <li>Ícono: 🤖 sobre fondo violeta oscuro</li>
+          <li>Gradiente: violeta → negro vertical</li>
+          <li>Línea de luz violeta en la parte inferior</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- RESULTADOS -->
+    <div class="hl-card">
+      <div class="hl-cover" style="background:linear-gradient(180deg,#140800 0%,#1A1000 100%)">
+        <div class="hl-cover-bg" style="background:radial-gradient(circle at 50% 30%,#FF8C00,transparent 60%)"></div>
+        <div class="hl-cover-icon">📊</div>
+        <div class="hl-cover-title">Resultados</div>
+        <div class="hl-cover-sub">Casos de éxito</div>
+        <div class="hl-cover-logo">JCL</div>
+        <div style="position:absolute;bottom:40px;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,#FF8C00,transparent)"></div>
+      </div>
+      <div class="hl-meta">
+        <h3>Resultados</h3>
+        <p>Cases de clientes con métricas reales: % de aumento de conversión, leads generados, ROI, testimonios.</p>
+        <div class="hl-colors">
+          <div class="color-chip"><div class="color-dot" style="background:#FF8C00"></div>#FF8C00</div>
+          <div class="color-chip"><div class="color-dot" style="background:#FF5722"></div>#FF5722</div>
+          <div class="color-chip"><div class="color-dot" style="background:#140800"></div>#140800</div>
+        </div>
+        <ul class="hl-icon-notes">
+          <li>Ícono: 📊 sobre fondo marrón muy oscuro</li>
+          <li>Gradiente: naranja → negro vertical</li>
+          <li>Usar números grandes en naranja (#FF8C00)</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- EQUIPO -->
+    <div class="hl-card">
+      <div class="hl-cover" style="background:linear-gradient(180deg,#001A1A 0%,#002525 100%)">
+        <div class="hl-cover-bg" style="background:radial-gradient(circle at 50% 30%,#00ACC1,transparent 60%)"></div>
+        <div class="hl-cover-icon">👥</div>
+        <div class="hl-cover-title">Equipo</div>
+        <div class="hl-cover-sub">Las personas detrás</div>
+        <div class="hl-cover-logo">JCL</div>
+        <div style="position:absolute;bottom:40px;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,#00ACC1,transparent)"></div>
+      </div>
+      <div class="hl-meta">
+        <h3>Equipo</h3>
+        <p>Presentación del equipo, proceso de trabajo, cultura y el "por qué" de JCL. Genera confianza y cercanía.</p>
+        <div class="hl-colors">
+          <div class="color-chip"><div class="color-dot" style="background:#00ACC1"></div>#00ACC1</div>
+          <div class="color-chip"><div class="color-dot" style="background:#00C8FF"></div>#00C8FF</div>
+          <div class="color-chip"><div class="color-dot" style="background:#001A1A"></div>#001A1A</div>
+        </div>
+        <ul class="hl-icon-notes">
+          <li>Ícono: 👥 sobre fondo verde-azul muy oscuro</li>
+          <li>Gradiente: teal → negro vertical</li>
+          <li>Fotos de equipo con borde de gradiente JCL</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Instrucciones Canva -->
+  <div class="strategy-card" style="margin-top:32px">
+    <div class="strategy-header">
+      <div class="strategy-icon" style="background:rgba(0,200,255,0.1)">🖼️</div>
+      <h3>Cómo crear las portadas en Canva</h3>
+    </div>
+    <ul class="strategy-list">
+      <li>Nuevo diseño → formato personalizado → 1080 × 1920 px (Historia de Instagram)</li>
+      <li>Fondo: color sólido con el hex de cada categoría (ej: #05091A para Servicios)</li>
+      <li>Gradiente: insertar rectángulo con opacidad, gradiente radial del color acento en la parte superior</li>
+      <li>Ícono: buscar el emoji en grande o usar icono de Canva — centrado en vertical superior</li>
+      <li>Tipografía: Syne Bold o Montserrat ExtraBold para el nombre de la categoría</li>
+      <li>Línea inferior: rectángulo fino 1080×2px con gradiente del color de la categoría</li>
+      <li>Logo JCL: esquina inferior derecha, en blanco, pequeño (80–100px)</li>
+      <li>Exportar como PNG · Subir como portada del Destacado en Instagram</li>
+    </ul>
+  </div>
+</div>
+</section>
+
+<!-- ===== GRILLA 9 POSTS ===== -->
+<section id="grilla">
+<div class="section" style="padding-top:0">
+  <div class="section-tag">04 — Plan Editorial</div>
+  <h2 class="section-title">Grilla de los Primeros 9 Posts</h2>
+  <p class="section-sub">Mix estratégico: 4 posts educativos, 3 de autoridad y 2 de venta. Diseño oscuro JCL en todos.</p>
+
+  <!-- Grid preview -->
+  <div class="grid-preview-wrap">
+    <div class="grid-preview">
+      <div class="grid-preview-header">
+        <div class="grid-preview-avatar"><div style="width:100%;height:100%;border-radius:50%;background:#111;display:flex;align-items:center;justify-content:center;font-size:10px;color:#fff;font-weight:700">JCL</div></div>
+        <div>
+          <div class="grid-preview-name">jclagencia</div>
+          <div style="color:#999;font-size:9px">9 publicaciones</div>
+        </div>
+      </div>
+      <div class="grid-mini">
+        <div class="grid-mini-cell" style="background:linear-gradient(135deg,#05091A,#1565C0)"><div class="pos">1</div>IA vs Marketing Trad.</div>
+        <div class="grid-mini-cell" style="background:linear-gradient(135deg,#080F24,#7C3AED)"><div class="pos">2</div>5 Herramientas IA</div>
+        <div class="grid-mini-cell" style="background:linear-gradient(135deg,#05091A,#00ACC1)"><div class="pos">3</div>Caso de Éxito</div>
+        <div class="grid-mini-cell" style="background:linear-gradient(135deg,#140800,#FF8C00)"><div class="pos">4</div>Quiénes Somos</div>
+        <div class="grid-mini-cell" style="background:linear-gradient(135deg,#05091A,#1565C0)"><div class="pos">5</div>Cómo Funciona N8N</div>
+        <div class="grid-mini-cell" style="background:linear-gradient(135deg,#080F24,#7C3AED)"><div class="pos">6</div>Auditoría Gratis</div>
+        <div class="grid-mini-cell" style="background:linear-gradient(135deg,#001A1A,#00ACC1)"><div class="pos">7</div>Error #1 Marketing</div>
+        <div class="grid-mini-cell" style="background:linear-gradient(135deg,#05091A,#1565C0)"><div class="pos">8</div>ROI con IA</div>
+        <div class="grid-mini-cell" style="background:linear-gradient(135deg,#0A0520,#FF8C00)"><div class="pos">9</div>Empezamos?</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="posts-grid">
+
+    <!-- POST 1 -->
+    <div class="post-card">
+      <div class="post-visual" style="background:linear-gradient(135deg,#05091A 0%,#0C1A3E 60%,#1565C0 100%)">
+        <div class="post-num">01</div>
+        <div class="post-type-badge type-edu">Educativo</div>
+        <div class="post-title-overlay">IA vs<br>Marketing<br>Tradicional</div>
+      </div>
+      <div class="post-meta">
+        <div class="post-tag" style="color:var(--teal)">Educativo · Carrusel</div>
+        <h4>IA vs Marketing Tradicional: quién gana en 2025</h4>
+        <p>Slide comparativo. Genera debate y posiciona a JCL como voz experta en el tema.</p>
+        <div class="post-copy">
+          <span class="hook">🤖 La IA no reemplaza al marketing.</span><br>
+          Lo hace 10 veces más rápido.<br><br>
+          5 cosas que la IA hace en minutos<br>
+          que antes tardaban días 👇<br><br>
+          <em style="color:var(--muted);font-size:10px">[Carrusel: 5 slides comparativos]</em>
+        </div>
+        <div class="post-tags">
+          <span class="post-hashtag">#MarketingDigital</span>
+          <span class="post-hashtag">#InteligenciaArtificial</span>
+          <span class="post-hashtag">#Automatizacion</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- POST 2 -->
+    <div class="post-card">
+      <div class="post-visual" style="background:linear-gradient(135deg,#080F24 0%,#0A0520 50%,#7C3AED 100%)">
+        <div class="post-num">02</div>
+        <div class="post-type-badge type-edu">Educativo</div>
+        <div class="post-title-overlay">5 Herramientas<br>de IA que<br>Necesitas</div>
+      </div>
+      <div class="post-meta">
+        <div class="post-tag" style="color:var(--teal)">Educativo · Carrusel</div>
+        <h4>Las 5 herramientas de IA que usamos cada día</h4>
+        <p>Alta guardia de guardados (saves). Genera autoridad de herramienta y reconocimiento de marca.</p>
+        <div class="post-copy">
+          <span class="hook">Guardá este post. Lo vas a necesitar.</span><br><br>
+          Las 5 herramientas de IA que usamos<br>
+          en JCL todos los días para hacer<br>
+          crecer marcas 👇<br><br>
+          <em style="color:var(--muted);font-size:10px">[Claude / N8N / Midjourney / Make / Perplexity]</em>
+        </div>
+        <div class="post-tags">
+          <span class="post-hashtag">#AITools</span>
+          <span class="post-hashtag">#N8N</span>
+          <span class="post-hashtag">#Claude</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- POST 3 -->
+    <div class="post-card">
+      <div class="post-visual" style="background:linear-gradient(135deg,#001A1A 0%,#003030 50%,#00ACC1 100%)">
+        <div class="post-num">03</div>
+        <div class="post-type-badge type-auth">Autoridad</div>
+        <div class="post-title-overlay">Caso<br>de Éxito<br>Real</div>
+      </div>
+      <div class="post-meta">
+        <div class="post-tag" style="color:var(--violet)">Autoridad · Imagen</div>
+        <h4>Caso de éxito: cómo [cliente] triplicó sus leads</h4>
+        <p>Resultado real con números. Si no tienes aún, usa un caso hipotético con disclaimer claro.</p>
+        <div class="post-copy">
+          <span class="hook">De 50 a 180 leads/mes en 6 semanas.</span><br><br>
+          Sin aumentar el presupuesto.<br>
+          Solo con automatización y estrategia.<br><br>
+          Esto es lo que hicimos 👇<br><br>
+          <em style="color:var(--muted);font-size:10px">[Imagen: dashboard con métricas reales]</em>
+        </div>
+        <div class="post-tags">
+          <span class="post-hashtag">#CasoDeExito</span>
+          <span class="post-hashtag">#Leads</span>
+          <span class="post-hashtag">#ResultadosReales</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- POST 4 -->
+    <div class="post-card">
+      <div class="post-visual" style="background:linear-gradient(135deg,#140800 0%,#1A0E00 50%,#FF8C00 100%)">
+        <div class="post-num">04</div>
+        <div class="post-type-badge type-auth">Autoridad</div>
+        <div class="post-title-overlay">Quiénes<br>Somos</div>
+      </div>
+      <div class="post-meta">
+        <div class="post-tag" style="color:var(--violet)">Autoridad · Imagen</div>
+        <h4>Quiénes somos y por qué creamos JCL</h4>
+        <p>El origen de la agencia. Genera conexión emocional y confianza. Obligatorio para cuenta nueva.</p>
+        <div class="post-copy">
+          <span class="hook">Creamos JCL porque el marketing ha cambiado</span><br>
+          y la mayoría de agencias no.<br><br>
+          Somos [nombres] y ayudamos a negocios<br>
+          a crecer con estrategia digital e IA.<br><br>
+          <em style="color:var(--muted);font-size:10px">[Foto del equipo con identidad JCL]</em>
+        </div>
+        <div class="post-tags">
+          <span class="post-hashtag">#JCLAgencia</span>
+          <span class="post-hashtag">#AgenciaDeMKT</span>
+          <span class="post-hashtag">#MarketingConIA</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- POST 5 -->
+    <div class="post-card">
+      <div class="post-visual" style="background:linear-gradient(135deg,#05091A 0%,#080F24 50%,#1565C0 100%)">
+        <div class="post-num">05</div>
+        <div class="post-type-badge type-edu">Educativo</div>
+        <div class="post-title-overlay">Cómo<br>Funciona<br>N8N</div>
+      </div>
+      <div class="post-meta">
+        <div class="post-tag" style="color:var(--teal)">Educativo · Reel/Video</div>
+        <h4>¿Qué es N8N y por qué cambia todo?</h4>
+        <p>Video corto (30–60s) explicando N8N de forma visual. Alto engagement en Reels educativos de IA.</p>
+        <div class="post-copy">
+          <span class="hook">Esta herramienta automatiza lo que tú haces manualmente.</span><br><br>
+          N8N conecta tus apps, genera respuestas<br>
+          y mueve datos solo.<br><br>
+          Te explico cómo en 60 segundos ↓<br><br>
+          <em style="color:var(--muted);font-size:10px">[Reel: screencast mostrando flujo N8N]</em>
+        </div>
+        <div class="post-tags">
+          <span class="post-hashtag">#N8N</span>
+          <span class="post-hashtag">#Automatizacion</span>
+          <span class="post-hashtag">#NoCode</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- POST 6 -->
+    <div class="post-card">
+      <div class="post-visual" style="background:linear-gradient(135deg,#0A0520 0%,#150A35 50%,#7C3AED 100%)">
+        <div class="post-num">06</div>
+        <div class="post-type-badge type-sell">Venta</div>
+        <div class="post-title-overlay">Auditoría<br>Gratis por<br>48h</div>
+      </div>
+      <div class="post-meta">
+        <div class="post-tag" style="color:var(--orange)">Venta · Imagen</div>
+        <h4>Auditoría digital gratuita — 48 horas</h4>
+        <p>Primer CTA de venta directa. Oferta de bajo riesgo para generar leads cualificados.</p>
+        <div class="post-copy">
+          <span class="hook">Te analizamos la presencia digital gratis.</span><br><br>
+          Sin compromiso. Sin venderte nada raro.<br>
+          Solo la verdad sobre dónde estás<br>
+          perdiendo clientes.<br><br>
+          Escríbenos "AUDITORÍA" por DM 📩<br><br>
+          <em style="color:var(--muted);font-size:10px">[Solo 5 plazas — urgencia real o percibida]</em>
+        </div>
+        <div class="post-tags">
+          <span class="post-hashtag">#MarketingDigital</span>
+          <span class="post-hashtag">#AuditoriaDigital</span>
+          <span class="post-hashtag">#GrowthHacking</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- POST 7 -->
+    <div class="post-card">
+      <div class="post-visual" style="background:linear-gradient(135deg,#001A1A 0%,#002020 50%,#00ACC1 100%)">
+        <div class="post-num">07</div>
+        <div class="post-type-badge type-edu">Educativo</div>
+        <div class="post-title-overlay">El Error #1<br>del Marketing<br>en 2025</div>
+      </div>
+      <div class="post-meta">
+        <div class="post-tag" style="color:var(--teal)">Educativo · Carrusel</div>
+        <h4>El error #1 que cometen las marcas con la IA</h4>
+        <p>Genera debate y shares. La gente se identifica con el error y quiere saber la solución.</p>
+        <div class="post-copy">
+          <span class="hook">El 80% de las marcas usa la IA mal.</span><br><br>
+          No es falta de herramientas.<br>
+          Es falta de estrategia.<br><br>
+          El error que más vemos 👇<br><br>
+          <em style="color:var(--muted);font-size:10px">[Spoiler: usar IA para volumen sin personalización]</em>
+        </div>
+        <div class="post-tags">
+          <span class="post-hashtag">#EstrategiaDigital</span>
+          <span class="post-hashtag">#IAMarketing</span>
+          <span class="post-hashtag">#MarketingConIA</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- POST 8 -->
+    <div class="post-card">
+      <div class="post-visual" style="background:linear-gradient(135deg,#05091A 0%,#0C1530 50%,#1565C0 100%)">
+        <div class="post-num">08</div>
+        <div class="post-type-badge type-auth">Autoridad</div>
+        <div class="post-title-overlay">ROI con IA:<br>Números<br>Reales</div>
+      </div>
+      <div class="post-meta">
+        <div class="post-tag" style="color:var(--violet)">Autoridad · Imagen</div>
+        <h4>¿Cuánto ROI genera la IA en marketing?</h4>
+        <p>Post de datos con estadísticas de industria + casos propios. Reafirma autoridad técnica.</p>
+        <div class="post-copy">
+          <span class="hook">Las marcas que integran IA en marketing</span><br>
+          ven un retorno medio de 3,7x.<br><br>
+          Fuente: McKinsey 2024.<br>
+          Nuestra media con clientes: 4,2x 📈<br><br>
+          <em style="color:var(--muted);font-size:10px">[Infografía con datos propios vs. industria]</em>
+        </div>
+        <div class="post-tags">
+          <span class="post-hashtag">#ROI</span>
+          <span class="post-hashtag">#MarketingData</span>
+          <span class="post-hashtag">#AgenciaMarketing</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- POST 9 -->
+    <div class="post-card">
+      <div class="post-visual" style="background:linear-gradient(135deg,#0A0520 0%,#140800 50%,#FF8C00 100%)">
+        <div class="post-num">09</div>
+        <div class="post-type-badge type-sell">Venta</div>
+        <div class="post-title-overlay">¿Empezamos<br>a trabajar<br>juntos?</div>
+      </div>
+      <div class="post-meta">
+        <div class="post-tag" style="color:var(--orange)">Venta · Imagen</div>
+        <h4>CTA final: reserva tu consulta</h4>
+        <p>Post de cierre de la grilla. Invita directamente a contactar. Simple, directo, sin presión.</p>
+        <div class="post-copy">
+          <span class="hook">Si llevas leyendo hasta aquí,</span><br>
+          ya sabes que tenemos algo<br>
+          para tu negocio.<br><br>
+          Escríbenos. Sin presión.<br>
+          La primera consulta es gratis ✉️<br><br>
+          <em style="color:var(--muted);font-size:10px">[Link en bio · DM abiertos · Respuesta en 48h]</em>
+        </div>
+        <div class="post-tags">
+          <span class="post-hashtag">#JCLAgencia</span>
+          <span class="post-hashtag">#MarketingDigital</span>
+          <span class="post-hashtag">#AgenciaIA</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</section>
+
+<!-- ===== ESTRATEGIA ===== -->
+<section id="estrategia">
+<div class="section" style="padding-top:0">
+  <div class="section-tag">05 — Guía de Publicación</div>
+  <h2 class="section-title">Estrategia de Contenido</h2>
+  <p class="section-sub">Frecuencia, horarios y reglas editoriales para mantener consistencia y crecimiento.</p>
+
+  <div class="strategy-card">
+    <div class="strategy-header">
+      <div class="strategy-icon" style="background:rgba(0,200,255,0.1)">📅</div>
+      <h3>Frecuencia y Horarios</h3>
+    </div>
+    <ul class="strategy-list">
+      <li><strong style="color:var(--text)">Publicar 3–4 veces por semana</strong> — consistencia &gt; cantidad. El algoritmo premia la regularidad.</li>
+      <li><strong style="color:var(--text)">Mejores horarios</strong>: martes–jueves 18:00–20:00 y sábados 10:00–12:00 (hora local de tu audiencia objetivo).</li>
+      <li><strong style="color:var(--text)">Reels 1–2 veces por semana</strong> — son el mayor driver de nuevos seguidores en 2025.</li>
+      <li><strong style="color:var(--text)">Stories diarias</strong> — mantienen visibilidad aunque no publiques posts. Detrás de escenas, polls, preguntas.</li>
+      <li><strong style="color:var(--text)">Responder comentarios en las primeras 2 horas</strong> — el algoritmo mide el engagement temprano.</li>
+    </ul>
+  </div>
+
+  <div class="strategy-card">
+    <div class="strategy-header">
+      <div class="strategy-icon" style="background:rgba(255,140,0,0.1)">🔥</div>
+      <h3>Mix de Contenido (regla 4-3-2)</h3>
+    </div>
+    <ul class="strategy-list">
+      <li><strong style="color:var(--teal)">4 posts educativos</strong> — enseñan algo sobre IA o marketing. Generan saves y shares. Construyen autoridad.</li>
+      <li><strong style="color:var(--violet)">3 posts de autoridad</strong> — casos de éxito, datos, resultados. Generan confianza y reducen fricción de compra.</li>
+      <li><strong style="color:var(--orange)">2 posts de venta</strong> — CTAs directos. Auditoría gratis, consulta, link en bio. Sin vergüenza.</li>
+    </ul>
+  </div>
+
+  <div class="strategy-card">
+    <div class="strategy-header">
+      <div class="strategy-icon" style="background:rgba(124,58,237,0.1)">🎯</div>
+      <h3>Hashtags — Estrategia por Post</h3>
+    </div>
+    <ul class="strategy-list">
+      <li><strong style="color:var(--text)">Usar 5–8 hashtags</strong> por post, no 30. La calidad de relevancia importa más que la cantidad.</li>
+      <li><strong style="color:var(--text)">Mix de volumen</strong>: 2 grandes (&gt;500K), 3 medianos (10K–500K), 2 pequeños (&lt;10K específicos del nicho).</li>
+      <li><strong style="color:var(--text)">Hashtag propio</strong>: crear #JCLAgencia para contenido de marca desde el primer post.</li>
+      <li><strong style="color:var(--text)">Hashtags core</strong>: #MarketingDigital #InteligenciaArtificial #Automatizacion #AgenciaMarketing #MarketingConIA</li>
+    </ul>
+  </div>
+
+  <div class="strategy-card">
+    <div class="strategy-header">
+      <div class="strategy-icon" style="background:rgba(0,172,193,0.1)">✍️</div>
+      <h3>Fórmula del Caption Perfecto</h3>
+    </div>
+    <ul class="strategy-list">
+      <li><strong style="color:var(--cyan)">Línea 1 (el hook)</strong>: dato sorprendente, pregunta directa o afirmación que rompe la inercia del scroll.</li>
+      <li><strong style="color:var(--cyan)">Líneas 2–5 (el cuerpo)</strong>: desarrolla la idea. Párrafos cortos. Una idea por párrafo. Espacio entre ellos.</li>
+      <li><strong style="color:var(--cyan)">Línea final (el CTA)</strong>: una sola acción. DM, guardar, comentar, visitar bio. Nunca dos CTAs en el mismo post.</li>
+      <li><strong style="color:var(--cyan)">Emoji como puntuación</strong>: uno o dos emojis. No decoración. Señalizan visualmente la estructura del texto.</li>
+    </ul>
+  </div>
+
+</div>
+</section>
+
+<!-- FOOTER -->
+<div class="kit-footer">
+  <strong>JCL Agencia de Marketing y Servicios de IA</strong><br>
+  Instagram Kit — Documento interno · 2025<br>
+  <span style="opacity:0.5;font-size:11px">Generado con Claude · Usar los colores exactos del sistema de diseño JCL para consistencia de marca</span>
+</div>
+
+<script>
+// Nav highlight
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.kit-nav a');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => {
+    if (window.scrollY >= s.offsetTop - 100) current = s.getAttribute('id');
+  });
+  navLinks.forEach(a => {
+    a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+  });
+});
+
+// Copy bio
+function copyBio() {
+  const bio = `📈 Marketing + IA para negocios reales\nHacemos crecer marcas con estrategia digital\ne Inteligencia Artificial.\n▸ Más leads · Más ventas · Menos fricción\nConsultamos en 48h ↓`;
+  navigator.clipboard.writeText(bio).then(() => {
+    const btn = document.querySelector('.copy-btn');
+    btn.textContent = '✓ Copiado';
+    setTimeout(() => btn.textContent = 'Copiar', 2000);
+  });
+}
+
+// Smooth reveal
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.style.opacity = '1';
+      e.target.style.transform = 'translateY(0)';
+    }
+  });
+}, { threshold: 0.05 });
+
+document.querySelectorAll('.hl-card, .post-card, .strategy-card, .palette-swatch').forEach(el => {
+  el.style.opacity = '0';
+  el.style.transform = 'translateY(20px)';
+  el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+  observer.observe(el);
+});
+</script>
+</body>
+</html>
