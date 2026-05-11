@@ -238,6 +238,64 @@ footer{padding:100px 60px 40px;position:relative;z-index:2;background:linear-gra
 .fbot{display:flex;justify-content:space-between;align-items:center;padding-top:36px;border-top:1px solid var(--glass-border);color:var(--text-muted);font-size:13px}
 .fbot-love{display:flex;align-items:center;gap:6px}
 
+/* ── PLANES MARKETING ── */
+.planes-sec { padding: 140px 60px; position: relative; z-index: 2; }
+.planes-inner { max-width: 1200px; margin: 0 auto; }
+.planes-header { text-align: center; margin-bottom: 56px; }
+.planes-header h2 { font-size: clamp(36px, 5vw, 60px); font-weight: 900; letter-spacing: -.03em; line-height: 1.1; margin-bottom: 20px; }
+.planes-header p { font-size: 18px; color: var(--text-muted); max-width: 580px; margin: 0 auto 36px; line-height: 1.6; }
+
+.toggle-wrap { display: inline-flex; background: rgba(255,255,255,.06); border: 1px solid var(--glass-border); border-radius: 100px; padding: 5px; gap: 4px; }
+.toggle-btn { padding: 10px 28px; border-radius: 100px; border: none; font-size: 14px; font-weight: 700; cursor: pointer; transition: all .3s; font-family: 'Inter', sans-serif; color: var(--text-muted); background: transparent; }
+.toggle-btn.active { background: linear-gradient(135deg, var(--c-jcl1), var(--c-jcl2), var(--c-jcl3)); color: #fff; box-shadow: 0 4px 16px rgba(139,47,201,.35); }
+.toggle-badge { display: inline-block; background: rgba(34,197,94,.15); color: #4ade80; border: 1px solid rgba(34,197,94,.25); font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 100px; margin-left: 6px; vertical-align: middle; }
+
+.planes-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 48px; }
+.plan-card { border-radius: 28px; padding: 40px 36px; display: flex; flex-direction: column; position: relative; overflow: hidden; transition: all .4s cubic-bezier(.16,1,.3,1); }
+.plan-card.basic { background: rgba(15,15,20,.5); border: 1px solid var(--glass-border); backdrop-filter: blur(40px); }
+.plan-card.pro { background: linear-gradient(160deg, rgba(139,47,201,.18), rgba(232,56,107,.12), rgba(244,123,31,.08)); border: 1px solid rgba(139,47,201,.4); backdrop-filter: blur(40px); box-shadow: 0 30px 60px rgba(139,47,201,.2); }
+.plan-card.max { background: rgba(15,15,20,.5); border: 1px solid var(--glass-border); backdrop-filter: blur(40px); }
+.plan-card:hover { transform: translateY(-8px); box-shadow: 0 40px 80px rgba(0,0,0,.4); }
+.plan-card.pro:hover { box-shadow: 0 40px 80px rgba(139,47,201,.3); }
+
+.plan-popular { position: absolute; top: 20px; right: 20px; background: linear-gradient(135deg, var(--c-jcl1), var(--c-jcl2)); color: #fff; font-size: 11px; font-weight: 800; padding: 5px 14px; border-radius: 100px; text-transform: uppercase; letter-spacing: .06em; }
+.plan-glow { position: absolute; top: -60px; right: -60px; width: 180px; height: 180px; border-radius: 50%; background: linear-gradient(135deg, var(--c-jcl1), var(--c-jcl2)); opacity: .08; filter: blur(40px); pointer-events: none; }
+
+.plan-icon { font-size: 36px; margin-bottom: 20px; }
+.plan-name { font-size: 13px; font-weight: 800; text-transform: uppercase; letter-spacing: .12em; color: var(--text-muted); margin-bottom: 8px; }
+.plan-tagline { font-size: 18px; font-weight: 700; color: #fff; margin-bottom: 28px; line-height: 1.3; }
+
+.plan-price-wrap { margin-bottom: 32px; padding-bottom: 32px; border-bottom: 1px solid var(--glass-border); }
+.plan-price { display: flex; align-items: flex-end; gap: 4px; }
+.plan-currency { font-size: 20px; font-weight: 700; color: var(--text-muted); margin-bottom: 8px; }
+.plan-amount { font-size: 52px; font-weight: 900; line-height: 1; color: #fff; letter-spacing: -.03em; transition: all .4s; }
+.plan-amount.pro-price { background: linear-gradient(135deg, #fff, var(--c-jcl2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.plan-period { font-size: 14px; color: var(--text-muted); margin-bottom: 6px; font-weight: 500; }
+.plan-saving { font-size: 12px; color: #4ade80; font-weight: 700; margin-top: 8px; min-height: 18px; }
+
+.plan-features { flex: 1; display: flex; flex-direction: column; gap: 14px; margin-bottom: 36px; }
+.plan-feat { display: flex; align-items: flex-start; gap: 12px; font-size: 14px; line-height: 1.4; }
+.feat-check { width: 20px; height: 20px; border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 11px; margin-top: 1px; }
+.feat-check.yes { background: linear-gradient(135deg, var(--c-jcl1), var(--c-jcl2)); color: #fff; }
+.feat-check.no { background: rgba(255,255,255,.06); color: rgba(255,255,255,.25); }
+.feat-text { color: var(--text-muted); }
+.feat-text strong { color: #fff; font-weight: 700; }
+.feat-text.dimmed { opacity: .4; }
+
+.plan-btn { display: block; text-align: center; padding: 16px 24px; border-radius: 14px; font-size: 15px; font-weight: 800; text-decoration: none; transition: all .3s; font-family: 'Inter', sans-serif; border: none; cursor: pointer; }
+.plan-btn.basic-btn { background: rgba(255,255,255,.08); color: #fff; border: 1px solid var(--glass-border); }
+.plan-btn.basic-btn:hover { background: rgba(255,255,255,.14); transform: translateY(-2px); }
+.plan-btn.pro-btn { background: linear-gradient(135deg, var(--c-jcl1), var(--c-jcl2), var(--c-jcl3)); color: #fff; box-shadow: 0 10px 28px rgba(139,47,201,.4); }
+.plan-btn.pro-btn:hover { transform: translateY(-3px); box-shadow: 0 16px 36px rgba(139,47,201,.6); }
+.plan-btn.max-btn { background: rgba(255,255,255,.08); color: #fff; border: 1px solid rgba(139,47,201,.3); }
+.plan-btn.max-btn:hover { background: rgba(139,47,201,.15); border-color: rgba(139,47,201,.6); transform: translateY(-2px); }
+
+.planes-note { text-align: center; margin-top: 32px; color: var(--text-muted); font-size: 14px; }
+.planes-note a { color: var(--c-jcl2); text-decoration: none; font-weight: 600; }
+
+@media(max-width: 1100px) { .planes-grid { grid-template-columns: 1fr; max-width: 480px; margin-left: auto; margin-right: auto; } }
+@media(max-width: 768px) { .planes-sec { padding: 90px 22px; } .plan-amount { font-size: 42px; } }
+
 /* ── FLOAT WHATSAPP ── */
 .wa-float{position:fixed;bottom:28px;right:28px;z-index:800;width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,#25D366,#128C7E);display:flex;align-items:center;justify-content:center;font-size:26px;box-shadow:0 8px 24px rgba(37,211,102,.35);text-decoration:none;transition:all .3s;animation:waup .8s ease 2s both}
 .wa-float:hover{transform:translateY(-4px) scale(1.05);box-shadow:0 14px 32px rgba(37,211,102,.5)}
@@ -297,6 +355,7 @@ footer{padding:100px 60px 40px;position:relative;z-index:2;background:linear-gra
   </a>
   <ul class="nlinks">
     <li><a href="#servicios">Servicios</a></li>
+    <li><a href="#planes">Marketing</a></li>
     <li><a href="#panel">Plataforma</a></li>
     <li><a href="#ia-tools">Tecnología</a></li>
     <li><a href="#proceso">Metodología</a></li>
@@ -311,6 +370,7 @@ footer{padding:100px 60px 40px;position:relative;z-index:2;background:linear-gra
 <div class="mmenu" id="mm">
   <button class="mcls" onclick="document.getElementById('mm').classList.remove('open')">✕</button>
   <a href="#servicios" onclick="document.getElementById('mm').classList.remove('open')">Servicios</a>
+  <a href="#planes" onclick="document.getElementById('mm').classList.remove('open')">Marketing</a>
   <a href="#panel" onclick="document.getElementById('mm').classList.remove('open')">Plataforma</a>
   <a href="#ia-tools" onclick="document.getElementById('mm').classList.remove('open')">Tecnología</a>
   <a href="#proceso" onclick="document.getElementById('mm').classList.remove('open')">Metodología</a>
@@ -560,6 +620,112 @@ footer{padding:100px 60px 40px;position:relative;z-index:2;background:linear-gra
   </div>
 </div>
 
+<!-- PLANES MARKETING DIGITAL -->
+<div id="planes" class="planes-sec">
+  <div class="planes-inner">
+    <div class="planes-header rv">
+      <div class="stag">Marketing Digital</div>
+      <h2 class="sh">Gestión profesional de<br>tus redes sociales.</h2>
+      <p>Contenido estratégico, diseño premium, reels, stories y community management. Tu marca presente, activa y creciendo cada semana.</p>
+      <div class="toggle-wrap" id="toggleWrap">
+        <button class="toggle-btn active" id="btn3m" onclick="setPlan('3m')">3 Meses</button>
+        <button class="toggle-btn" id="btn6m" onclick="setPlan('6m')">6 Meses <span class="toggle-badge">−20%</span></button>
+      </div>
+    </div>
+
+    <div class="planes-grid rv d1">
+
+      <!-- BÁSICO -->
+      <div class="plan-card basic">
+        <div class="plan-icon">🌱</div>
+        <div class="plan-name">Básico</div>
+        <div class="plan-tagline">Para negocios que<br>están empezando a crecer.</div>
+        <div class="plan-price-wrap">
+          <div class="plan-price">
+            <span class="plan-currency">$</span>
+            <span class="plan-amount" id="price-basic">350.000</span>
+          </div>
+          <div class="plan-period">COP / mes · <span id="period-basic">3 meses</span></div>
+          <div class="plan-saving" id="saving-basic"></div>
+        </div>
+        <div class="plan-features">
+          <div class="plan-feat"><span class="feat-check yes">✓</span><span class="feat-text"><strong>1 red social</strong> gestionada (Instagram o Facebook)</span></div>
+          <div class="plan-feat"><span class="feat-check yes">✓</span><span class="feat-text"><strong>12 posts</strong> diseñados al mes (3 por semana)</span></div>
+          <div class="plan-feat"><span class="feat-check yes">✓</span><span class="feat-text"><strong>Stories</strong> 3 veces por semana</span></div>
+          <div class="plan-feat"><span class="feat-check yes">✓</span><span class="feat-text"><strong>Optimización del perfil</strong> (bio, foto, highlights, links)</span></div>
+          <div class="plan-feat"><span class="feat-check yes">✓</span><span class="feat-text"><strong>Calendario editorial</strong> mensual</span></div>
+          <div class="plan-feat"><span class="feat-check yes">✓</span><span class="feat-text"><strong>Diseño gráfico</strong> con identidad de marca</span></div>
+          <div class="plan-feat"><span class="feat-check yes">✓</span><span class="feat-text"><strong>Reporte mensual</strong> de métricas básicas</span></div>
+          <div class="plan-feat"><span class="feat-check no">—</span><span class="feat-text dimmed">Reels / TikToks</span></div>
+          <div class="plan-feat"><span class="feat-check no">—</span><span class="feat-text dimmed">Community management</span></div>
+          <div class="plan-feat"><span class="feat-check no">—</span><span class="feat-text dimmed">Gestión de publicidad</span></div>
+        </div>
+        <a href="https://wa.me/573023440073?text=Hola%2C%20me%20interesa%20el%20Plan%20B%C3%A1sico%20de%20marketing%20digital" class="plan-btn basic-btn" target="_blank" rel="noopener">Quiero el Plan Básico →</a>
+      </div>
+
+      <!-- PRO -->
+      <div class="plan-card pro">
+        <div class="plan-glow"></div>
+        <div class="plan-popular">⭐ Más Popular</div>
+        <div class="plan-icon">🚀</div>
+        <div class="plan-name">Pro</div>
+        <div class="plan-tagline">Para marcas que quieren<br>destacar y vender más.</div>
+        <div class="plan-price-wrap">
+          <div class="plan-price">
+            <span class="plan-currency">$</span>
+            <span class="plan-amount pro-price" id="price-pro">750.000</span>
+          </div>
+          <div class="plan-period">COP / mes · <span id="period-pro">3 meses</span></div>
+          <div class="plan-saving" id="saving-pro"></div>
+        </div>
+        <div class="plan-features">
+          <div class="plan-feat"><span class="feat-check yes">✓</span><span class="feat-text"><strong>2 redes sociales</strong> (Instagram + Facebook o TikTok)</span></div>
+          <div class="plan-feat"><span class="feat-check yes">✓</span><span class="feat-text"><strong>20 posts</strong> diseñados al mes (5 por semana)</span></div>
+          <div class="plan-feat"><span class="feat-check yes">✓</span><span class="feat-text"><strong>Stories diarias</strong> con animaciones y encuestas</span></div>
+          <div class="plan-feat"><span class="feat-check yes">✓</span><span class="feat-text"><strong>4 Reels o TikToks</strong> al mes con guión y edición</span></div>
+          <div class="plan-feat"><span class="feat-check yes">✓</span><span class="feat-text"><strong>Rediseño completo</strong> del perfil (identidad visual profesional)</span></div>
+          <div class="plan-feat"><span class="feat-check yes">✓</span><span class="feat-text"><strong>Copywriting estratégico</strong> — captions que convierten</span></div>
+          <div class="plan-feat"><span class="feat-check yes">✓</span><span class="feat-text"><strong>Community management</strong> lunes a viernes</span></div>
+          <div class="plan-feat"><span class="feat-check yes">✓</span><span class="feat-text"><strong>Estrategia de contenido</strong> mensual personalizada</span></div>
+          <div class="plan-feat"><span class="feat-check yes">✓</span><span class="feat-text"><strong>Reporte mensual con IA</strong> — métricas, engagement y crecimiento</span></div>
+          <div class="plan-feat"><span class="feat-check no">—</span><span class="feat-text dimmed">Gestión de pauta publicitaria</span></div>
+        </div>
+        <a href="https://wa.me/573023440073?text=Hola%2C%20me%20interesa%20el%20Plan%20Pro%20de%20marketing%20digital" class="plan-btn pro-btn" target="_blank" rel="noopener">Quiero el Plan Pro →</a>
+      </div>
+
+      <!-- MAX -->
+      <div class="plan-card max">
+        <div class="plan-icon">👑</div>
+        <div class="plan-name">Max</div>
+        <div class="plan-tagline">Para marcas que quieren<br>dominar su mercado.</div>
+        <div class="plan-price-wrap">
+          <div class="plan-price">
+            <span class="plan-currency">$</span>
+            <span class="plan-amount" id="price-max">1.500.000</span>
+          </div>
+          <div class="plan-period">COP / mes · <span id="period-max">3 meses</span></div>
+          <div class="plan-saving" id="saving-max"></div>
+        </div>
+        <div class="plan-features">
+          <div class="plan-feat"><span class="feat-check yes">✓</span><span class="feat-text"><strong>3+ redes sociales</strong> (Instagram, Facebook, TikTok + YouTube Shorts)</span></div>
+          <div class="plan-feat"><span class="feat-check yes">✓</span><span class="feat-text"><strong>Posts ilimitados</strong> con diseño premium de nivel agencia</span></div>
+          <div class="plan-feat"><span class="feat-check yes">✓</span><span class="feat-text"><strong>Stories diarias premium</strong> — animadas, interactivas, con marca</span></div>
+          <div class="plan-feat"><span class="feat-check yes">✓</span><span class="feat-text"><strong>8 Reels + 8 TikToks</strong> al mes — guión, grabación y edición</span></div>
+          <div class="plan-feat"><span class="feat-check yes">✓</span><span class="feat-text"><strong>Dirección de arte completa</strong> — paleta, tipografía, estética única</span></div>
+          <div class="plan-feat"><span class="feat-check yes">✓</span><span class="feat-text"><strong>Copywriting + SEO</strong> en captions para mayor alcance orgánico</span></div>
+          <div class="plan-feat"><span class="feat-check yes">✓</span><span class="feat-text"><strong>Community management 24/7</strong> — respondemos por ti siempre</span></div>
+          <div class="plan-feat"><span class="feat-check yes">✓</span><span class="feat-text"><strong>Gestión de Meta Ads</strong> incluida (presupuesto publicitario aparte)</span></div>
+          <div class="plan-feat"><span class="feat-check yes">✓</span><span class="feat-text"><strong>Auditoría Digital IA</strong> mensual — reporte profesional entregado</span></div>
+          <div class="plan-feat"><span class="feat-check yes">✓</span><span class="feat-text"><strong>Reportes semanales con IA</strong> + videollamada estratégica mensual</span></div>
+        </div>
+        <a href="https://wa.me/573023440073?text=Hola%2C%20me%20interesa%20el%20Plan%20Max%20de%20marketing%20digital" class="plan-btn max-btn" target="_blank" rel="noopener">Quiero el Plan Max →</a>
+      </div>
+
+    </div>
+    <p class="planes-note rv">¿Tienes dudas sobre qué plan elegir? <a href="https://wa.me/573023440073?text=Hola%2C%20quiero%20saber%20qu%C3%A9%20plan%20es%20el%20mejor%20para%20mi%20negocio" target="_blank">Escríbenos y te asesoramos gratis →</a></p>
+  </div>
+</div>
+
 <!-- PANEL SHOWCASE -->
 <div id="panel" class="panel-sec" style="position:relative;z-index:2">
   <div class="panel-inner">
@@ -726,7 +892,7 @@ footer{padding:100px 60px 40px;position:relative;z-index:2;background:linear-gra
       <div class="stag">Agendar Demo</div>
       <h2 class="sh">Empieza hoy.<br>Resultados desde el día 1.</h2>
       <p style="color:var(--text-muted);line-height:1.65;font-size:17px;margin-bottom:44px;max-width:460px">Cuéntanos tu negocio. En 48 horas te presentamos un plan de IA personalizado con los servicios que más impacto tendrán en tu caso.</p>
-      <div class="cdet"><div class="wpico">✉️</div><span>hola@jclagencia.com</span></div>
+      <div class="cdet"><div class="wpico">✉️</div><span>jclmarketingyia@gmail.com</span></div>
       <div class="cdet"><div class="wpico">💬</div><span>WhatsApp disponible 24/7</span></div>
       <div class="cdet"><div class="wpico">🚀</div><span>Propuesta estratégica en 48h</span></div>
       <div class="cdet"><div class="wpico">🌎</div><span>Operamos en 10+ países</span></div>
@@ -797,7 +963,7 @@ footer{padding:100px 60px 40px;position:relative;z-index:2;background:linear-gra
       </ul></div>
       <div class="fcol"><h4>Contacto</h4><ul>
         <li><a href="#contacto">Agendar Demo</a></li>
-        <li><a href="mailto:hola@jclagencia.com">hola@jclagencia.com</a></li>
+        <li><a href="mailto:jclmarketingyia@gmail.com">jclmarketingyia@gmail.com</a></li>
         <li><a href="#contacto">WhatsApp</a></li>
         <li><a href="#contacto">Política de Privacidad</a></li>
       </ul></div>
@@ -810,7 +976,7 @@ footer{padding:100px 60px 40px;position:relative;z-index:2;background:linear-gra
 </footer>
 
 <!-- WhatsApp Float -->
-<a href="https://wa.me/message/JCL" class="wa-float" title="Habla con nosotros por WhatsApp" target="_blank" rel="noopener">💬</a>
+<a href="https://wa.me/573023440073" class="wa-float" title="Habla con nosotros por WhatsApp" target="_blank" rel="noopener">💬</a>
 
 <script>
 // Preloader
@@ -837,6 +1003,27 @@ const cob = new IntersectionObserver(entries => {
   });
 }, {threshold: 0.5});
 document.querySelectorAll('[data-to]').forEach(el => cob.observe(el));
+
+// Toggle planes 3m / 6m
+const PRICES = {
+  basic:  { '3m': '350.000', '6m': '280.000' },
+  pro:    { '3m': '750.000', '6m': '600.000' },
+  max:    { '3m': '1.500.000', '6m': '1.200.000' },
+};
+const SAVINGS = {
+  basic: 'Ahorras $210.000 en 6 meses',
+  pro:   'Ahorras $900.000 en 6 meses',
+  max:   'Ahorras $1.800.000 en 6 meses',
+};
+function setPlan(mode) {
+  ['basic','pro','max'].forEach(p => {
+    document.getElementById('price-' + p).textContent = PRICES[p][mode];
+    document.getElementById('period-' + p).textContent = mode === '3m' ? '3 meses' : '6 meses';
+    document.getElementById('saving-' + p).textContent = mode === '6m' ? SAVINGS[p] : '';
+  });
+  document.getElementById('btn3m').classList.toggle('active', mode === '3m');
+  document.getElementById('btn6m').classList.toggle('active', mode === '6m');
+}
 
 // Formulario
 document.querySelector('.fbtn').addEventListener('click', function(e) {
