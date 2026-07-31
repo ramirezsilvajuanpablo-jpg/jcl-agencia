@@ -462,6 +462,7 @@ footer{padding:100px 60px 40px;position:relative;z-index:2;background:linear-gra
       <h3 class="ctitle">Pedidos QR</h3>
       <p class="cdesc">Tus clientes piden desde la mesa escaneando un código QR. El negocio se gestiona solo, en tiempo real.</p>
       <span class="feat-tag">🍽️ La Roca · Frits Chiken</span>
+      <span class="feat-tag" style="margin-top:8px;background:rgba(255,255,255,.08);border:1px solid var(--glass-border)">🚀 Regístrate tú mismo, sin esperar</span>
       <span class="carr">↗</span>
     </a>
   </div>
@@ -647,9 +648,10 @@ footer{padding:100px 60px 40px;position:relative;z-index:2;background:linear-gra
 <!-- PEDIDOS QR -->
 <div id="pedidos" class="sec">
   <div class="rv svc-header">
-    <div class="stag">Pedidos Digitales</div>
-    <h2 class="sh">Sistema de Pedidos para Bares y Restaurantes</h2>
-    <p class="ssub" style="margin:0 auto 40px">Los clientes piden desde su mesa. El negocio se gestiona solo. Con solo escanear un código QR, acceden al menú digital desde su celular — sin descargar ninguna app — y hacen su pedido directamente desde la mesa.</p>
+    <div class="stag">Nuestro Enfoque · Pedidos Digitales</div>
+    <h2 class="sh">La plataforma de pedidos QR para restaurantes, bares y cafeterías.</h2>
+    <p class="ssub" style="margin:0 auto 24px">Los clientes piden desde su mesa. El negocio se gestiona solo. Con solo escanear un código QR, acceden al menú digital desde su celular — sin descargar ninguna app — y hacen su pedido directamente desde la mesa.</p>
+    <p id="stats-badge" class="stag" style="background:linear-gradient(135deg,rgba(139,47,201,.18),rgba(232,56,107,.14));border-color:rgba(232,56,107,.3)">Sé de los primeros negocios en registrarte</p>
   </div>
 
   <div class="svc-grid rv">
@@ -769,6 +771,20 @@ footer{padding:100px 60px 40px;position:relative;z-index:2;background:linear-gra
         <p class="contact-note" id="reg-msg">Gratis para empezar · Activación inmediata</p>
       </div>
     </div>
+  </div>
+</div>
+
+<!-- HACIA DÓNDE VAMOS -->
+<div id="vision" class="sec" style="padding-top:0">
+  <div class="rv" style="text-align:center;max-width:780px;margin:0 auto">
+    <div class="stag">Hacia Dónde Vamos</div>
+    <h2 class="sh">Un solo enfoque: la mejor plataforma de pedidos para comer y beber.</h2>
+    <p class="ssub" style="margin:0 auto">A partir de ahora, todo nuestro esfuerzo de producto está puesto en un solo sistema — bien hecho, probado en negocios reales y disponible para cualquier restaurante, bar o cafetería que lo necesite.</p>
+  </div>
+  <div class="panel-feats rv d1" style="max-width:780px;margin:48px auto 0">
+    <div class="pfeat"><div class="pfeat-icon">🎯</div><div class="pfeat-body"><h5>Un nicho, no tres</h5><p>Dejamos de repartir esfuerzo entre proyectos distintos — nos concentramos en resolver pedidos y mesas mejor que nadie.</p></div></div>
+    <div class="pfeat"><div class="pfeat-icon">📍</div><div class="pfeat-body"><h5>Empezamos en Boyacá</h5><p>Conocemos el territorio y a los negocios de la región — el punto de partida antes de crecer a más ciudades.</p></div></div>
+    <div class="pfeat"><div class="pfeat-icon">🏗️</div><div class="pfeat-body"><h5>Un sistema, cientos de negocios</h5><p>Cada restaurante con su propia marca y su propio subdominio, todos sobre la misma plataforma confiable.</p></div></div>
   </div>
 </div>
 
@@ -950,6 +966,17 @@ const cob = new IntersectionObserver(entries => {
   });
 }, {threshold: 0.5});
 document.querySelectorAll('[data-to]').forEach(el => cob.observe(el));
+
+// Contador en vivo de negocios registrados
+fetch('https://jcl-pedidos-app-production.up.railway.app/api/stats')
+  .then(r => r.json())
+  .then(d => {
+    const n = d.negocios || 0;
+    const badge = document.getElementById('stats-badge');
+    if (!badge) return;
+    if (n > 0) badge.textContent = `🔥 ${n} negocio${n !== 1 ? 's' : ''} ya está${n !== 1 ? 'n' : ''} usando el sistema`;
+  })
+  .catch(() => {});
 
 // Formulario
 document.querySelector('.fbtn').addEventListener('click', function(e) {
