@@ -534,7 +534,8 @@ footer{padding:100px 60px 40px;position:relative;z-index:2;background:linear-gra
           <div class="fg"><label>WhatsApp de contacto</label><input type="text" id="reg-whatsapp" placeholder="300 123 4567"></div>
           <div class="fg"><label>Número de mesas</label><input type="number" id="reg-mesas" placeholder="10" min="1" max="100"></div>
         </div>
-        <div class="fg"><label>Correo (opcional)</label><input type="email" id="reg-email" placeholder="tu@negocio.com"></div>
+        <div class="fg"><label>Correo</label><input type="email" id="reg-email" placeholder="tu@negocio.com"></div>
+        <p class="contact-note" style="text-align:left;margin:-10px 0 20px">A este correo te enviamos la contraseña de tu panel — la puedes cambiar después.</p>
         <div class="fg"><label>Contraseña de administrador</label><input type="password" id="reg-password" placeholder="Mínimo 6 caracteres"></div>
         <button class="fbtn" id="reg-submit">Crear mi sistema →</button>
         <p class="contact-note" id="reg-msg">Gratis para empezar · Activación inmediata</p>
@@ -767,8 +768,14 @@ document.getElementById('reg-submit').addEventListener('click', async function(e
 
   const resetMsg = () => { msg.textContent = 'Gratis para empezar · Activación inmediata'; msg.style.color = ''; };
 
-  if (!nombre || !slug || !whatsapp || !password) {
-    msg.textContent = '⚠ Completa nombre, subdominio, WhatsApp y contraseña';
+  if (!nombre || !slug || !whatsapp || !email || !password) {
+    msg.textContent = '⚠ Completa nombre, subdominio, WhatsApp, correo y contraseña';
+    msg.style.color = '#fb7185';
+    setTimeout(resetMsg, 3000);
+    return;
+  }
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    msg.textContent = '⚠ El correo no es válido';
     msg.style.color = '#fb7185';
     setTimeout(resetMsg, 3000);
     return;
