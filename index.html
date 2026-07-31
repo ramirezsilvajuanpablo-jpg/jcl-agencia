@@ -502,6 +502,18 @@ footer{padding:100px 60px 40px;position:relative;z-index:2;background:linear-gra
     </div>
     <div class="rv d2">
       <div class="fbox glass-panel">
+        <div class="fg">
+          <label>Logo de tu negocio (opcional)</label>
+          <input type="file" id="reg-logo" accept="image/png,image/jpeg,image/webp">
+          <p class="contact-note" style="text-align:left;margin-top:8px">Con tu logo, detectamos automáticamente los colores de tu marca.</p>
+          <div id="reg-logo-preview" style="display:none;margin-top:16px;align-items:center;gap:16px">
+            <img id="reg-logo-img" alt="Logo" style="width:56px;height:56px;border-radius:12px;object-fit:cover;border:1px solid var(--glass-border);flex-shrink:0">
+            <div style="flex:1;min-width:0">
+              <p class="contact-note" style="text-align:left;margin:0 0 10px;opacity:1">Color de marca — elige uno o personalízalo:</p>
+              <div id="reg-color-swatches" style="display:flex;gap:10px;align-items:center;flex-wrap:wrap"></div>
+            </div>
+          </div>
+        </div>
         <div class="frow">
           <div class="fg"><label>Nombre del negocio</label><input type="text" id="reg-nombre" placeholder="Ej. La Roca Cafe Bar"></div>
           <div class="fg">
@@ -649,6 +661,98 @@ regSlug.addEventListener('input', () => {
   regPreview.innerHTML = 'Tu sistema quedará en: <strong style="color:var(--text-main)">' + (s || 'turestaurante') + '.jclagencia.com</strong>';
 });
 
+// ── Logo: extraer colores dominantes + elegir marca ─────────────────────────
+let logoDataUrl = null;
+let colorElegido = null;
+
+function rgbToHex(r, g, b) {
+  return '#' + [r, g, b].map(v => v.toString(16).padStart(2, '0')).join('').toUpperCase();
+}
+
+function distanciaColor(a, b) {
+  return Math.abs(a[0] - b[0]) + Math.abs(a[1] - b[1]) + Math.abs(a[2] - b[2]);
+}
+
+function extraerColores(img, maxColores) {
+  const canvas = document.createElement('canvas');
+  const size = 80;
+  canvas.width = size; canvas.height = size;
+  const ctx = canvas.getContext('2d', { willReadFrequently: true });
+  ctx.drawImage(img, 0, 0, size, size);
+  let datos;
+  try { datos = ctx.getImageData(0, 0, size, size).data; } catch (e) { return []; }
+
+  const cuentas = new Map();
+  for (let i = 0; i < datos.length; i += 4) {
+    const r = datos[i], g = datos[i + 1], b = datos[i + 2], a = datos[i + 3];
+    if (a < 128) continue;
+    if (r > 235 && g > 235 && b > 235) continue; // casi blanco
+    if (r < 20 && g < 20 && b < 20) continue;    // casi negro
+    const key = [Math.round(r / 24) * 24, Math.round(g / 24) * 24, Math.round(b / 24) * 24].join(',');
+    cuentas.set(key, (cuentas.get(key) || 0) + 1);
+  }
+
+  const ordenados = [...cuentas.entries()]
+    .sort((a, b) => b[1] - a[1])
+    .map(([key]) => key.split(',').map(Number));
+
+  const elegidos = [];
+  for (const c of ordenados) {
+    if (elegidos.some(e => distanciaColor(e, c) < 60)) continue; // evitar colores casi iguales
+    elegidos.push(c);
+    if (elegidos.length >= maxColores) break;
+  }
+  return elegidos.map(([r, g, b]) => rgbToHex(r, g, b));
+}
+
+function pintarSwatches(colores) {
+  const cont = document.getElementById('reg-color-swatches');
+  cont.innerHTML = '';
+  colores.forEach((hex, i) => {
+    const sw = document.createElement('button');
+    sw.type = 'button';
+    sw.title = hex;
+    sw.style.cssText = 'width:34px;height:34px;border-radius:50%;cursor:pointer;background:' + hex + ';border:3px solid ' + (i === 0 ? '#fff' : 'transparent') + ';transition:border-color .15s;flex-shrink:0';
+    sw.addEventListener('click', () => {
+      colorElegido = hex;
+      cont.querySelectorAll('button').forEach(b => b.style.borderColor = 'transparent');
+      sw.style.borderColor = '#fff';
+      picker.value = hex;
+    });
+    cont.appendChild(sw);
+  });
+  if (colores.length > 0) colorElegido = colores[0];
+
+  // Selector de color libre — siempre disponible
+  const picker = document.createElement('input');
+  picker.type = 'color';
+  picker.value = colores[0] || '#CC2200';
+  picker.title = 'Elegir otro color';
+  picker.style.cssText = 'width:34px;height:34px;border-radius:50%;border:none;cursor:pointer;padding:0;background:none;flex-shrink:0';
+  picker.addEventListener('input', () => {
+    colorElegido = picker.value.toUpperCase();
+    cont.querySelectorAll('button').forEach(b => b.style.borderColor = 'transparent');
+  });
+  cont.appendChild(picker);
+}
+
+document.getElementById('reg-logo').addEventListener('change', function() {
+  const file = this.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = () => {
+    logoDataUrl = reader.result;
+    const img = new Image();
+    img.onload = () => {
+      document.getElementById('reg-logo-img').src = logoDataUrl;
+      document.getElementById('reg-logo-preview').style.display = 'flex';
+      pintarSwatches(extraerColores(img, 4));
+    };
+    img.src = logoDataUrl;
+  };
+  reader.readAsDataURL(file);
+});
+
 document.getElementById('reg-submit').addEventListener('click', async function(e) {
   e.preventDefault();
   const btn = this;
@@ -683,7 +787,7 @@ document.getElementById('reg-submit').addEventListener('click', async function(e
     const res = await fetch(REGISTRO_API, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ nombre, tipo, slug, whatsapp, email, num_mesas, password }),
+      body: JSON.stringify({ nombre, tipo, slug, whatsapp, email, num_mesas, password, logo: logoDataUrl, color_primario: colorElegido }),
     });
     const data = await res.json();
     if (!res.ok) throw new Error(data.error || 'No se pudo completar el registro');
