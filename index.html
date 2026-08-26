@@ -5,12 +5,71 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script>if (window.location.search) history.replaceState(null, '', window.location.pathname);</script>
 <title>JCL Agencia — Pedidos por QR para Restaurantes, Bares y Cafeterías</title>
-<meta name="description" content="Sistema de pedidos por código QR para restaurantes, bares y cafeterías. Regístrate y tu sistema queda activo al instante, con tu propio subdominio.">
-<meta property="og:title" content="JCL Agencia — Pedidos por QR">
-<meta property="og:description" content="Tus clientes piden desde la mesa escaneando un QR. Regístrate y arranca hoy mismo.">
+<meta name="description" content="Sistema de pedidos por código QR para restaurantes, bares y cafeterías. Regístrate y tu sistema queda activo al instante, con tu propio subdominio. Primer mes gratis.">
+<link rel="canonical" href="https://jclagencia.com/">
+<meta name="theme-color" content="#125EE0">
+
+<!-- Favicon en archivos REALES: Googlebot no puede descargar un icono
+     incrustado como data: URI, por eso el buscador mostraba el mundito gris.
+     Los tamaños son múltiplos de 48, que es lo que Google pide. -->
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="48x48" href="/icons/icon-48.png">
+<link rel="icon" type="image/png" sizes="96x96" href="/icons/icon-96.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/icons/icon-192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
+
+<!-- Vista previa al compartir (WhatsApp, Facebook, X). Sin og:image el enlace
+     se compartía sin imagen, con un recuadro vacío. -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="JCL Agencia">
+<meta property="og:locale" content="es_CO">
+<meta property="og:url" content="https://jclagencia.com/">
+<meta property="og:title" content="JCL Agencia — Pedidos por QR para Restaurantes, Bares y Cafeterías">
+<meta property="og:description" content="Tus clientes piden desde la mesa escaneando un QR. Regístrate y arranca hoy mismo — primer mes gratis.">
+<meta property="og:image" content="https://jclagencia.com/icons/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="JCL Agencia — pedidos por QR para restaurantes, bares y cafeterías">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="JCL Agencia — Pedidos por QR para Restaurantes, Bares y Cafeterías">
+<meta name="twitter:description" content="Tus clientes piden desde la mesa escaneando un QR. Primer mes gratis.">
+<meta name="twitter:image" content="https://jclagencia.com/icons/og-image.jpg">
+
+<!-- Datos estructurados: es lo que le dice a Google cuál es el logo OFICIAL de
+     la marca (distinto del iconito del resultado de búsqueda). -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "JCL Agencia",
+  "alternateName": "JCL Marketing Digital & Servicios de IA",
+  "url": "https://jclagencia.com/",
+  "logo": {
+    "@type": "ImageObject",
+    "url": "https://jclagencia.com/icons/icon-512.png",
+    "width": 512,
+    "height": 512
+  },
+  "image": "https://jclagencia.com/icons/og-image.jpg",
+  "description": "Sistema de pedidos por código QR para restaurantes, bares y cafeterías.",
+  "areaServed": { "@type": "Country", "name": "Colombia" },
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Sogamoso",
+    "addressRegion": "Boyacá",
+    "addressCountry": "CO"
+  },
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "contactType": "ventas",
+    "telephone": "+57-312-286-6413",
+    "availableLanguage": ["es"]
+  }
+}
+</script>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%237B2FBE'/%3E%3Cstop offset='50%25' stop-color='%23E8386B'/%3E%3Cstop offset='100%25' stop-color='%23F5921E'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='7' fill='url(%23g)'/%3E%3Ctext x='16' y='23' font-family='Arial Black,Arial,sans-serif' font-weight='900' font-size='17' fill='white' text-anchor='middle'%3EJCL%3C/text%3E%3C/svg%3E">
 <style>
 /* ── RESET & VARIABLES ── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -204,6 +263,23 @@ h2.sh{font-size:clamp(36px,5vw,60px);font-weight:900;letter-spacing:-.03em;line-
 .fbtn:hover{transform:translateY(-2px);box-shadow:0 16px 38px rgba(232,56,107,.5)}
 .contact-note{font-size:12px;color:var(--text-muted);text-align:center;margin-top:14px;opacity:.7}
 
+/* ── PLANES Y PRECIOS ── */
+.free-badge{display:inline-flex;align-items:center;gap:8px;margin-top:28px;padding:12px 26px;border-radius:100px;font-size:15px;font-weight:800;color:#fff;background:linear-gradient(135deg,var(--c-jcl1),var(--c-jcl2),var(--c-jcl3));box-shadow:0 12px 30px rgba(232,56,107,.35)}
+.prgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:1100px;margin:56px auto 0}
+.prc{padding:40px 34px;display:flex;flex-direction:column;justify-content:space-between;gap:32px;text-align:center}
+.prc-name{font-size:13px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted);margin-bottom:18px}
+.prc-price{font-size:clamp(38px,4.4vw,52px);font-weight:900;letter-spacing:-.03em;line-height:1;background:linear-gradient(135deg,#fff 30%,rgba(255,255,255,.72));-webkit-background-clip:text;background-clip:text;color:transparent}
+.prc-cur{font-size:.5em;font-weight:800;vertical-align:super;margin-right:2px}
+.prc-per{font-size:.34em;font-weight:700;color:var(--text-muted);-webkit-text-fill-color:var(--text-muted);margin-left:4px}
+.prc-note{font-size:14px;color:var(--text-muted);line-height:1.55;margin-top:16px}
+.prc-btn{display:block;padding:15px;border-radius:14px;font-size:15px;font-weight:800;text-decoration:none;color:#fff;background:linear-gradient(135deg,var(--c-jcl1),var(--c-jcl2),var(--c-jcl3));box-shadow:0 10px 26px rgba(232,56,107,.28);transition:transform .3s,box-shadow .3s}
+.prc-btn:hover{transform:translateY(-2px);box-shadow:0 16px 36px rgba(232,56,107,.45)}
+.prc-incl{max-width:1100px;margin:20px auto 0;padding:32px 34px}
+.prc-incl-title{font-size:13px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted);margin-bottom:22px;text-align:center}
+.prc-incl-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px 28px}
+.prc-incl-grid span{font-size:15px;color:var(--text-muted);line-height:1.5}
+@media(max-width:860px){.prgrid{grid-template-columns:1fr;max-width:460px}}
+
 /* ── FOOTER ── */
 footer{padding:100px 60px 40px;position:relative;z-index:2;background:linear-gradient(to top,#000,transparent)}
 .fi{max-width:1400px;margin:0 auto}
@@ -355,6 +431,7 @@ footer{padding:100px 60px 40px;position:relative;z-index:2;background:linear-gra
   </a>
   <ul class="nlinks">
     <li><a href="#pedidos">Cómo Funciona</a></li>
+    <li><a href="#precios">Precios</a></li>
     <li><a href="#vision">Nuestro Enfoque</a></li>
     <li><a href="#contacto">Contacto</a></li>
   </ul>
@@ -368,6 +445,7 @@ footer{padding:100px 60px 40px;position:relative;z-index:2;background:linear-gra
 <div class="mmenu" id="mm">
   <button class="mcls" onclick="document.getElementById('mm').classList.remove('open')">✕</button>
   <a href="#pedidos">Cómo Funciona</a>
+  <a href="#precios">Precios</a>
   <a href="#vision">Nuestro Enfoque</a>
   <a href="#contacto">Contacto</a>
   <a href="#registro" class="ncta" style="margin-top:16px;font-size:15px">Regístrate gratis →</a>
@@ -473,7 +551,7 @@ footer{padding:100px 60px 40px;position:relative;z-index:2;background:linear-gra
   <div class="rv" style="margin-top:40px">
     <div class="glass-panel" style="padding:40px 44px;display:flex;flex-wrap:wrap;gap:24px;align-items:center;justify-content:space-between">
       <div style="flex:1;min-width:260px">
-        <p style="font-size:16px;color:var(--text-main);line-height:1.6;margin-bottom:14px"><strong>En operación</strong> en La Roca Cafe Bar y Frits Chiken. Funciona igual de bien para cualquier bar o restaurante.</p>
+        <p style="font-size:16px;color:var(--text-main);line-height:1.6;margin-bottom:14px"><strong>En operación</strong> y funcionando hoy. Igual de bien para cualquier bar o restaurante.</p>
         <div style="display:flex;gap:10px;flex-wrap:wrap">
           <span class="feat-tag" style="margin-top:0">⏱ Implementación en 24-48h</span>
           <span class="feat-tag" style="margin-top:0;background:linear-gradient(135deg,var(--c-jcl2),var(--c-jcl3))">🎨 Adaptable a tu marca</span>
@@ -481,8 +559,60 @@ footer{padding:100px 60px 40px;position:relative;z-index:2;background:linear-gra
       </div>
       <div style="display:flex;gap:14px;flex-wrap:wrap">
         <a href="#registro" class="bp" style="padding:16px 32px;font-size:15px">Regístrate ahora →</a>
-        <a href="https://www.instagram.com/p/DZ_ZE_xPv7X/" class="bs" target="_blank" rel="noopener" style="padding:16px 32px;font-size:15px">Ver demo — La Roca ↗</a>
       </div>
+    </div>
+  </div>
+</div>
+
+<!-- PLANES Y PRECIOS -->
+<div id="precios" class="sec">
+  <div class="rv" style="text-align:center;max-width:760px;margin:0 auto">
+    <div class="stag">Planes y Precios</div>
+    <h2 class="sh">Un precio claro,<br>según el tamaño de tu negocio.</h2>
+    <p class="ssub" style="margin:0 auto">Los tres planes traen <strong style="color:var(--text-main)">exactamente las mismas funciones</strong>. Lo único que cambia es cuántas mesas manejas — no pagas de más por un sistema recortado.</p>
+    <div class="free-badge">🎁 Primer mes gratis en cualquier plan</div>
+  </div>
+
+  <div class="prgrid">
+    <div class="prc glass-panel rv">
+      <div class="prc-top">
+        <div class="prc-name">Hasta 10 mesas</div>
+        <div class="prc-price"><span class="prc-cur">$</span>16.900<span class="prc-per">/mes</span></div>
+        <div class="prc-note">Ideal para cafeterías y negocios pequeños</div>
+      </div>
+      <a href="#registro" class="prc-btn">Empezar gratis →</a>
+    </div>
+
+    <div class="prc glass-panel rv d1">
+      <div class="prc-top">
+        <div class="prc-name">Hasta 20 mesas</div>
+        <div class="prc-price"><span class="prc-cur">$</span>29.900<span class="prc-per">/mes</span></div>
+        <div class="prc-note">Para restaurantes y bares en crecimiento</div>
+      </div>
+      <a href="#registro" class="prc-btn">Empezar gratis →</a>
+    </div>
+
+    <div class="prc glass-panel rv d2">
+      <div class="prc-top">
+        <div class="prc-name">Más de 20 mesas</div>
+        <div class="prc-price"><span class="prc-cur">$</span>49.900<span class="prc-per">/mes</span></div>
+        <div class="prc-note">Sin límite de mesas, para locales grandes</div>
+      </div>
+      <a href="#registro" class="prc-btn">Empezar gratis →</a>
+    </div>
+  </div>
+
+  <div class="prc-incl glass-panel rv">
+    <div class="prc-incl-title">Todo esto viene incluido en los tres planes</div>
+    <div class="prc-incl-grid">
+      <span>✓ Carta digital con QR por mesa</span>
+      <span>✓ Panel de cocina en tiempo real</span>
+      <span>✓ Panel de meseros con avisos</span>
+      <span>✓ Panel de caja y cierre del día</span>
+      <span>✓ Reporte en Excel al correo</span>
+      <span>✓ Tu propio subdominio y tu marca</span>
+      <span>✓ Control de inventario y agotados</span>
+      <span>✓ Actualizaciones incluidas</span>
     </div>
   </div>
 </div>
@@ -497,7 +627,7 @@ footer{padding:100px 60px 40px;position:relative;z-index:2;background:linear-gra
       <div class="panel-feats">
         <div class="pfeat"><div class="pfeat-icon">⚡</div><div class="pfeat-body"><h5>Activación inmediata</h5><p>Tu sistema queda funcionando apenas te registras, sin esperar aprobación.</p></div></div>
         <div class="pfeat"><div class="pfeat-icon">🌐</div><div class="pfeat-body"><h5>Tu propio subdominio</h5><p>Ej. turestaurante.jclagencia.com — solo para tu negocio.</p></div></div>
-        <div class="pfeat"><div class="pfeat-icon">🍽️</div><div class="pfeat-body"><h5>Sirve para restaurantes, bares y cafeterías</h5><p>El mismo sistema probado en La Roca Cafe Bar y Frits Chiken.</p></div></div>
+        <div class="pfeat"><div class="pfeat-icon">🍽️</div><div class="pfeat-body"><h5>Sirve para restaurantes, bares y cafeterías</h5><p>El mismo sistema, probado y funcionando en negocios reales.</p></div></div>
       </div>
     </div>
     <div class="rv d2">
@@ -515,7 +645,7 @@ footer{padding:100px 60px 40px;position:relative;z-index:2;background:linear-gra
           </div>
         </div>
         <div class="frow">
-          <div class="fg"><label>Nombre del negocio</label><input type="text" id="reg-nombre" placeholder="Ej. La Roca Cafe Bar"></div>
+          <div class="fg"><label>Nombre del negocio</label><input type="text" id="reg-nombre" placeholder="Ej. Restaurante El Fogón"></div>
           <div class="fg">
             <label>Tipo de negocio</label>
             <select id="reg-tipo">
@@ -535,10 +665,15 @@ footer{padding:100px 60px 40px;position:relative;z-index:2;background:linear-gra
           <div class="fg"><label>Número de mesas</label><input type="number" id="reg-mesas" placeholder="10" min="1" max="100"></div>
         </div>
         <div class="fg"><label>Correo</label><input type="email" id="reg-email" placeholder="tu@negocio.com"></div>
-        <p class="contact-note" style="text-align:left;margin:-10px 0 20px">A este correo te enviamos la contraseña de tu panel — la puedes cambiar después.</p>
-        <div class="fg"><label>Contraseña de administrador</label><input type="password" id="reg-password" placeholder="Mínimo 6 caracteres"></div>
+        <p class="contact-note" style="text-align:left;margin:-10px 0 20px">Te enviamos un código a este correo para confirmar el registro, y luego un link para crear tu contraseña.</p>
         <button class="fbtn" id="reg-submit">Crear mi sistema →</button>
         <p class="contact-note" id="reg-msg">Gratis para empezar · Activación inmediata</p>
+
+        <div id="reg-step2" style="display:none;margin-top:20px;padding-top:20px;border-top:1px solid var(--glass-border)">
+          <div class="fg"><label>Código de verificación</label><input type="text" id="reg-codigo" placeholder="123456" inputmode="numeric" maxlength="6"></div>
+          <button class="fbtn" id="reg-confirmar">Confirmar código →</button>
+          <p class="contact-note" id="reg-msg2">Revisa tu correo — el código vence en 15 minutos. <a href="#" id="reg-reenviar" style="color:var(--text-main);text-decoration:underline">Reenviar código</a></p>
+        </div>
       </div>
     </div>
   </div>
@@ -584,7 +719,7 @@ footer{padding:100px 60px 40px;position:relative;z-index:2;background:linear-gra
     <p style="color:var(--text-muted);line-height:1.65;font-size:17px;margin-bottom:36px">Si tienes dudas antes de registrarte, o quieres que te acompañemos a configurar tu negocio, escríbenos directamente.</p>
     <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap">
       <a href="https://wa.me/573023440073?text=Hola%2C%20tengo%20una%20pregunta%20sobre%20el%20sistema%20de%20pedidos%20QR" class="bp" target="_blank" rel="noopener">💬 Escríbenos por WhatsApp</a>
-      <a href="mailto:jclmarketingyia@gmail.com" class="bs">✉️ jclmarketingyia@gmail.com</a>
+      <a href="mailto:admin@jclagencia.com" class="bs">✉️ admin@jclagencia.com</a>
     </div>
   </div>
 </div>
@@ -606,7 +741,7 @@ footer{padding:100px 60px 40px;position:relative;z-index:2;background:linear-gra
         <li><a href="#vision">Nuestro Enfoque</a></li>
       </ul></div>
       <div class="fcol"><h4>Contacto</h4><ul>
-        <li><a href="mailto:jclmarketingyia@gmail.com">jclmarketingyia@gmail.com</a></li>
+        <li><a href="mailto:admin@jclagencia.com">admin@jclagencia.com</a></li>
         <li><a href="https://wa.me/573023440073" target="_blank" rel="noopener">WhatsApp</a></li>
       </ul></div>
     </div>
@@ -650,8 +785,11 @@ fetch('https://jcl-pedidos-app-production.up.railway.app/api/stats')
   })
   .catch(() => {});
 
-// Registro self-service — Pedidos QR
+// Registro self-service — Pedidos QR (2 pasos: enviar código -> confirmar código)
 const REGISTRO_API = 'https://jcl-pedidos-app-production.up.railway.app/api/registro';
+const VERIFICAR_API = 'https://jcl-pedidos-app-production.up.railway.app/api/registro/verificar';
+const REENVIAR_API = 'https://jcl-pedidos-app-production.up.railway.app/api/registro/reenviar';
+let pendingId = null;
 const regSlug = document.getElementById('reg-slug');
 const regPreview = document.getElementById('reg-slug-preview');
 function slugify(v) {
@@ -764,12 +902,11 @@ document.getElementById('reg-submit').addEventListener('click', async function(e
   const whatsapp = document.getElementById('reg-whatsapp').value.trim();
   const email = document.getElementById('reg-email').value.trim();
   const num_mesas = document.getElementById('reg-mesas').value || 10;
-  const password = document.getElementById('reg-password').value;
 
   const resetMsg = () => { msg.textContent = 'Gratis para empezar · Activación inmediata'; msg.style.color = ''; };
 
-  if (!nombre || !slug || !whatsapp || !email || !password) {
-    msg.textContent = '⚠ Completa nombre, subdominio, WhatsApp, correo y contraseña';
+  if (!nombre || !slug || !whatsapp || !email) {
+    msg.textContent = '⚠ Completa nombre, subdominio, WhatsApp y correo';
     msg.style.color = '#fb7185';
     setTimeout(resetMsg, 3000);
     return;
@@ -780,29 +917,25 @@ document.getElementById('reg-submit').addEventListener('click', async function(e
     setTimeout(resetMsg, 3000);
     return;
   }
-  if (password.length < 6) {
-    msg.textContent = '⚠ La contraseña debe tener al menos 6 caracteres';
-    msg.style.color = '#fb7185';
-    setTimeout(resetMsg, 3000);
-    return;
-  }
 
   btn.disabled = true;
-  btn.textContent = 'Creando tu sistema...';
+  btn.textContent = 'Enviando código...';
 
   try {
     const res = await fetch(REGISTRO_API, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ nombre, tipo, slug, whatsapp, email, num_mesas, password, logo: logoDataUrl, color_primario: colorElegido }),
+      body: JSON.stringify({ nombre, tipo, slug, whatsapp, email, num_mesas, logo: logoDataUrl, color_primario: colorElegido }),
     });
     const data = await res.json();
     if (!res.ok) throw new Error(data.error || 'No se pudo completar el registro');
 
-    btn.textContent = '✓ ¡Listo! Tu sistema ya está activo';
-    btn.style.background = 'linear-gradient(135deg, #22c55e, #16a34a)';
-    msg.innerHTML = 'Entra en: <a href="' + data.url + '" target="_blank" rel="noopener" style="color:#4ade80;font-weight:700">' + data.url + '</a>';
+    pendingId = data.pendingId;
+    btn.textContent = '✓ Código enviado a tu correo';
+    msg.textContent = 'Escribe el código que te llegó para activar tu sistema.';
     msg.style.color = '';
+    document.getElementById('reg-step2').style.display = 'block';
+    document.getElementById('reg-codigo').focus();
   } catch (err) {
     btn.disabled = false;
     btn.textContent = 'Crear mi sistema →';
@@ -811,6 +944,85 @@ document.getElementById('reg-submit').addEventListener('click', async function(e
     setTimeout(resetMsg, 4000);
   }
 });
+
+document.getElementById('reg-confirmar').addEventListener('click', async function(e) {
+  e.preventDefault();
+  const btn = this;
+  const msg2 = document.getElementById('reg-msg2');
+  const codigo = document.getElementById('reg-codigo').value.trim();
+  const resetMsg2 = () => { msg2.innerHTML = 'Revisa tu correo — el código vence en 15 minutos. <a href="#" id="reg-reenviar" style="color:var(--text-main);text-decoration:underline">Reenviar código</a>'; msg2.style.color = ''; document.getElementById('reg-reenviar').addEventListener('click', reenviarCodigo); };
+
+  if (!/^\d{6}$/.test(codigo)) {
+    msg2.textContent = '⚠ El código son 6 números';
+    msg2.style.color = '#fb7185';
+    setTimeout(resetMsg2, 3000);
+    return;
+  }
+
+  btn.disabled = true;
+  btn.textContent = 'Confirmando...';
+
+  try {
+    const res = await fetch(VERIFICAR_API, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ pendingId, codigo }),
+    });
+    const data = await res.json();
+    if (!res.ok) {
+      const err = new Error(data.error || 'No se pudo confirmar el código');
+      err.fatal = [404, 410, 429].includes(res.status); // la solicitud pendiente ya no existe del lado del servidor
+      throw err;
+    }
+
+    const submitBtn = document.getElementById('reg-submit');
+    submitBtn.textContent = '✓ ¡Listo! Tu sistema ya está activo';
+    submitBtn.style.background = 'linear-gradient(135deg, #22c55e, #16a34a)';
+    document.getElementById('reg-msg').innerHTML = 'Entra en: <a href="' + data.url + '" target="_blank" rel="noopener" style="color:#4ade80;font-weight:700">' + data.url + '</a>';
+    document.getElementById('reg-msg').style.color = '';
+    document.getElementById('reg-step2').style.display = 'none';
+  } catch (err) {
+    if (err.fatal) {
+      // El registro pendiente ya no existe (expiró o se agotaron los intentos) — hay que empezar de nuevo.
+      document.getElementById('reg-step2').style.display = 'none';
+      document.getElementById('reg-codigo').value = '';
+      pendingId = null;
+      const submitBtn = document.getElementById('reg-submit');
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Crear mi sistema →';
+      document.getElementById('reg-msg').textContent = '⚠ ' + err.message;
+      document.getElementById('reg-msg').style.color = '#fb7185';
+    } else {
+      btn.disabled = false;
+      btn.textContent = 'Confirmar código →';
+      msg2.textContent = '⚠ ' + err.message;
+      msg2.style.color = '#fb7185';
+      setTimeout(resetMsg2, 4000);
+    }
+  }
+});
+
+async function reenviarCodigo(e) {
+  e.preventDefault();
+  const msg2 = document.getElementById('reg-msg2');
+  msg2.textContent = 'Reenviando...';
+  msg2.style.color = '';
+  try {
+    const res = await fetch(REENVIAR_API, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ pendingId }),
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || 'No se pudo reenviar el código');
+    msg2.textContent = '✓ Código reenviado — revisa tu correo';
+    msg2.style.color = '#4ade80';
+  } catch (err) {
+    msg2.textContent = '⚠ ' + err.message;
+    msg2.style.color = '#fb7185';
+  }
+}
+document.getElementById('reg-reenviar').addEventListener('click', reenviarCodigo);
 </script>
 </body>
 </html>
