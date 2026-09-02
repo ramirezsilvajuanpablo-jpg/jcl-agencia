@@ -9,6 +9,7 @@
     { "src": "icons/**", "use": "@vercel/static" }
   ],
   "routes": [
+    { "src": "/q/(.*)", "dest": "https://admin.jclagencia.com/q/$1" },
     { "src": "/api/superadmin/(.*)", "dest": "https://admin.jclagencia.com/api/superadmin/$1" },
     { "src": "/superadmin", "dest": "https://admin.jclagencia.com/superadmin" },
     { "src": "/superadmin/(.*)", "dest": "https://admin.jclagencia.com/superadmin/$1" },
