@@ -1446,7 +1446,7 @@ const Bienvenida = (() => {
           <div class="bv-dir">${esc(host)}</div>
           <ol class="bv-lista">
             <li><span>Abre tu panel de administrador en <code>${esc(host)}/admin</code></span></li>
-            <li><span>La primera vez creas tu contraseña.<small>Con el botón del final de este recorrido, o con el enlace que te llegó al correo (sirve por 48 horas).</small></span></li>
+            <li><span>La primera vez creas tu contraseña.<small>Con el botón del final de este recorrido, o con el enlace que te llegó al correo (sirve por 48 horas). Usa el que quieras: cuando la crees por uno, el otro te lleva directo a entrar.</small></span></li>
             <li><span>Desde ahí entras siempre con esa contraseña.<small>Consejo: en el panel toca “Instalar Admin” y te queda como una app en el celular.</small></span></li>
           </ol>`,
       },
@@ -1507,7 +1507,7 @@ const Bienvenida = (() => {
     $('bv-sig').hidden = ultimo;
     $('bv-entrar').hidden = !ultimo;
     $('bv-estado').hidden = !ultimo;
-    if (ultimo) pintarEntrar();
+    if (ultimo) { pintarEntrar(); revisarClave(); }
     raiz.scrollTop = 0;
   }
 
@@ -1524,17 +1524,21 @@ const Bienvenida = (() => {
   // Si el navegador consulta la dirección segundos antes de que el DNS la
   // publique, el internet del cliente guarda el "no existe" hasta 30 minutos y
   // el enlace de activación sale "No se puede acceder a este sitio".
-  const dominio = { slug: null, ok: false, vencido: false, timer: 0, inicio: 0, vistoListo: 0 };
+  const dominio = { slug: null, ok: false, vencido: false, timer: 0, inicio: 0, vistoListo: 0, claveCreada: false };
+  const tokenDe = d => { try { return new URL(d.setupUrl).searchParams.get('setup') || ''; } catch { return ''; } };
+  const urlEstado = slug => DOMINIO_API + '?slug=' + encodeURIComponent(slug) + (datos && tokenDe(datos) ? '&token=' + encodeURIComponent(tokenDe(datos)) : '');
   function vigilarDominio(slug) {
     if (!slug || (dominio.slug === slug && (dominio.ok || dominio.vencido || dominio.timer))) return;
-    Object.assign(dominio, { slug, ok: false, vencido: false, inicio: Date.now(), vistoListo: 0 });
+    Object.assign(dominio, { slug, ok: false, vencido: false, inicio: Date.now(), vistoListo: 0, claveCreada: false });
     const probar = async () => {
       dominio.timer = 0;
       const ctrl = new AbortController();
       const corte = setTimeout(() => ctrl.abort(), 12000);
       try {
-        const r = await fetch(DOMINIO_API + '?slug=' + encodeURIComponent(slug), { cache: 'no-store', signal: ctrl.signal });
+        const r = await fetch(urlEstado(slug), { cache: 'no-store', signal: ctrl.signal });
         const d = await r.json();
+        // Ya la creó por el correo: la dirección abre, no hay nada que esperar.
+        if (d.contrasena_creada) { dominio.claveCreada = true; dominio.ok = true; }
         if (d.listo) {
           if (!dominio.vistoListo) dominio.vistoListo = Date.now();
           // Unos segundos de margen para que el internet del cliente también la vea.
@@ -1552,9 +1556,29 @@ const Bienvenida = (() => {
     probar();
   }
 
+  // Una consulta suelta al llegar al último paso o al volver a esta pestaña:
+  // la espera del subdominio ya pudo terminar y la contraseña crearse después.
+  async function revisarClave() {
+    if (!datos || dominio.claveCreada) return;
+    try {
+      const r = await fetch(urlEstado(datos.slug), { cache: 'no-store' });
+      const d = await r.json();
+      if (d.contrasena_creada) { dominio.claveCreada = true; dominio.ok = true; pintarEntrar(); }
+    } catch {
+      // sin red: el botón sigue como estaba
+    }
+  }
+
   function pintarEntrar() {
     if (!datos) return;
     const a = $('bv-entrar'), est = $('bv-estado');
+    if (dominio.claveCreada) {
+      a.href = datos.url + '/admin';
+      a.removeAttribute('aria-disabled');
+      a.textContent = 'Entrar a mi panel →';
+      est.textContent = 'Tu contraseña ya fue creada. Entra con ella.';
+      return;
+    }
     a.href = datos.setupUrl || (datos.url + '/admin');
     if (dominio.ok || dominio.vencido) {
       a.removeAttribute('aria-disabled');
@@ -1598,6 +1622,9 @@ const Bienvenida = (() => {
   }
 
   $('bv-como').addEventListener('click', () => mostrarTour(0));
+  const alVolver = () => { if (!raiz.hidden && !$('bv-tour').hidden && actual === slides.length - 1) revisarClave(); };
+  window.addEventListener('focus', alVolver);
+  document.addEventListener('visibilitychange', () => { if (!document.hidden) alVolver(); });
   $('bv-saltar').addEventListener('click', () => { t0 -= 3000; completarIntro(); });
   $('bv-cerrar').addEventListener('click', cerrar);
   $('bv-sig').addEventListener('click', () => {
