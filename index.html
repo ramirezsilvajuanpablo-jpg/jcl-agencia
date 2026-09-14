@@ -920,6 +920,7 @@ const REGISTRO_API = 'https://jcl-pedidos-app-production.up.railway.app/api/regi
 const VERIFICAR_API = 'https://jcl-pedidos-app-production.up.railway.app/api/registro/verificar';
 const REENVIAR_API = 'https://jcl-pedidos-app-production.up.railway.app/api/registro/reenviar';
 const LOGO_API = 'https://jcl-pedidos-app-production.up.railway.app/api/registro/logo';
+const DOMINIO_API = 'https://jcl-pedidos-app-production.up.railway.app/api/registro/dominio';
 const fmtPesos = n => new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP', maximumFractionDigits: 0 }).format(n);
 let pendingId = null;
 let registroListo = null; // respuesta de verificar: con ella se reabre la bienvenida
@@ -1519,26 +1520,34 @@ const Bienvenida = (() => {
     redibujar();
   }
 
-  /* ── ¿Ya abre la dirección? El certificado del subdominio tarda 1-3 min ── */
-  const dominio = { url: null, ok: false, vencido: false, timer: 0, inicio: 0 };
-  function vigilarDominio(url) {
-    if (!url || (dominio.url === url && (dominio.ok || dominio.vencido || dominio.timer))) return;
-    Object.assign(dominio, { url, ok: false, vencido: false, inicio: Date.now() });
+  /* ── ¿Ya abre la dirección? Se le pregunta al servidor, NO al subdominio ── */
+  // Si el navegador consulta la dirección segundos antes de que el DNS la
+  // publique, el internet del cliente guarda el "no existe" hasta 30 minutos y
+  // el enlace de activación sale "No se puede acceder a este sitio".
+  const dominio = { slug: null, ok: false, vencido: false, timer: 0, inicio: 0, vistoListo: 0 };
+  function vigilarDominio(slug) {
+    if (!slug || (dominio.slug === slug && (dominio.ok || dominio.vencido || dominio.timer))) return;
+    Object.assign(dominio, { slug, ok: false, vencido: false, inicio: Date.now(), vistoListo: 0 });
     const probar = async () => {
       dominio.timer = 0;
       const ctrl = new AbortController();
-      const corte = setTimeout(() => ctrl.abort(), 8000);
+      const corte = setTimeout(() => ctrl.abort(), 12000);
       try {
-        // no-cors: solo importa si responde con un certificado válido.
-        await fetch(url + '/icon.svg?v=' + Date.now(), { mode: 'no-cors', cache: 'no-store', signal: ctrl.signal });
-        dominio.ok = true;
+        const r = await fetch(DOMINIO_API + '?slug=' + encodeURIComponent(slug), { cache: 'no-store', signal: ctrl.signal });
+        const d = await r.json();
+        if (d.listo) {
+          if (!dominio.vistoListo) dominio.vistoListo = Date.now();
+          // Unos segundos de margen para que el internet del cliente también la vea.
+          if (Date.now() - dominio.vistoListo >= 10000) dominio.ok = true;
+        }
       } catch {
-        if (Date.now() - dominio.inicio > 240000) dominio.vencido = true;
+        // red inestable: se vuelve a intentar
       } finally {
         clearTimeout(corte);
       }
+      if (!dominio.ok && Date.now() - dominio.inicio > 300000) dominio.vencido = true;
       pintarEntrar();
-      if (!dominio.ok && !dominio.vencido) dominio.timer = setTimeout(probar, 5000);
+      if (!dominio.ok && !dominio.vencido) dominio.timer = setTimeout(probar, dominio.vistoListo ? 10000 : 5000);
     };
     probar();
   }
@@ -1552,7 +1561,7 @@ const Bienvenida = (() => {
       a.textContent = 'Crear mi contraseña y empezar →';
       est.textContent = dominio.ok
         ? 'Tu dirección ya está en línea.'
-        : 'Si todavía no abre, espera un par de minutos y vuelve a intentar. El enlace también está en tu correo.';
+        : 'Tu dirección está tardando más de lo normal. Si al abrir ves “No se puede acceder a este sitio”, espera unos minutos y recarga esa página: el enlace sirve 48 horas y también está en tu correo.';
     } else {
       a.setAttribute('aria-disabled', 'true');
       a.textContent = 'Preparando tu dirección…';
@@ -1576,7 +1585,7 @@ const Bienvenida = (() => {
     raiz.hidden = false;
     document.documentElement.style.overflow = 'hidden';
     arrancarLienzo();
-    vigilarDominio(datos.url);
+    vigilarDominio(datos.slug);
     if (intro) mostrarIntro(); else mostrarTour(0);
   }
 
