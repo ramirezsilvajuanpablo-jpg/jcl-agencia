@@ -263,6 +263,131 @@ h2.sh{font-size:clamp(36px,5vw,60px);font-weight:900;letter-spacing:-.03em;line-
 .fbtn:hover{transform:translateY(-2px);box-shadow:0 16px 38px rgba(232,56,107,.5)}
 .contact-note{font-size:12px;color:var(--text-muted);text-align:center;margin-top:14px;opacity:.7}
 
+/* ── BIENVENIDA AL SISTEMA (se abre al confirmar el código del registro) ── */
+#bv{position:fixed;inset:0;z-index:9500;overflow-y:auto;overscroll-behavior:contain;color:#fff;background:radial-gradient(120% 85% at 50% 34%,#1a0430 0%,#0b0114 45%,#05000a 75%)}
+#bv[hidden],#bv [hidden]{display:none!important}
+#bv-canvas{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:1}
+.bv-piso{position:fixed;left:-60%;right:-60%;bottom:-8%;height:52%;z-index:0;pointer-events:none;background-image:linear-gradient(rgba(232,56,107,.28) 1px,transparent 1px),linear-gradient(90deg,rgba(139,47,201,.28) 1px,transparent 1px);background-size:64px 64px;transform:perspective(380px) rotateX(66deg);transform-origin:50% 100%;-webkit-mask-image:linear-gradient(to top,#000 5%,transparent 80%);mask-image:linear-gradient(to top,#000 5%,transparent 80%);animation:bvPiso 1.8s linear infinite}
+.bv-lineas{position:fixed;inset:0;z-index:1;pointer-events:none;background:repeating-linear-gradient(0deg,rgba(255,255,255,.022) 0 1px,transparent 1px 3px)}
+@keyframes bvPiso{to{background-position:0 64px,0 0}}
+.bv-cerrar{position:fixed;top:16px;right:16px;z-index:4;width:42px;height:42px;border-radius:50%;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.06);color:#fff;font-size:15px;cursor:pointer;-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);transition:background .2s}
+.bv-cerrar:hover{background:rgba(255,255,255,.14)}
+.bv-cerrar:focus-visible,.bv-cta:focus-visible,.bv-sec:focus-visible{outline:2px solid #FFB300;outline-offset:3px}
+.bv-escena{position:relative;z-index:2;min-height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:72px 16px 44px;text-align:center}
+
+.bv-nucleo{position:relative;width:148px;height:148px;margin:12px 0 62px;opacity:0;transform:scale(.3);transition:opacity .5s,transform 1s cubic-bezier(.16,1.4,.3,1)}
+.bv-nucleo.on{opacity:1;transform:scale(1)}
+.bv-anillo{position:absolute;inset:0;border-radius:50%;background:conic-gradient(from 0deg,#8B2FC9,#E8386B,#F47B1F,#FFB300,#8B2FC9);-webkit-mask:radial-gradient(farthest-side,transparent calc(100% - 3px),#000 calc(100% - 3px));mask:radial-gradient(farthest-side,transparent calc(100% - 3px),#000 calc(100% - 3px));animation:bvGira 5s linear infinite;filter:drop-shadow(0 0 12px rgba(232,56,107,.8))}
+.bv-anillo.b2{inset:-16px;opacity:.4;animation-duration:12s;animation-direction:reverse;-webkit-mask:radial-gradient(farthest-side,transparent calc(100% - 1px),#000 calc(100% - 1px));mask:radial-gradient(farthest-side,transparent calc(100% - 1px),#000 calc(100% - 1px));background:conic-gradient(from 90deg,transparent 0 20%,#E8386B 30%,transparent 42% 62%,#FFB300 72%,transparent 84%)}
+.bv-logo{position:absolute;inset:15px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;overflow:hidden;box-shadow:0 0 0 1px rgba(255,255,255,.25),0 0 70px rgba(139,47,201,.6)}
+.bv-logo img{width:66%;height:66%;object-fit:contain}
+.bv-inicial{font-size:54px;font-weight:900;letter-spacing:-.04em;background:linear-gradient(135deg,#8B2FC9,#E8386B,#F47B1F);-webkit-background-clip:text;background-clip:text;color:transparent}
+@keyframes bvGira{to{transform:rotate(360deg)}}
+
+.bv-ojo{display:inline-flex;align-items:center;gap:9px;font:700 11.5px/1 ui-monospace,"SF Mono",Menlo,Consolas,monospace;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.72);margin-bottom:16px;opacity:0;transition:opacity .5s}
+.bv-ojo::before{content:"";width:8px;height:8px;border-radius:50%;background:#4ade80;box-shadow:0 0 10px #4ade80;animation:bvLate 1.6s ease-in-out infinite}
+@keyframes bvLate{50%{opacity:.35}}
+.bv-titulo{font-size:clamp(30px,5.6vw,56px);font-weight:900;letter-spacing:-.045em;line-height:1.02;text-wrap:balance;max-width:13em;margin-bottom:26px;clip-path:inset(0 0 100% 0);transform:translateY(14px);transition:clip-path .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
+.bv-titulo.on{clip-path:inset(0 0 -12% 0);transform:none}
+.bv-grad{background:linear-gradient(100deg,#b567f0 0%,#E8386B 40%,#F47B1F 72%,#FFB300 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+
+.bv-boot{list-style:none;width:min(100%,380px);display:grid;gap:7px;margin-bottom:26px;font:600 12px/1.2 ui-monospace,"SF Mono",Menlo,Consolas,monospace;letter-spacing:.12em;text-transform:uppercase}
+.bv-boot li{display:flex;align-items:center;gap:10px;color:rgba(255,255,255,.5);opacity:0;transform:translateX(-10px);transition:opacity .35s,transform .35s,color .35s}
+.bv-boot li.on{opacity:1;transform:none}
+.bv-boot li::after{content:"";order:1;flex:1;border-bottom:1px dashed rgba(255,255,255,.16)}
+.bv-boot b{order:2;font-weight:700;color:rgba(255,255,255,.4);min-width:7.4em;text-align:right}
+.bv-boot li.ok{color:rgba(255,255,255,.88)}
+.bv-boot li.ok b{color:#4ade80}
+
+.bv-url{font:600 14px/1.4 ui-monospace,"SF Mono",Menlo,Consolas,monospace;color:rgba(255,255,255,.7);margin-bottom:24px;word-break:break-all;opacity:0;transition:opacity .5s}
+.bv-ojo.on,.bv-url.on{opacity:1}
+
+.bv-cta{position:relative;overflow:hidden;display:inline-flex;align-items:center;justify-content:center;gap:10px;border:none;border-radius:14px;padding:17px 34px;font:800 17px/1 'Inter',sans-serif;color:#fff;text-decoration:none;cursor:pointer;background:linear-gradient(135deg,#8B2FC9,#E8386B 55%,#F47B1F);box-shadow:0 12px 34px rgba(232,56,107,.42),inset 0 1px 0 rgba(255,255,255,.25);transition:transform .25s,box-shadow .25s,opacity .3s}
+.bv-cta::after{content:"";position:absolute;top:0;bottom:0;left:-60%;width:40%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.45),transparent);transform:skewX(-18deg);animation:bvBrillo 2.8s ease-in-out infinite}
+@keyframes bvBrillo{0%,55%{left:-60%}100%{left:130%}}
+.bv-cta:hover{transform:translateY(-2px);box-shadow:0 18px 44px rgba(232,56,107,.55),inset 0 1px 0 rgba(255,255,255,.25)}
+.bv-cta[aria-disabled="true"]{opacity:.55;cursor:progress;pointer-events:none}
+.bv-cta[aria-disabled="true"]::after{animation:none}
+#bv-como{opacity:0;transform:translateY(12px);transition:opacity .5s,transform .5s cubic-bezier(.16,1,.3,1),box-shadow .25s}
+#bv-como.on{opacity:1;transform:none}
+.bv-saltar{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);z-index:4;background:none;border:none;color:rgba(255,255,255,.5);font:600 13px 'Inter',sans-serif;cursor:pointer;padding:8px 12px}
+.bv-saltar:hover{color:#fff}
+
+.bv-card{width:min(100%,580px);text-align:left;background:rgba(14,8,24,.74);-webkit-backdrop-filter:blur(28px) saturate(150%);backdrop-filter:blur(28px) saturate(150%);border:1px solid rgba(255,255,255,.1);border-radius:24px;padding:28px;box-shadow:0 40px 90px rgba(0,0,0,.55),inset 0 1px 0 rgba(255,255,255,.08)}
+.bv-progreso{height:3px;border-radius:3px;background:rgba(255,255,255,.08);overflow:hidden;margin-bottom:16px}
+.bv-progreso span{display:block;height:100%;width:0;background:linear-gradient(90deg,#8B2FC9,#E8386B,#F47B1F,#FFB300);transition:width .6s cubic-bezier(.16,1,.3,1)}
+.bv-paso{font:700 11px/1 ui-monospace,"SF Mono",Menlo,Consolas,monospace;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.5)}
+.bv-slide{animation:bvEntra .5s cubic-bezier(.16,1,.3,1)}
+.bv-slide.atras{animation-name:bvEntraAtras}
+@keyframes bvEntra{from{opacity:0;transform:translateX(26px)}to{opacity:1;transform:none}}
+@keyframes bvEntraAtras{from{opacity:0;transform:translateX(-26px)}to{opacity:1;transform:none}}
+.bv-slide h3{font-size:clamp(23px,4.4vw,30px);font-weight:900;letter-spacing:-.035em;line-height:1.1;margin:10px 0 10px;text-wrap:balance}
+.bv-slide>p{font-size:15px;line-height:1.6;color:rgba(255,255,255,.7);max-width:62ch}
+.bv-nota{font-size:13.5px;line-height:1.55;color:rgba(255,255,255,.62);margin-top:16px;padding:12px 14px;border-radius:12px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07)}
+.bv-nota strong{color:#fff}
+
+.bv-dir{display:flex;align-items:center;gap:10px;margin-top:16px;padding:14px 16px;border-radius:14px;background:rgba(0,0,0,.4);border:1px solid rgba(255,255,255,.1);font:600 15px/1.35 ui-monospace,"SF Mono",Menlo,Consolas,monospace;word-break:break-all}
+.bv-dir::before{content:"";flex:none;width:8px;height:8px;border-radius:50%;background:#4ade80;box-shadow:0 0 10px #4ade80}
+
+.bv-lista{list-style:none;counter-reset:bvn;display:grid;gap:14px;margin-top:18px}
+.bv-lista li{counter-increment:bvn;display:grid;grid-template-columns:30px 1fr;gap:12px;align-items:start;font-size:15px;line-height:1.5;color:rgba(255,255,255,.86)}
+.bv-lista li::before{content:counter(bvn);width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font:800 13px/1 'Inter',sans-serif;color:#fff;background:linear-gradient(135deg,#8B2FC9,#E8386B)}
+.bv-lista li span{padding-top:4px}
+.bv-lista li small{display:block;font-size:13px;color:rgba(255,255,255,.55);margin-top:2px}
+.bv-lista code,.bv-pant code{font:600 .92em ui-monospace,"SF Mono",Menlo,Consolas,monospace;color:#fff;word-break:break-all}
+
+.bv-pant{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:18px}
+.bv-pant div{padding:14px;border-radius:14px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08)}
+.bv-pant h4{font-size:15px;font-weight:800;letter-spacing:-.02em;margin-bottom:4px}
+.bv-pant p{font-size:13px;line-height:1.45;color:rgba(255,255,255,.62);margin-bottom:10px}
+.bv-pant code{font-size:12px;color:rgba(255,255,255,.8)}
+.bv-pant em{display:inline-block;margin-top:6px;font-style:normal;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.5)}
+
+.bv-flujo{list-style:none;position:relative;display:grid;gap:16px;margin-top:20px;padding-left:4px}
+.bv-flujo::before{content:"";position:absolute;left:11px;top:8px;bottom:8px;width:2px;background:rgba(255,255,255,.1)}
+.bv-flujo::after{content:"";position:absolute;left:11px;top:8px;width:2px;height:0;background:linear-gradient(#8B2FC9,#E8386B,#F47B1F,#FFB300);box-shadow:0 0 10px rgba(232,56,107,.7);animation:bvRecorre 2.2s cubic-bezier(.65,0,.35,1) .2s forwards}
+@keyframes bvRecorre{to{height:calc(100% - 16px)}}
+.bv-flujo li{position:relative;padding-left:32px;font-size:15px;line-height:1.45;color:rgba(255,255,255,.86)}
+.bv-flujo li::before{content:"";position:absolute;left:1px;top:2px;width:18px;height:18px;border-radius:50%;background:#0b0114;border:2px solid rgba(255,255,255,.2);z-index:1;animation:bvEnciende .4s forwards;animation-delay:calc(.2s + var(--i) * .5s)}
+@keyframes bvEnciende{to{border-color:#E8386B;background:#E8386B;box-shadow:0 0 0 4px rgba(232,56,107,.2),0 0 14px rgba(232,56,107,.7)}}
+.bv-flujo li b{display:block;color:#fff}
+.bv-flujo li small{font-size:13px;color:rgba(255,255,255,.55)}
+
+.bv-plan{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:18px}
+.bv-plan div{padding:16px;border-radius:14px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08)}
+.bv-plan div:first-child{border-color:rgba(74,222,128,.35);background:rgba(74,222,128,.06)}
+.bv-plan small{display:block;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.55);margin-bottom:8px}
+.bv-plan strong{display:block;font-size:26px;font-weight:900;letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+.bv-plan span{display:block;font-size:13px;color:rgba(255,255,255,.62);margin-top:4px}
+
+.bv-nav{display:flex;align-items:center;gap:10px;margin-top:26px}
+.bv-nav .bv-cta{flex:1;padding:16px 20px;font-size:16px}
+.bv-sec{flex:none;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);color:#fff;border-radius:14px;padding:15px 18px;font:700 15px/1 'Inter',sans-serif;cursor:pointer;transition:background .2s}
+.bv-sec:hover{background:rgba(255,255,255,.12)}
+.bv-sec[hidden]{display:none}
+.bv-estado{display:flex;align-items:center;gap:8px;justify-content:center;font-size:13px;line-height:1.45;color:rgba(255,255,255,.6);margin-top:12px;text-align:center}
+.bv-estado i{flex:none;width:14px;height:14px;border-radius:50%;border:2px solid rgba(255,255,255,.2);border-top-color:#E8386B;animation:bvGira .8s linear infinite}
+
+@media(max-width:520px){
+  .bv-card{padding:22px 18px;border-radius:20px}
+  .bv-plan{grid-template-columns:1fr}
+  .bv-pant{gap:8px}
+  .bv-pant div{padding:12px}
+  .bv-pant h4{font-size:14px}
+  .bv-pant p{font-size:12.5px;margin-bottom:8px}
+  .bv-nucleo{width:124px;height:124px;margin-bottom:54px}
+  .bv-inicial{font-size:44px}
+  .bv-cta{padding:16px 26px}
+}
+@media(max-width:340px){.bv-pant{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){
+  .bv-piso,.bv-anillo,.bv-cta::after,.bv-ojo::before,.bv-estado i{animation:none}
+  .bv-slide{animation:none}
+  .bv-flujo::after{animation:none;height:calc(100% - 16px)}
+  .bv-flujo li::before{animation:none;border-color:#E8386B;background:#E8386B}
+  .bv-nucleo,.bv-titulo,.bv-boot li,.bv-ojo,.bv-url,#bv-como{transition:none}
+}
+
 /* ── PLANES Y PRECIOS ── */
 .free-badge{display:inline-flex;align-items:center;gap:8px;margin-top:28px;padding:12px 26px;border-radius:100px;font-size:15px;font-weight:800;color:#fff;background:linear-gradient(135deg,var(--c-jcl1),var(--c-jcl2),var(--c-jcl3));box-shadow:0 12px 30px rgba(232,56,107,.35)}
 .prgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:1100px;margin:56px auto 0}
@@ -797,6 +922,7 @@ const REENVIAR_API = 'https://jcl-pedidos-app-production.up.railway.app/api/regi
 const LOGO_API = 'https://jcl-pedidos-app-production.up.railway.app/api/registro/logo';
 const fmtPesos = n => new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP', maximumFractionDigits: 0 }).format(n);
 let pendingId = null;
+let registroListo = null; // respuesta de verificar: con ella se reabre la bienvenida
 const regSlug = document.getElementById('reg-slug');
 const regPreview = document.getElementById('reg-slug-preview');
 function slugify(v) {
@@ -992,6 +1118,8 @@ document.getElementById('reg-logo-ia-btn').addEventListener('click', async funct
 
 document.getElementById('reg-submit').addEventListener('click', async function(e) {
   e.preventDefault();
+  // Ya registrado: el mismo botón ahora reabre el paso a paso para entrar.
+  if (registroListo) { Bienvenida.tour(); return; }
   const btn = this;
   const msg = document.getElementById('reg-msg');
   const nombre = document.getElementById('reg-nombre').value.trim();
@@ -1073,13 +1201,15 @@ document.getElementById('reg-confirmar').addEventListener('click', async functio
       throw err;
     }
 
+    registroListo = { ...data, nombre: document.getElementById('reg-nombre').value.trim(), logo: logoDataUrl };
     const submitBtn = document.getElementById('reg-submit');
-    submitBtn.textContent = '✓ ¡Listo! Tu sistema ya está activo';
-    submitBtn.style.background = 'linear-gradient(135deg, #22c55e, #16a34a)';
+    submitBtn.disabled = false;
+    submitBtn.textContent = 'Cómo entrar →';
     document.getElementById('reg-msg').innerHTML = 'Entra en: <a href="' + data.url + '" target="_blank" rel="noopener" style="color:#4ade80;font-weight:700">' + data.url + '</a>' +
       (data.prueba_hasta ? '<br><span style="display:inline-block;margin-top:8px">🎁 Gratis hasta el ' + data.prueba_hasta + ' · después ' + fmtPesos(data.monto) + ' al mes por tus ' + data.num_mesas + ' mesas (' + data.rango + ')</span>' : '');
     document.getElementById('reg-msg').style.color = '';
     document.getElementById('reg-step2').style.display = 'none';
+    Bienvenida.abrir(registroListo);
   } catch (err) {
     if (err.fatal) {
       // El registro pendiente ya no existe (expiró o se agotaron los intentos) — hay que empezar de nuevo.
@@ -1122,6 +1252,376 @@ async function reenviarCodigo(e) {
   }
 }
 document.getElementById('reg-reenviar').addEventListener('click', reenviarCodigo);
+</script>
+
+<!-- BIENVENIDA AL SISTEMA: se abre sola al confirmar el código del registro -->
+<div id="bv" hidden role="dialog" aria-modal="true" aria-label="Bienvenida a tu sistema">
+  <div class="bv-piso" aria-hidden="true"></div>
+  <canvas id="bv-canvas" aria-hidden="true"></canvas>
+  <div class="bv-lineas" aria-hidden="true"></div>
+  <button type="button" class="bv-cerrar" id="bv-cerrar" aria-label="Cerrar la bienvenida">✕</button>
+
+  <section class="bv-escena" id="bv-intro">
+    <div class="bv-nucleo" id="bv-nucleo">
+      <div class="bv-anillo b2"></div>
+      <div class="bv-anillo"></div>
+      <div class="bv-logo"><img id="bv-logo-img" alt="" hidden><span class="bv-inicial" id="bv-inicial"></span></div>
+    </div>
+    <p class="bv-ojo" id="bv-ojo">Sistema activado</p>
+    <h2 class="bv-titulo" id="bv-titulo">Bienvenido a tu sistema,<br><span class="bv-grad" id="bv-nombre"></span></h2>
+    <ul class="bv-boot" id="bv-boot" aria-label="Pantallas de tu sistema">
+      <li>Carta QR<b>Conectando</b></li>
+      <li>Meseros<b>Conectando</b></li>
+      <li>Cocina<b>Conectando</b></li>
+      <li>Caja<b>Conectando</b></li>
+      <li>Panel admin<b>Conectando</b></li>
+    </ul>
+    <p class="bv-url" id="bv-url"></p>
+    <button type="button" class="bv-cta" id="bv-como">Cómo entrar →</button>
+  </section>
+  <button type="button" class="bv-saltar" id="bv-saltar" hidden>Saltar animación</button>
+
+  <section class="bv-escena" id="bv-tour" hidden>
+    <div class="bv-card">
+      <div class="bv-progreso" aria-hidden="true"><span id="bv-barra"></span></div>
+      <p class="bv-paso" id="bv-paso"></p>
+      <div id="bv-slide" aria-live="polite"></div>
+      <div class="bv-nav">
+        <button type="button" class="bv-sec" id="bv-atras">← Atrás</button>
+        <button type="button" class="bv-cta" id="bv-sig">Siguiente →</button>
+        <a class="bv-cta" id="bv-entrar" href="#" hidden>Crear mi contraseña y empezar →</a>
+      </div>
+      <p class="bv-estado" id="bv-estado" hidden></p>
+    </div>
+  </section>
+</div>
+
+<script>
+const Bienvenida = (() => {
+  const $ = id => document.getElementById(id);
+  const raiz = $('bv');
+  const lienzo = $('bv-canvas');
+  const ctx = lienzo.getContext('2d');
+  const quieto = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+
+  let datos = null, slides = [], actual = 0, timers = [], foco = null;
+
+  /* ── Partículas: llegan desde fuera de la pantalla y forman el anillo ── */
+  const COLORES = [[139, 47, 201], [232, 56, 107], [244, 123, 31], [255, 179, 0]];
+  let W = 0, H = 0, particulas = [], ondas = [], raf = 0, t0 = 0, tenue = false;
+  let cx = 0, cy = 0, radio = 100;
+
+  function colorEn(f) {
+    const x = (((f % 1) + 1) % 1) * COLORES.length;
+    const i = Math.floor(x) % COLORES.length, j = (i + 1) % COLORES.length, k = x - Math.floor(x);
+    return COLORES[i].map((c, n) => Math.round(c + (COLORES[j][n] - c) * k));
+  }
+
+  // En la intro el anillo rodea el logo; en el recorrido se abre detrás de la tarjeta.
+  function objetivo() {
+    const n = $('bv-nucleo');
+    if (!tenue && !$('bv-intro').hidden) {
+      const r = n.getBoundingClientRect();
+      return { x: r.left + r.width / 2, y: r.top + r.height / 2, r: n.offsetWidth / 2 + 30 };
+    }
+    return { x: W / 2, y: H / 2, r: Math.min(W, H) * 0.46 };
+  }
+
+  function medir() {
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    lienzo.width = Math.round(W * dpr); lienzo.height = Math.round(H * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+
+  function crearParticulas() {
+    const n = W < 600 ? 90 : 170;
+    const o = objetivo();
+    cx = o.x; cy = o.y; radio = o.r;
+    const lejos = Math.hypot(W, H) * 0.6;
+    particulas = Array.from({ length: n }, (_, i) => {
+      const a = Math.random() * Math.PI * 2;
+      const d = lejos * (0.8 + Math.random() * 0.4);
+      return {
+        sx: W / 2 + Math.cos(a) * d, sy: H / 2 + Math.sin(a) * d,
+        ang: (i / n) * Math.PI * 2,
+        capa: (Math.random() - 0.5) * 22,
+        tam: 0.8 + Math.random() * 1.8,
+        vel: 0.18 + Math.random() * 0.22,
+        retraso: Math.random() * 0.4,
+        color: colorEn(i / n),
+      };
+    });
+    ondas = [];
+  }
+
+  function cuadro(ts) {
+    if (!t0) t0 = ts;
+    const t = quieto ? 3 : (ts - t0) / 1000;
+    const o = objetivo();
+    const suave = quieto ? 1 : 0.06;
+    cx += (o.x - cx) * suave; cy += (o.y - cy) * suave; radio += (o.r - radio) * suave;
+
+    // Borra "hacia transparente" para dejar estela sin tapar el fondo del CSS.
+    ctx.globalCompositeOperation = 'destination-out';
+    ctx.fillStyle = quieto ? 'rgba(0,0,0,1)' : 'rgba(0,0,0,0.2)';
+    ctx.fillRect(0, 0, W, H);
+    ctx.globalCompositeOperation = 'lighter';
+
+    const alfa = tenue ? 0.32 : 0.9;
+    for (const p of particulas) {
+      const e = Math.min(1, Math.max(0, (t - p.retraso) / 1.3));
+      const ee = 1 - Math.pow(1 - e, 3);
+      const ang = p.ang + t * p.vel;
+      const r = radio + p.capa * (1.4 - ee * 0.9) + Math.sin(t * 2.2 + p.capa) * 2.5;
+      const x = p.sx + (cx + Math.cos(ang) * r - p.sx) * ee;
+      const y = p.sy + (cy + Math.sin(ang) * r - p.sy) * ee;
+      ctx.fillStyle = `rgba(${p.color[0]},${p.color[1]},${p.color[2]},${alfa})`;
+      ctx.beginPath(); ctx.arc(x, y, p.tam, 0, Math.PI * 2); ctx.fill();
+    }
+
+    for (let i = ondas.length - 1; i >= 0; i--) {
+      const w = ondas[i];
+      w.r += 5.5; w.a -= 0.018;
+      if (w.a <= 0) { ondas.splice(i, 1); continue; }
+      ctx.strokeStyle = `rgba(232,56,107,${w.a})`;
+      ctx.lineWidth = 2;
+      ctx.beginPath(); ctx.arc(cx, cy, w.r, 0, Math.PI * 2); ctx.stroke();
+    }
+
+    if (!quieto) raf = requestAnimationFrame(cuadro);
+  }
+
+  function arrancarLienzo() {
+    cancelAnimationFrame(raf);
+    medir(); crearParticulas(); t0 = 0;
+    raf = requestAnimationFrame(cuadro);
+  }
+  function pararLienzo() { cancelAnimationFrame(raf); raf = 0; }
+  const redibujar = () => { if (quieto && !raiz.hidden) requestAnimationFrame(cuadro); };
+  window.addEventListener('resize', () => { if (!raiz.hidden) { medir(); redibujar(); } });
+
+  /* ── Intro: el sistema "enciende" pantalla por pantalla ── */
+  function programar(ms, fn) { timers.push(setTimeout(fn, quieto ? 0 : ms)); }
+  function limpiarTimers() { timers.forEach(clearTimeout); timers = []; }
+  const items = () => [...$('bv-boot').children];
+
+  function mostrarIntro() {
+    limpiarTimers();
+    $('bv-intro').hidden = false; $('bv-tour').hidden = true;
+    $('bv-saltar').hidden = quieto;
+    tenue = false;
+    ['bv-nucleo', 'bv-ojo', 'bv-titulo', 'bv-url', 'bv-como'].forEach(id => $(id).classList.remove('on'));
+    items().forEach(li => { li.classList.remove('on', 'ok'); li.querySelector('b').textContent = 'Conectando'; });
+
+    programar(1250, () => { $('bv-nucleo').classList.add('on'); ondas.push({ r: radio, a: 0.9 }, { r: radio * 0.7, a: 0.6 }); });
+    programar(1750, () => $('bv-ojo').classList.add('on'));
+    programar(1950, () => $('bv-titulo').classList.add('on'));
+    items().forEach((li, i) => {
+      programar(2500 + i * 260, () => li.classList.add('on'));
+      programar(2760 + i * 260, () => { li.classList.add('ok'); li.querySelector('b').textContent = 'En línea ✓'; });
+    });
+    const fin = 2760 + items().length * 260 + 150;
+    programar(fin, () => $('bv-url').classList.add('on'));
+    programar(fin + 300, completarIntro);
+  }
+
+  function completarIntro() {
+    limpiarTimers();
+    ['bv-nucleo', 'bv-ojo', 'bv-titulo', 'bv-url', 'bv-como'].forEach(id => $(id).classList.add('on'));
+    items().forEach(li => { li.classList.add('on', 'ok'); li.querySelector('b').textContent = 'En línea ✓'; });
+    $('bv-saltar').hidden = true;
+    $('bv-como').focus({ preventScroll: true });
+  }
+
+  /* ── Recorrido paso a paso ── */
+  function construirSlides(d) {
+    const host = String(d.url || '').replace(/^https?:\/\//, '');
+    const s = [
+      {
+        titulo: 'Cómo entrar a tu sistema',
+        html: `<p>Todo tu sistema vive en tu propia dirección, lista para abrir desde el celular o el computador:</p>
+          <div class="bv-dir">${esc(host)}</div>
+          <ol class="bv-lista">
+            <li><span>Abre tu panel de administrador en <code>${esc(host)}/admin</code></span></li>
+            <li><span>La primera vez creas tu contraseña.<small>Con el botón del final de este recorrido, o con el enlace que te llegó al correo (sirve por 48 horas).</small></span></li>
+            <li><span>Desde ahí entras siempre con esa contraseña.<small>Consejo: en el panel toca “Instalar Admin” y te queda como una app en el celular.</small></span></li>
+          </ol>`,
+      },
+      {
+        titulo: 'Cada persona tiene su pantalla',
+        html: `<p>Tú manejas el negocio desde el panel. Tu equipo entra con un código que tú le creas, en tu misma dirección (por ejemplo <code>${esc(host)}/meseros</code>).</p>
+          <div class="bv-pant">
+            <div><h4>Panel admin</h4><p>Menú, personal, reportes y la configuración del negocio.</p><code>/admin</code><br><em>Tu contraseña</em></div>
+            <div><h4>Meseros</h4><p>Toman pedidos en la mesa y los entregan cuando están listos.</p><code>/meseros</code><br><em>Código de acceso</em></div>
+            <div><h4>Cocina</h4><p>Recibe al instante lo que tiene que preparar y lo marca listo.</p><code>/cocina</code><br><em>Código de acceso</em></div>
+            <div><h4>Caja</h4><p>Cobra, da vueltos y deja la mesa libre.</p><code>/caja</code><br><em>Código de acceso</em></div>
+          </div>`,
+      },
+      {
+        titulo: 'Así viaja un pedido',
+        html: `<p>Desde que el cliente se sienta hasta que paga, sin comandas de papel.</p>
+          <ol class="bv-flujo">
+            <li style="--i:0"><b>El cliente escanea el QR</b><small>O acerca el celular a la etiqueta NFC de la mesa.</small></li>
+            <li style="--i:1"><b>Pide desde tu carta</b><small>Con fotos, precios y notas para la cocina.</small></li>
+            <li style="--i:2"><b>Cocina lo recibe al instante</b><small>Lo ve en su pantalla y lo marca listo.</small></li>
+            <li style="--i:3"><b>El mesero lo lleva a la mesa</b><small>Ve en su pantalla qué está listo para entregar.</small></li>
+            <li style="--i:4"><b>Se cobra y la mesa queda libre</b><small>En caja, o el mesero mismo si tu negocio no tiene caja.</small></li>
+          </ol>
+          <p class="bv-nota"><strong>¿Alguien no usa el celular?</strong> El mesero le toma el pedido desde su pantalla y llega a cocina igual que los demás.</p>`,
+      },
+    ];
+    if (d.prueba_hasta) {
+      s.push({
+        titulo: 'Tu primer mes es gratis',
+        html: `<p>Empiezas hoy sin pagar nada. Así queda tu plan:</p>
+          <div class="bv-plan">
+            <div><small>Hasta el ${esc(d.prueba_hasta)}</small><strong>$0</strong><span>El sistema completo</span></div>
+            <div><small>Desde esa fecha</small><strong>${esc(fmtPesos(d.monto))}</strong><span>al mes · ${esc(d.num_mesas)} mesas (${esc(d.rango)})</span></div>
+          </div>
+          <p class="bv-nota">Dos días antes te avisamos por WhatsApp, y ese día te llega el link de pago. Tu plan lo ves cuando quieras en <strong>Configuración → Tu plan</strong>.</p>`,
+      });
+    }
+    s.push({
+      titulo: 'Ahora, deja tu sistema listo',
+      html: `<p>Al crear tu contraseña te llevamos de la mano por estos tres pasos:</p>
+        <ol class="bv-lista">
+          <li><span>Agrega tu personal<small>Meseros, cocina y caja, cada uno con su código de acceso.</small></span></li>
+          <li><span>Configura tus medios de pago<small>Efectivo, Nequi, transferencia o datáfono, y tu llave para recibir.</small></span></li>
+          <li><span>Empieza a subir tu menú<small>Categorías y productos con foto y precio. Después imprimes los QR de tus mesas.</small></span></li>
+        </ol>`,
+    });
+    return s;
+  }
+
+  function pintarSlide(i, haciaAtras) {
+    actual = Math.max(0, Math.min(slides.length - 1, i));
+    const sl = slides[actual];
+    $('bv-slide').innerHTML = `<article class="bv-slide${haciaAtras ? ' atras' : ''}"><h3>${esc(sl.titulo)}</h3>${sl.html}</article>`;
+    $('bv-paso').textContent = `Paso ${actual + 1} de ${slides.length}`;
+    $('bv-barra').style.width = ((actual + 1) / slides.length * 100) + '%';
+    const ultimo = actual === slides.length - 1;
+    $('bv-atras').hidden = actual === 0;
+    $('bv-sig').hidden = ultimo;
+    $('bv-entrar').hidden = !ultimo;
+    $('bv-estado').hidden = !ultimo;
+    if (ultimo) pintarEntrar();
+    raiz.scrollTop = 0;
+  }
+
+  function mostrarTour(i) {
+    limpiarTimers();
+    $('bv-intro').hidden = true; $('bv-saltar').hidden = true; $('bv-tour').hidden = false;
+    tenue = true;
+    pintarSlide(i || 0);
+    $('bv-sig').focus({ preventScroll: true });
+    redibujar();
+  }
+
+  /* ── ¿Ya abre la dirección? El certificado del subdominio tarda 1-3 min ── */
+  const dominio = { url: null, ok: false, vencido: false, timer: 0, inicio: 0 };
+  function vigilarDominio(url) {
+    if (!url || (dominio.url === url && (dominio.ok || dominio.vencido || dominio.timer))) return;
+    Object.assign(dominio, { url, ok: false, vencido: false, inicio: Date.now() });
+    const probar = async () => {
+      dominio.timer = 0;
+      const ctrl = new AbortController();
+      const corte = setTimeout(() => ctrl.abort(), 8000);
+      try {
+        // no-cors: solo importa si responde con un certificado válido.
+        await fetch(url + '/icon.svg?v=' + Date.now(), { mode: 'no-cors', cache: 'no-store', signal: ctrl.signal });
+        dominio.ok = true;
+      } catch {
+        if (Date.now() - dominio.inicio > 240000) dominio.vencido = true;
+      } finally {
+        clearTimeout(corte);
+      }
+      pintarEntrar();
+      if (!dominio.ok && !dominio.vencido) dominio.timer = setTimeout(probar, 5000);
+    };
+    probar();
+  }
+
+  function pintarEntrar() {
+    if (!datos) return;
+    const a = $('bv-entrar'), est = $('bv-estado');
+    a.href = datos.setupUrl || (datos.url + '/admin');
+    if (dominio.ok || dominio.vencido) {
+      a.removeAttribute('aria-disabled');
+      a.textContent = 'Crear mi contraseña y empezar →';
+      est.textContent = dominio.ok
+        ? 'Tu dirección ya está en línea.'
+        : 'Si todavía no abre, espera un par de minutos y vuelve a intentar. El enlace también está en tu correo.';
+    } else {
+      a.setAttribute('aria-disabled', 'true');
+      a.textContent = 'Preparando tu dirección…';
+      est.innerHTML = '<i aria-hidden="true"></i><span>Activando la conexión segura de tu dirección. Tarda de 1 a 3 minutos.</span>';
+    }
+  }
+
+  /* ── Abrir y cerrar ── */
+  function abrir(d, { intro = true } = {}) {
+    if (d) {
+      datos = d;
+      slides = construirSlides(d);
+      $('bv-nombre').textContent = d.nombre || '';
+      $('bv-url').textContent = String(d.url || '').replace(/^https?:\/\//, '');
+      const img = $('bv-logo-img');
+      if (d.logo) { img.src = d.logo; img.hidden = false; $('bv-inicial').textContent = ''; }
+      else { img.hidden = true; $('bv-inicial').textContent = (d.nombre || '?').trim().charAt(0).toUpperCase(); }
+    }
+    if (!datos) return;
+    foco = document.activeElement;
+    raiz.hidden = false;
+    document.documentElement.style.overflow = 'hidden';
+    arrancarLienzo();
+    vigilarDominio(datos.url);
+    if (intro) mostrarIntro(); else mostrarTour(0);
+  }
+
+  function cerrar() {
+    limpiarTimers();
+    pararLienzo();
+    raiz.hidden = true;
+    document.documentElement.style.overflow = '';
+    if (foco && typeof foco.focus === 'function') foco.focus();
+  }
+
+  $('bv-como').addEventListener('click', () => mostrarTour(0));
+  $('bv-saltar').addEventListener('click', () => { t0 -= 3000; completarIntro(); });
+  $('bv-cerrar').addEventListener('click', cerrar);
+  $('bv-sig').addEventListener('click', () => {
+    pintarSlide(actual + 1);
+    (actual === slides.length - 1 ? $('bv-entrar') : $('bv-sig')).focus({ preventScroll: true });
+  });
+  $('bv-atras').addEventListener('click', () => {
+    pintarSlide(actual - 1, true);
+    if (actual === 0) $('bv-sig').focus({ preventScroll: true });
+  });
+  $('bv-entrar').addEventListener('click', e => {
+    if ($('bv-entrar').getAttribute('aria-disabled') === 'true') e.preventDefault();
+  });
+  document.addEventListener('keydown', e => {
+    if (raiz.hidden) return;
+    if (e.key === 'Escape') { cerrar(); return; }
+    if ($('bv-tour').hidden) return;
+    if (e.key === 'ArrowRight' && actual < slides.length - 1) pintarSlide(actual + 1);
+    if (e.key === 'ArrowLeft' && actual > 0) pintarSlide(actual - 1, true);
+  });
+  let toqueX = null;
+  $('bv-tour').addEventListener('touchstart', e => { toqueX = e.touches[0].clientX; }, { passive: true });
+  $('bv-tour').addEventListener('touchend', e => {
+    if (toqueX == null) return;
+    const dx = e.changedTouches[0].clientX - toqueX;
+    toqueX = null;
+    if (Math.abs(dx) < 60) return;
+    if (dx < 0 && actual < slides.length - 1) pintarSlide(actual + 1);
+    if (dx > 0 && actual > 0) pintarSlide(actual - 1, true);
+  });
+
+  return { abrir, cerrar, tour: () => abrir(null, { intro: false }) };
+})();
 </script>
 </body>
 </html>
