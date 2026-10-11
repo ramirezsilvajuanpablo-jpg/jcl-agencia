@@ -1,19 +1,63 @@
 {
   "version": 2,
   "builds": [
-    { "src": "index.html", "use": "@vercel/static" },
-    { "src": "instagram-kit.html", "use": "@vercel/static" },
-    { "src": "favicon.ico", "use": "@vercel/static" },
-    { "src": "robots.txt", "use": "@vercel/static" },
-    { "src": "sitemap.xml", "use": "@vercel/static" },
-    { "src": "icons/**", "use": "@vercel/static" }
+    {
+      "src": "index.html",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "pagar.html",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "instagram-kit.html",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "favicon.ico",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "robots.txt",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "sitemap.xml",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "icons/**",
+      "use": "@vercel/static"
+    }
   ],
   "routes": [
-    { "src": "/q/(.*)", "dest": "https://admin.jclagencia.com/q/$1" },
-    { "src": "/api/superadmin/(.*)", "dest": "https://admin.jclagencia.com/api/superadmin/$1" },
-    { "src": "/superadmin", "dest": "https://admin.jclagencia.com/superadmin" },
-    { "src": "/superadmin/(.*)", "dest": "https://admin.jclagencia.com/superadmin/$1" },
-    { "src": "/_next/(.*)", "dest": "https://admin.jclagencia.com/_next/$1" },
-    { "src": "/(.*)", "dest": "/$1" }
+    {
+      "src": "/pagar",
+      "dest": "/pagar.html"
+    },
+    {
+      "src": "/q/(.*)",
+      "dest": "https://admin.jclagencia.com/q/$1"
+    },
+    {
+      "src": "/api/superadmin/(.*)",
+      "dest": "https://admin.jclagencia.com/api/superadmin/$1"
+    },
+    {
+      "src": "/superadmin",
+      "dest": "https://admin.jclagencia.com/superadmin"
+    },
+    {
+      "src": "/superadmin/(.*)",
+      "dest": "https://admin.jclagencia.com/superadmin/$1"
+    },
+    {
+      "src": "/_next/(.*)",
+      "dest": "https://admin.jclagencia.com/_next/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/$1"
+    }
   ]
 }

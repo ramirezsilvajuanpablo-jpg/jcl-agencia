@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Paga tu factura — JCL Agencia</title>
+<meta name="description" content="Consulta y paga la mensualidad de tu sistema de pedidos JCL.">
+<link rel="icon" href="/favicon.ico">
+<style>
+:root{
+  --bg:#000; --text-main:#fff; --text-muted:rgba(255,255,255,.65);
+  --glass-bg:rgba(255,255,255,.06); --glass-border:rgba(255,255,255,.12);
+  --ok:#30d158; --warn:#F5921E; --bad:#ff453a;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--text-main);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Inter,Arial,sans-serif;min-height:100svh;
+  background-image:radial-gradient(ellipse 800px 500px at 50% -10%,rgba(232,56,107,.18),transparent 60%);}
+.wrap{max-width:560px;margin:0 auto;padding:28px 20px 60px}
+.top{display:flex;align-items:center;justify-content:space-between;margin-bottom:34px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--text-main)}
+.logo svg{height:26px}
+.logo span{font-weight:800;letter-spacing:-.01em}
+.volver{color:var(--text-muted);text-decoration:none;font-size:14px}
+h1{font-size:clamp(26px,5vw,34px);font-weight:900;letter-spacing:-.02em;margin-bottom:10px}
+.sub{color:var(--text-muted);font-size:15px;line-height:1.55;margin-bottom:26px}
+.panel{background:var(--glass-bg);border:1px solid var(--glass-border);border-radius:20px;padding:22px;backdrop-filter:blur(20px);margin-bottom:16px}
+label{display:block;font-size:13px;font-weight:700;color:var(--text-muted);margin-bottom:8px}
+input{width:100%;background:rgba(255,255,255,.06);border:1px solid var(--glass-border);border-radius:12px;padding:14px 16px;color:#fff;font-size:16px;outline:none;font-family:inherit}
+input:focus{border-color:rgba(232,56,107,.6)}
+.btn{display:block;width:100%;border:none;border-radius:100px;padding:15px 20px;font-size:15px;font-weight:800;cursor:pointer;text-align:center;text-decoration:none;margin-top:14px;
+  background:linear-gradient(135deg,#7B2FBE,#E8386B,#F5921E);color:#fff}
+.btn:disabled{opacity:.5;cursor:wait}
+.btn2{background:rgba(255,255,255,.08);border:1px solid var(--glass-border);color:#fff}
+.row{display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.08);font-size:15px}
+.row:last-child{border-bottom:none}
+.row span:first-child{color:var(--text-muted)}
+.monto{font-size:34px;font-weight:900;letter-spacing:-.02em;margin:6px 0 2px}
+.chip{display:inline-block;font-size:12px;font-weight:800;border-radius:100px;padding:5px 12px;margin-bottom:12px}
+.chip.ok{background:rgba(48,209,88,.14);color:var(--ok)}
+.chip.warn{background:rgba(245,146,30,.16);color:var(--warn)}
+.chip.bad{background:rgba(255,69,58,.14);color:var(--bad)}
+.err{color:var(--bad);font-size:14px;margin-top:12px}
+.ayuda{color:var(--text-muted);font-size:13px;line-height:1.6;margin-top:16px}
+.ayuda a{color:#E8386B}
+.oculto{display:none}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <a class="logo" href="/">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 260"><defs><linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="60%"><stop offset="0%" stop-color="#7B2FBE"/><stop offset="45%" stop-color="#E8386B"/><stop offset="100%" stop-color="#F5921E"/></linearGradient></defs><text x="200" y="210" font-family="Arial Black,Arial,sans-serif" font-weight="900" font-size="230" fill="url(#g)" text-anchor="middle" letter-spacing="-8">JCL</text></svg>
+      <span>Agencia</span>
+    </a>
+    <a class="volver" href="/">← Inicio</a>
+  </div>
+
+  <h1>Paga tu factura</h1>
+  <p class="sub">Consulta lo que debes de tu sistema de pedidos y págalo en línea. Si ya pagaste, avísanos desde aquí mismo.</p>
+
+  <!-- Paso 1: buscar -->
+  <div class="panel" id="p-buscar">
+    <label for="buscar">Tu sistema o tu WhatsApp</label>
+    <input id="buscar" type="text" placeholder="boyacomer   ·   3001234567" autocomplete="off">
+    <p class="ayuda">Escribe lo que va antes de <strong>.jclagencia.com</strong>, o el WhatsApp con el que te registraste.</p>
+    <button class="btn" id="btn-buscar">Ver mi factura →</button>
+    <p class="err oculto" id="err-buscar"></p>
+  </div>
+
+  <!-- Paso 2: resultado -->
+  <div class="panel oculto" id="p-cuenta"></div>
+
+  <p class="ayuda">¿Dudas con tu pago? Escríbenos por <a href="https://wa.me/573023440073" target="_blank" rel="noopener">WhatsApp</a>.</p>
+</div>
+
+<script>
+const API = 'https://jcl-pedidos-app-production.up.railway.app/api/pagos';
+const $ = id => document.getElementById(id);
+const pesos = n => new Intl.NumberFormat('es-CO', { style:'currency', currency:'COP', maximumFractionDigits:0 }).format(n||0);
+const fecha = d => d ? new Date(d).toLocaleDateString('es-CO',{day:'numeric',month:'long',year:'numeric',timeZone:'UTC'}) : '';
+let datos = null;
+
+async function buscar() {
+  const q = $('buscar').value.trim();
+  if (q.length < 3) return;
+  $('btn-buscar').disabled = true; $('btn-buscar').textContent = 'Buscando...';
+  $('err-buscar').classList.add('oculto');
+  try {
+    const r = await fetch(API + '/factura?buscar=' + encodeURIComponent(q));
+    const d = await r.json();
+    if (!r.ok) throw new Error(d.error || 'No se pudo consultar');
+    datos = d;
+    pintar(d);
+  } catch (e) {
+    $('err-buscar').textContent = e.message;
+    $('err-buscar').classList.remove('oculto');
+  } finally {
+    $('btn-buscar').disabled = false; $('btn-buscar').textContent = 'Ver mi factura →';
+  }
+}
+
+// El detalle lo arma el sistema, pero igual va escapado: es texto que se
+// mete en el HTML.
+const esc = t => String(t ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+
+function pintar(d) {
+  const f = d.factura;
+  const caja = $('p-cuenta');
+  if (!f) {
+    caja.innerHTML = `
+      <div class="chip ok">Estás al día</div>
+      <h2 style="font-size:20px;font-weight:800;margin-bottom:6px">${d.negocio.nombre}</h2>
+      <p class="sub" style="margin:0">No tienes facturas pendientes. Tu plan es de ${d.negocio.plan} (${pesos(d.monto_plan)} al mes)${d.proximo_cobro ? ` y tu próximo cobro es el ${fecha(d.proximo_cobro)}` : ''}.</p>`;
+  } else if (f.reportado) {
+    caja.innerHTML = `
+      <div class="chip warn">Pago reportado</div>
+      <h2 style="font-size:20px;font-weight:800;margin-bottom:6px">${d.negocio.nombre}</h2>
+      <p class="sub" style="margin:0">Ya recibimos tu aviso de pago de ${pesos(f.monto)} (${f.referencia}). Lo estamos confirmando; si algo falta te escribimos por WhatsApp.</p>`;
+  } else {
+    caja.innerHTML = `
+      <div class="chip ${d.negocio.suspendido ? 'bad' : 'warn'}">${d.negocio.suspendido ? 'Servicio suspendido por falta de pago' : 'Tienes una factura pendiente'}</div>
+      <h2 style="font-size:20px;font-weight:800;margin-bottom:10px">${d.negocio.nombre}</h2>
+      <div class="monto">${pesos(f.monto)}</div>
+      <div style="margin:14px 0">
+        <div class="row"><span>Periodo</span><span>${fecha(f.desde)} — ${fecha(f.hasta)}</span></div>
+        ${f.detalle && f.detalle.length > 1
+          ? f.detalle.map(l => `<div class="row"><span>${esc(l.concepto)}</span><span style="white-space:nowrap">${pesos(l.monto)}</span></div>`).join('')
+          : `<div class="row"><span>Plan</span><span>${d.negocio.plan} (${d.negocio.mesas} mesas)</span></div>`}
+        <div class="row"><span>Referencia</span><span><strong>${f.referencia}</strong></span></div>
+      </div>
+      <a class="btn" href="${d.link_pago}" target="_blank" rel="noopener" id="btn-pagar">Pagar ${pesos(f.monto)} →</a>
+      <p class="ayuda">Puedes pagar con tarjeta, PSE o Nequi. Al pagar, escribe la referencia <strong>${f.referencia}</strong> si el formulario te lo permite.</p>
+      <button class="btn btn2" id="btn-pague">Ya pagué — avisar</button>
+      <div class="oculto" id="p-reportar" style="margin-top:14px">
+        <label for="ref">Número del comprobante (opcional)</label>
+        <input id="ref" type="text" placeholder="Ej: 128374-1562891" autocomplete="off">
+        <button class="btn" id="btn-reportar">Enviar aviso de pago</button>
+        <p class="err oculto" id="err-reportar"></p>
+      </div>`;
+    $('btn-pague').onclick = () => $('p-reportar').classList.remove('oculto');
+    $('btn-reportar').onclick = reportar;
+  }
+  caja.classList.remove('oculto');
+}
+
+async function reportar() {
+  const btn = $('btn-reportar');
+  btn.disabled = true; btn.textContent = 'Enviando...';
+  $('err-reportar').classList.add('oculto');
+  try {
+    const r = await fetch(API + '/reportar', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ factura_id: datos.factura.id, referencia: $('ref').value.trim() }),
+    });
+    const d = await r.json();
+    if (!r.ok) throw new Error(d.error || 'No se pudo enviar');
+    $('p-cuenta').innerHTML = `
+      <div class="chip ok">¡Gracias!</div>
+      <h2 style="font-size:20px;font-weight:800;margin-bottom:6px">Recibimos tu aviso de pago</h2>
+      <p class="sub" style="margin:0">Lo confirmamos en unos minutos y tu sistema sigue funcionando sin cortes. Si algo falta, te escribimos por WhatsApp.</p>`;
+  } catch (e) {
+    $('err-reportar').textContent = e.message;
+    $('err-reportar').classList.remove('oculto');
+    btn.disabled = false; btn.textContent = 'Enviar aviso de pago';
+  }
+}
+
+$('btn-buscar').onclick = buscar;
+$('buscar').addEventListener('keydown', e => { if (e.key === 'Enter') buscar(); });
+// Se puede llegar directo con jclagencia.com/pagar?negocio=boyacomer
+const pre = new URLSearchParams(location.search).get('negocio');
+if (pre) { $('buscar').value = pre; buscar(); }
+</script>
+</body>
+</html>

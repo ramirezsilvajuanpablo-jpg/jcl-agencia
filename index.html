@@ -390,19 +390,36 @@ h2.sh{font-size:clamp(36px,5vw,60px);font-weight:900;letter-spacing:-.03em;line-
 
 /* ── PLANES Y PRECIOS ── */
 .free-badge{display:inline-flex;align-items:center;gap:8px;margin-top:28px;padding:12px 26px;border-radius:100px;font-size:15px;font-weight:800;color:#fff;background:linear-gradient(135deg,var(--c-jcl1),var(--c-jcl2),var(--c-jcl3));box-shadow:0 12px 30px rgba(232,56,107,.35)}
-.prgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:1100px;margin:56px auto 0}
-.prc{padding:40px 34px;display:flex;flex-direction:column;justify-content:space-between;gap:32px;text-align:center}
+.prgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;max-width:1240px;margin:56px auto 0}
+.prc{padding:34px 24px;display:flex;flex-direction:column;justify-content:space-between;gap:32px;text-align:center}
 .prc-name{font-size:13px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted);margin-bottom:18px}
-.prc-price{font-size:clamp(38px,4.4vw,52px);font-weight:900;letter-spacing:-.03em;line-height:1;background:linear-gradient(135deg,#fff 30%,rgba(255,255,255,.72));-webkit-background-clip:text;background-clip:text;color:transparent}
+.prc-price{font-size:clamp(34px,3.4vw,46px);font-weight:900;letter-spacing:-.03em;line-height:1;background:linear-gradient(135deg,#fff 30%,rgba(255,255,255,.72));-webkit-background-clip:text;background-clip:text;color:transparent}
 .prc-cur{font-size:.5em;font-weight:800;vertical-align:super;margin-right:2px}
 .prc-per{font-size:.34em;font-weight:700;color:var(--text-muted);-webkit-text-fill-color:var(--text-muted);margin-left:4px}
 .prc-note{font-size:14px;color:var(--text-muted);line-height:1.55;margin-top:16px}
 .prc-btn{display:block;padding:15px;border-radius:14px;font-size:15px;font-weight:800;text-decoration:none;color:#fff;background:linear-gradient(135deg,var(--c-jcl1),var(--c-jcl2),var(--c-jcl3));box-shadow:0 10px 26px rgba(232,56,107,.28);transition:transform .3s,box-shadow .3s}
 .prc-btn:hover{transform:translateY(-2px);box-shadow:0 16px 36px rgba(232,56,107,.45)}
 .prc-incl{max-width:1100px;margin:20px auto 0;padding:32px 34px}
+.prc-cupo{margin-top:16px;padding:10px 12px;border-radius:12px;font-size:13.5px;line-height:1.45;color:var(--text-muted);background:rgba(255,255,255,.04);border:1px solid var(--glass-border)}
+.prc-cupo strong{color:var(--text-main);font-weight:800}
+.prc-cupo-nota{max-width:760px;margin:22px auto 0;text-align:center;font-size:14.5px;line-height:1.6;color:var(--text-muted)}
+.prc-cupo-nota strong{color:var(--text-main)}
+/* Asistente de WhatsApp: se cobra aparte, así que va en su propia tarjeta y no
+   entre las de los planes — que ahí parecería un quinto plan. */
+.addon{max-width:1100px;margin:20px auto 0;padding:32px 34px;display:grid;grid-template-columns:1fr auto;gap:28px;align-items:center}
+.addon-tag{display:inline-block;font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#E8386B;background:rgba(232,56,107,.12);border:1px solid rgba(232,56,107,.28);border-radius:100px;padding:5px 13px;margin-bottom:14px}
+.addon h3{font-size:clamp(22px,2.4vw,30px);font-weight:900;letter-spacing:-.02em;margin-bottom:12px;line-height:1.2}
+.addon p{font-size:15px;color:var(--text-muted);line-height:1.6;max-width:620px}
+.addon ul{list-style:none;margin-top:16px;display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:9px 26px}
+.addon li{font-size:14.5px;color:var(--text-muted);line-height:1.5}
+.addon-precio{text-align:center;flex-shrink:0}
+.addon-precio .prc-price{font-size:clamp(30px,3vw,40px)}
+.addon-precio small{display:block;font-size:13px;color:var(--text-muted);margin-top:8px;max-width:180px;line-height:1.5}
+@media(max-width:860px){.addon{grid-template-columns:1fr;gap:20px;text-align:left}.addon-precio{text-align:left}.addon-precio small{max-width:none}}
 .prc-incl-title{font-size:13px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted);margin-bottom:22px;text-align:center}
 .prc-incl-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px 28px}
 .prc-incl-grid span{font-size:15px;color:var(--text-muted);line-height:1.5}
+@media(max-width:1180px){.prgrid{grid-template-columns:repeat(2,1fr);max-width:760px}}
 @media(max-width:860px){.prgrid{grid-template-columns:1fr;max-width:460px}}
 
 /* ── FOOTER ── */
@@ -559,6 +576,7 @@ footer{padding:100px 60px 40px;position:relative;z-index:2;background:linear-gra
     <li><a href="#precios">Precios</a></li>
     <li><a href="#vision">Nuestro Enfoque</a></li>
     <li><a href="#contacto">Contacto</a></li>
+    <li><a href="/pagar">Paga tu factura</a></li>
   </ul>
   <a href="#registro" class="ncta">Regístrate gratis →</a>
   <button class="nburg" id="burger">
@@ -573,6 +591,7 @@ footer{padding:100px 60px 40px;position:relative;z-index:2;background:linear-gra
   <a href="#precios">Precios</a>
   <a href="#vision">Nuestro Enfoque</a>
   <a href="#contacto">Contacto</a>
+  <a href="/pagar">Paga tu factura</a>
   <a href="#registro" class="ncta" style="margin-top:16px;font-size:15px">Regístrate gratis →</a>
 </div>
 
@@ -694,7 +713,7 @@ footer{padding:100px 60px 40px;position:relative;z-index:2;background:linear-gra
   <div class="rv" style="text-align:center;max-width:760px;margin:0 auto">
     <div class="stag">Planes y Precios</div>
     <h2 class="sh">Un precio claro,<br>según el tamaño de tu negocio.</h2>
-    <p class="ssub" style="margin:0 auto">Los tres planes traen <strong style="color:var(--text-main)">exactamente las mismas funciones</strong>. Lo único que cambia es cuántas mesas manejas — no pagas de más por un sistema recortado.</p>
+    <p class="ssub" style="margin:0 auto">Todos los planes traen <strong style="color:var(--text-main)">exactamente las mismas funciones</strong>. Lo único que cambia es cuántas mesas manejas — no pagas de más por un sistema recortado.</p>
     <div class="free-badge">🎁 Primer mes gratis en cualquier plan</div>
   </div>
 
@@ -704,31 +723,46 @@ footer{padding:100px 60px 40px;position:relative;z-index:2;background:linear-gra
         <div class="prc-name">Hasta 10 mesas</div>
         <div class="prc-price"><span class="prc-cur">$</span>16.900<span class="prc-per">/mes</span></div>
         <div class="prc-note">Ideal para cafeterías y negocios pequeños</div>
+        <div class="prc-cupo">Incluye <strong>200 cuentas</strong> cobradas al mes</div>
       </div>
       <a href="#registro" class="prc-btn">Empezar gratis →</a>
     </div>
 
     <div class="prc glass-panel rv d1">
       <div class="prc-top">
-        <div class="prc-name">Hasta 20 mesas</div>
+        <div class="prc-name">11 a 20 mesas</div>
         <div class="prc-price"><span class="prc-cur">$</span>29.900<span class="prc-per">/mes</span></div>
         <div class="prc-note">Para restaurantes y bares en crecimiento</div>
+        <div class="prc-cupo">Incluye <strong>300 cuentas</strong> cobradas al mes</div>
       </div>
       <a href="#registro" class="prc-btn">Empezar gratis →</a>
     </div>
 
     <div class="prc glass-panel rv d2">
       <div class="prc-top">
-        <div class="prc-name">Más de 20 mesas</div>
+        <div class="prc-name">21 a 50 mesas</div>
         <div class="prc-price"><span class="prc-cur">$</span>49.900<span class="prc-per">/mes</span></div>
-        <div class="prc-note">Sin límite de mesas, para locales grandes</div>
+        <div class="prc-note">Para restaurantes grandes</div>
+        <div class="prc-cupo">Incluye <strong>500 cuentas</strong> cobradas al mes</div>
+      </div>
+      <a href="#registro" class="prc-btn">Empezar gratis →</a>
+    </div>
+
+    <div class="prc glass-panel rv d3">
+      <div class="prc-top">
+        <div class="prc-name">Más de 50 mesas</div>
+        <div class="prc-price"><span class="prc-cur">$</span>100.000<span class="prc-per">/mes</span></div>
+        <div class="prc-note">Sin límite de mesas, para locales muy grandes</div>
+        <div class="prc-cupo">Incluye <strong>1.000 cuentas</strong> cobradas al mes</div>
       </div>
       <a href="#registro" class="prc-btn">Empezar gratis →</a>
     </div>
   </div>
 
+  <p class="prc-cupo-nota rv">¿Vendes más? Cada 100 cuentas adicionales, o fracción, suman <strong>$10.000</strong> a tu mensualidad. Una cuenta es cada pago en caja: una mesa que pidió en varias rondas y pagó todo junto cuenta como una. En tu panel ves cuántas llevas, y te avisamos por WhatsApp antes de llegar al límite.</p>
+
   <div class="prc-incl glass-panel rv">
-    <div class="prc-incl-title">Todo esto viene incluido en los tres planes</div>
+    <div class="prc-incl-title">Todo esto viene incluido en todos los planes</div>
     <div class="prc-incl-grid">
       <span>✓ Carta digital con QR por mesa</span>
       <span>✓ Panel de cocina en tiempo real</span>
@@ -738,6 +772,46 @@ footer{padding:100px 60px 40px;position:relative;z-index:2;background:linear-gra
       <span>✓ Tu propio subdominio y tu marca</span>
       <span>✓ Control de inventario y agotados</span>
       <span>✓ Actualizaciones incluidas</span>
+    </div>
+  </div>
+
+  <div class="addon glass-panel rv">
+    <div>
+      <span class="addon-tag">Opcional</span>
+      <h3>Asistente de WhatsApp para tu restaurante</h3>
+      <p>Conectas el WhatsApp de tu negocio escaneando un código y un asistente contesta solo, a toda hora. No necesitas otro número ni otra aplicación.</p>
+      <ul>
+        <li>✓ Le manda a cada cliente el link para pedir</li>
+        <li>✓ Responde qué hay y cuánto vale, con tu carta de hoy</li>
+        <li>✓ Dice si están abiertos y hasta qué hora</li>
+        <li>✓ Le cuenta al cliente cómo va su pedido</li>
+        <li>✓ Cuando alguien necesita hablar contigo, te avisa y se calla</li>
+        <li>✓ Lo pruebas y lo apagas cuando quieras, desde tu panel</li>
+      </ul>
+    </div>
+    <div class="addon-precio">
+      <div class="prc-price"><span class="prc-cur">$</span>29.900<span class="prc-per">/mes</span></div>
+      <small>Se suma a tu plan. Lo activas tú mismo desde el panel.</small>
+    </div>
+  </div>
+
+  <div class="addon glass-panel rv">
+    <div>
+      <span class="addon-tag">Opcional · Nuevo</span>
+      <h3>Facturación electrónica DIAN</h3>
+      <p>Cada cuenta que cobras sale con su documento electrónico validado por la DIAN, sin que la cajera haga nada distinto. Se imprime en la misma impresora de caja, con el QR de la DIAN.</p>
+      <ul>
+        <li>✓ Tiquete POS electrónico de cada venta</li>
+        <li>✓ Factura a nombre del cliente cuando la pide</li>
+        <li>✓ Anulaciones y devoluciones con nota crédito, desde caja</li>
+        <li>✓ Impuesto al consumo o IVA separado solo</li>
+        <li>✓ Guardamos el XML de cada documento por ti</li>
+        <li>✓ Te acompañamos en la habilitación ante la DIAN</li>
+      </ul>
+    </div>
+    <div class="addon-precio">
+      <div class="prc-price"><span class="prc-cur">$</span>29.900<span class="prc-per">/mes</span></div>
+      <small>Incluye 500 documentos al mes; cada adicional, $50. Activación $150.000 y certificado digital $150.000 al año, pagados al empezar. Contrato de 12 meses.</small>
     </div>
   </div>
 </div>
@@ -769,8 +843,8 @@ footer{padding:100px 60px 40px;position:relative;z-index:2;background:linear-gra
             </div>
           </div>
           <div id="reg-logo-ia" style="display:none;margin-top:14px">
-            <p class="contact-note" style="text-align:left;margin:0 0 10px;opacity:1">Tu logo se ve en baja calidad. ¿Lo mejoramos con IA? Verás los dos y tú eliges.</p>
-            <button type="button" id="reg-logo-ia-btn" style="background:linear-gradient(135deg,#7B2FBE,#E8386B);color:#fff;border:none;border-radius:10px;padding:10px 16px;font-weight:700;font-size:14px;cursor:pointer">✨ Mejorar con IA</button>
+            <p class="contact-note" id="reg-logo-ia-texto" style="text-align:left;margin:0 0 10px;opacity:1">¿Le quitamos el fondo y lo dejamos limpio, solo tu logo? Verás los dos y tú eliges.</p>
+            <button type="button" id="reg-logo-ia-btn" style="background:linear-gradient(135deg,#7B2FBE,#E8386B);color:#fff;border:none;border-radius:10px;padding:10px 16px;font-weight:700;font-size:14px;cursor:pointer">✨ Quitar el fondo con IA</button>
             <div id="reg-logo-comparar" style="display:none;gap:18px;margin-top:14px;flex-wrap:wrap"></div>
           </div>
         </div>
@@ -1059,7 +1133,7 @@ document.getElementById('reg-logo').addEventListener('change', async function() 
   const btnIa = document.getElementById('reg-logo-ia-btn');
   cajaIa.style.display = 'none';
   document.getElementById('reg-logo-comparar').style.display = 'none';
-  btnIa.disabled = false; btnIa.textContent = '✨ Mejorar con IA';
+  btnIa.disabled = false; btnIa.textContent = '✨ Quitar el fondo con IA';
 
   const leido = await new Promise(resolve => { const r = new FileReader(); r.onload = () => resolve(r.result); r.readAsDataURL(file); });
   let png;
@@ -1072,7 +1146,17 @@ document.getElementById('reg-logo').addEventListener('change', async function() 
   try {
     const r = await llamarLogoApi(png, false);
     logoDataUrl = r.logo; logoSinIa = r.logo; mostrarLogo(r.logo);
-    if (r.bajaCalidad) cajaIa.style.display = 'block';
+    // Se ofrece SIEMPRE, no solo cuando el logo se ve borroso: lo que más
+    // pide la gente es quitarle el fondo para que en el menú y en las
+    // tarjetas QR quede solo el logo. Sigue siendo opcional y con
+    // antes/después — nadie se queda con su marca cambiada sin escogerlo.
+    cajaIa.style.display = 'block';
+    const textoIa = document.getElementById('reg-logo-ia-texto');
+    if (textoIa) {
+      textoIa.textContent = r.bajaCalidad
+        ? 'Tu logo se ve en baja calidad. ¿Lo mejoramos y le quitamos el fondo? Verás los dos y tú eliges.'
+        : '¿Le quitamos el fondo y lo dejamos limpio, solo tu logo? Verás los dos y tú eliges.';
+    }
   } catch (e) {
     // Sin esta limpieza el registro funciona igual: el servidor la repite al guardar.
   }
@@ -1112,7 +1196,7 @@ document.getElementById('reg-logo-ia-btn').addEventListener('click', async funct
     btn.textContent = '✨ Listo — elige cuál usar';
   } catch (e) {
     btn.disabled = false;
-    btn.textContent = '✨ Mejorar con IA';
+    btn.textContent = '✨ Quitar el fondo con IA';
     document.getElementById('reg-logo-estado').textContent = '⚠ ' + e.message;
   }
 });
