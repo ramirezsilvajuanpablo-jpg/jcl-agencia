@@ -14,6 +14,34 @@
       "use": "@vercel/static"
     },
     {
+      "src": "paginas.css",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "facturacion-electronica-pos.html",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "menu-digital-qr.html",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "sistema-pos-bares.html",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "sistema-pos-cafeterias.html",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "sistema-pos-comidas-rapidas.html",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "software-restaurantes-sogamoso.html",
+      "use": "@vercel/static"
+    },
+    {
       "src": "favicon.ico",
       "use": "@vercel/static"
     },
@@ -34,6 +62,30 @@
     {
       "src": "/pagar",
       "dest": "/pagar.html"
+    },
+    {
+      "src": "/facturacion-electronica-pos/?",
+      "dest": "/facturacion-electronica-pos.html"
+    },
+    {
+      "src": "/menu-digital-qr/?",
+      "dest": "/menu-digital-qr.html"
+    },
+    {
+      "src": "/sistema-pos-bares/?",
+      "dest": "/sistema-pos-bares.html"
+    },
+    {
+      "src": "/sistema-pos-cafeterias/?",
+      "dest": "/sistema-pos-cafeterias.html"
+    },
+    {
+      "src": "/sistema-pos-comidas-rapidas/?",
+      "dest": "/sistema-pos-comidas-rapidas.html"
+    },
+    {
+      "src": "/software-restaurantes-sogamoso/?",
+      "dest": "/software-restaurantes-sogamoso.html"
     },
     {
       "src": "/q/(.*)",
