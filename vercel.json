@@ -42,6 +42,10 @@
       "use": "@vercel/static"
     },
     {
+      "src": "software-a-la-medida.html",
+      "use": "@vercel/static"
+    },
+    {
       "src": "favicon.ico",
       "use": "@vercel/static"
     },
@@ -86,6 +90,10 @@
     {
       "src": "/software-restaurantes-sogamoso/?",
       "dest": "/software-restaurantes-sogamoso.html"
+    },
+    {
+      "src": "/software-a-la-medida/?",
+      "dest": "/software-a-la-medida.html"
     },
     {
       "src": "/q/(.*)",
