@@ -1385,7 +1385,8 @@ document.getElementById('reg-logo').addEventListener('change', async function() 
     // pide la gente es quitarle el fondo para que en el menú y en las
     // tarjetas QR quede solo el logo. Sigue siendo opcional y con
     // antes/después — nadie se queda con su marca cambiada sin escogerlo.
-    cajaIa.style.display = 'block';
+    // Si el sistema tiene apagadas las imágenes con IA, no se ofrece.
+    if (r.ia_disponible !== false) cajaIa.style.display = 'block';
     const textoIa = document.getElementById('reg-logo-ia-texto');
     if (textoIa) {
       textoIa.textContent = r.bajaCalidad
