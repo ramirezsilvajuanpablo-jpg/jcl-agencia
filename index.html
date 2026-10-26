@@ -297,6 +297,7 @@ nav.sc{padding:16px 60px;background:rgba(5,0,10,.6);backdrop-filter:blur(24px) s
 .bdot{width:8px;height:8px;background:linear-gradient(135deg,var(--c-jcl2),var(--c-jcl3));border-radius:50%;box-shadow:0 0 10px var(--c-jcl2);animation:pulse 2s infinite}
 @keyframes pulse{0%,100%{box-shadow:0 0 6px var(--c-jcl2)}50%{box-shadow:0 0 16px var(--c-jcl2),0 0 28px rgba(232,56,107,.4)}}
 h1.hh{font-size:clamp(46px,7.5vw,96px);font-weight:900;line-height:1.04;margin-bottom:28px;text-shadow:0 20px 40px rgba(0,0,0,.3);animation:fup .8s ease .1s forwards;opacity:0}
+.hh-kw{display:block;font-size:.34em;font-weight:700;letter-spacing:0;line-height:1.3;margin-top:18px;color:var(--text-main);-webkit-text-fill-color:var(--text-main)}
 .gt{background:linear-gradient(to right,#fff 10%,var(--c-yellow) 45%,var(--c-jcl2) 80%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 .hsub{font-size:clamp(17px,2.1vw,22px);color:var(--text-muted);max-width:680px;margin:0 auto 52px;line-height:1.55;font-weight:400;text-shadow:0 4px 10px rgba(0,0,0,.5);animation:fup .8s ease .2s forwards;opacity:0}
 .hact{display:flex;gap:20px;justify-content:center;flex-wrap:wrap;animation:fup .8s ease .3s forwards;opacity:0}
@@ -544,6 +545,26 @@ h2.sh{font-size:clamp(36px,5vw,60px);font-weight:900;letter-spacing:-.03em;line-
 .prc-btn{display:block;padding:15px;border-radius:14px;font-size:15px;font-weight:800;text-decoration:none;color:#fff;background:linear-gradient(135deg,var(--c-jcl1),var(--c-jcl2),var(--c-jcl3));box-shadow:0 10px 26px rgba(232,56,107,.28);transition:transform .3s,box-shadow .3s}
 .prc-btn:hover{transform:translateY(-2px);box-shadow:0 16px 36px rgba(232,56,107,.45)}
 .prc-incl{max-width:1100px;margin:20px auto 0;padding:32px 34px}
+/* Franja de resultados: las cifras salen de /api/stats o son reales y sin nombres de clientes. */
+.res-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;max-width:1100px;margin:0 auto}
+.res{padding:24px 18px;text-align:center;border-radius:20px}
+.res b{display:block;font-size:clamp(30px,4vw,42px);font-weight:800;line-height:1.1;margin-bottom:8px}
+.res span{display:block;font-size:14px;line-height:1.45;color:var(--text-muted)}
+/* Comparación con otros sistemas POS, sin nombrar a ninguno. */
+.cmp{max-width:900px;margin:28px auto 0;padding:10px 8px;border-radius:22px;overflow-x:auto}
+.cmp table{width:100%;border-collapse:collapse;font-size:15px}
+.cmp th,.cmp td{padding:14px 16px;text-align:left;border-bottom:1px solid var(--glass-border);vertical-align:top}
+.cmp tr:last-child td{border-bottom:none}
+.cmp th{font-size:13px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--text-muted)}
+.cmp td:first-child{color:var(--text-muted)}
+.cmp .cmp-jcl{color:var(--text-main);font-weight:700;background:rgba(232,56,107,.08)}
+.cmp th.cmp-jcl{color:var(--text-main)}
+.cmp-nota{font-size:12.5px;color:var(--text-muted);text-align:center;margin:10px 0 4px}
+.cmp-ia{max-width:900px;margin:22px auto 0;text-align:center}
+.cmp-ia p{color:var(--text-muted);font-size:15px;margin-bottom:14px}
+.cmp-ia-btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.cmp-ia-btns .bs{padding:12px 22px;font-size:14.5px}
+@media(max-width:760px){.res-grid{grid-template-columns:repeat(2,1fr)}.cmp table{font-size:13.5px}.cmp th,.cmp td{padding:11px 10px}}
 .prc-cupo{margin-top:16px;padding:10px 12px;border-radius:12px;font-size:13.5px;line-height:1.45;color:var(--text-muted);background:rgba(255,255,255,.04);border:1px solid var(--glass-border)}
 .prc-cupo strong{color:var(--text-main);font-weight:800}
 .prc-cupo-nota{max-width:760px;margin:22px auto 0;text-align:center;font-size:14.5px;line-height:1.6;color:var(--text-muted)}
@@ -765,8 +786,8 @@ footer{padding:100px 60px 40px;position:relative;z-index:2;background:linear-gra
 <section id="hero">
   <div class="hcontent">
     <div class="hbadge"><span class="bdot"></span>Sistema POS · Pedidos por QR · Facturación DIAN</div>
-    <h1 class="hh">Sistema POS para<br><span class="gt">restaurantes, bares y cafeterías.</span></h1>
-    <p class="hsub">Caja, cocina, meseros, inventario y domicilios en un solo sistema, con pedidos desde la mesa por QR y facturación electrónica DIAN. Funciona en el celular, la tablet o el computador que ya tienes.</p>
+    <h1 class="hh"><span class="gt">Cero pedidos perdidos.</span><small class="hh-kw">Sistema POS para restaurantes, bares y cafeterías</small></h1>
+    <p class="hsub">Ve en vivo, desde tu celular, cuánto vendes y qué pidió cada mesa. Tus clientes piden escaneando el QR de su mesa, el chatbot de WhatsApp toma los domicilios y facturas electrónicamente ante la DIAN. Sin comprar equipos.</p>
     <div class="hact">
       <a href="#registro" class="bp">Registrar mi negocio →</a>
       <a href="#pedidos" class="bs">Ver cómo funciona</a>
@@ -796,6 +817,16 @@ footer{padding:100px 60px 40px;position:relative;z-index:2;background:linear-gra
     <span class="mqitem">Tu Propio Subdominio</span>
     <span class="mqitem">Sin Instalar Nada</span>
   </div></div>
+</div>
+
+<!-- RESULTADOS -->
+<div id="resultados" class="sec" style="padding-top:44px;padding-bottom:12px">
+  <div class="res-grid rv">
+    <div class="res glass-panel"><b class="gt" id="res-pedidos">+3.500</b><span>pedidos al mes pasan por nuestro sistema</span></div>
+    <div class="res glass-panel"><b class="gt">+80</b><span>pedidos al día en un solo asadero, sin libreta</span></div>
+    <div class="res glass-panel"><b class="gt">+100</b><span>clientes atendidos en un mes por el chatbot de un restaurante</span></div>
+    <div class="res glass-panel"><b class="gt">1 mes</b><span>gratis, con los QR enviados sin costo a toda Colombia</span></div>
+  </div>
 </div>
 
 <!-- PEDIDOS QR -->
@@ -911,6 +942,35 @@ footer{padding:100px 60px 40px;position:relative;z-index:2;background:linear-gra
     <a class="sol glass-panel" href="/menu-digital-qr"><span class="sol-ico" aria-hidden="true">📱</span><strong>Menú digital QR</strong><span>Tu carta con fotos en un QR por mesa: el cliente pide desde su celular.</span></a>
     <a class="sol glass-panel" href="/facturacion-electronica-pos"><span class="sol-ico" aria-hidden="true">🧾</span><strong>Facturación electrónica POS</strong><span>Tiquete POS electrónico de cada venta, validado por la DIAN.</span></a>
     <a class="sol glass-panel" href="/software-restaurantes-sogamoso"><span class="sol-ico" aria-hidden="true">📍</span><strong>Hecho en Sogamoso</strong><span>Software para restaurantes de Boyacá, con soporte cercano.</span></a>
+  </div>
+</div>
+
+<!-- COMPARACIÓN -->
+<div id="comparar" class="sec">
+  <div class="rv" style="text-align:center;max-width:760px;margin:0 auto">
+    <div class="stag">Compara antes de decidir</div>
+    <h2 class="sh">Lo que hace un POS grande, <span class="gt">por una fracción del precio.</span></h2>
+  </div>
+  <div class="cmp glass-panel rv">
+    <table>
+      <thead><tr><th></th><th class="cmp-jcl">JCL</th><th>Otros sistemas POS</th></tr></thead>
+      <tbody>
+        <tr><td>Precio al mes</td><td class="cmp-jcl">Desde $16.900</td><td>De $85.000 a $160.000</td></tr>
+        <tr><td>Prueba gratis</td><td class="cmp-jcl">1 mes completo</td><td>De 5 a 15 días</td></tr>
+        <tr><td>Stickers QR de las mesas</td><td class="cmp-jcl">Enviados gratis a toda Colombia</td><td>Los imprimes tú</td></tr>
+        <tr><td>Chatbot de WhatsApp que toma pedidos</td><td class="cmp-jcl">$29.900 al mes</td><td>Pocos lo tienen</td></tr>
+        <tr><td>Capacitación del equipo</td><td class="cmp-jcl">Gratis, por Google Meet</td><td>Varía según el sistema</td></tr>
+      </tbody>
+    </table>
+    <p class="cmp-nota">Precios mensuales publicados por sistemas POS para restaurantes en Colombia, octubre de 2026.</p>
+  </div>
+  <div class="cmp-ia rv">
+    <p>¿Prefieres una opinión que no sea la nuestra? Pregúntale a una inteligencia artificial:</p>
+    <div class="cmp-ia-btns">
+      <a class="bs" href="https://chatgpt.com/?q=Estoy%20evaluando%20un%20sistema%20POS%20para%20mi%20restaurante%20en%20Colombia.%20Comp%C3%A1rame%20JCL%20Pedidos%20%28jclagencia.com%29%20con%20las%20mejores%20opciones%20del%20mercado%20colombiano%20para%20un%20restaurante%20de%2010%20a%2030%20mesas%3A%20precio%20mensual%2C%20prueba%20gratis%2C%20pedidos%20por%20QR%20desde%20la%20mesa%2C%20chatbot%20de%20WhatsApp%20que%20toma%20pedidos%2C%20facturaci%C3%B3n%20electr%C3%B3nica%20DIAN%2C%20capacitaci%C3%B3n%20y%20soporte.%20Dame%20una%20tabla%20comparativa%20y%20una%20recomendaci%C3%B3n%20honesta." target="_blank" rel="noopener">Comparar con ChatGPT</a>
+      <a class="bs" href="https://claude.ai/new?q=Estoy%20evaluando%20un%20sistema%20POS%20para%20mi%20restaurante%20en%20Colombia.%20Comp%C3%A1rame%20JCL%20Pedidos%20%28jclagencia.com%29%20con%20las%20mejores%20opciones%20del%20mercado%20colombiano%20para%20un%20restaurante%20de%2010%20a%2030%20mesas%3A%20precio%20mensual%2C%20prueba%20gratis%2C%20pedidos%20por%20QR%20desde%20la%20mesa%2C%20chatbot%20de%20WhatsApp%20que%20toma%20pedidos%2C%20facturaci%C3%B3n%20electr%C3%B3nica%20DIAN%2C%20capacitaci%C3%B3n%20y%20soporte.%20Dame%20una%20tabla%20comparativa%20y%20una%20recomendaci%C3%B3n%20honesta." target="_blank" rel="noopener">Comparar con Claude</a>
+      <a class="bs" href="https://www.perplexity.ai/search?q=Estoy%20evaluando%20un%20sistema%20POS%20para%20mi%20restaurante%20en%20Colombia.%20Comp%C3%A1rame%20JCL%20Pedidos%20%28jclagencia.com%29%20con%20las%20mejores%20opciones%20del%20mercado%20colombiano%20para%20un%20restaurante%20de%2010%20a%2030%20mesas%3A%20precio%20mensual%2C%20prueba%20gratis%2C%20pedidos%20por%20QR%20desde%20la%20mesa%2C%20chatbot%20de%20WhatsApp%20que%20toma%20pedidos%2C%20facturaci%C3%B3n%20electr%C3%B3nica%20DIAN%2C%20capacitaci%C3%B3n%20y%20soporte.%20Dame%20una%20tabla%20comparativa%20y%20una%20recomendaci%C3%B3n%20honesta." target="_blank" rel="noopener">Comparar con Perplexity</a>
+    </div>
   </div>
 </div>
 
@@ -1240,6 +1300,10 @@ fetch('https://jcl-pedidos-app-production.up.railway.app/api/stats')
   .then(r => r.json())
   .then(d => {
     const n = d.negocios || 0;
+    // Los pedidos del mes, redondeados hacia abajo para no exagerar nunca.
+    const p = d.pedidos_mes || 0;
+    const res = document.getElementById('res-pedidos');
+    if (res && p >= 100) res.textContent = `+${(p >= 1000 ? Math.floor(p / 500) * 500 : Math.floor(p / 100) * 100).toLocaleString('es-CO')}`;
     const badge = document.getElementById('stats-badge');
     if (!badge) return;
     if (n > 0) badge.textContent = `🔥 ${n} negocio${n !== 1 ? 's' : ''} ya está${n !== 1 ? 'n' : ''} usando el sistema`;
