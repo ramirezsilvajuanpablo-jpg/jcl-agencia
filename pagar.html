@@ -103,14 +103,23 @@ async function buscar() {
 // mete en el HTML.
 const esc = t => String(t ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 
+// La última factura pagada: quien ya pagó tiene que ver que le llegó.
+const pagoRecibido = d => d.ultimo_pago
+  ? `<div class="row" style="margin-top:14px"><span>✅ Pago recibido</span><span><strong>${pesos(d.ultimo_pago.monto)}</strong> · ${d.ultimo_pago.referencia}${d.ultimo_pago.pagada_en ? ` · ${new Date(d.ultimo_pago.pagada_en).toLocaleDateString('es-CO',{day:'numeric',month:'long',timeZone:'America/Bogota'})}` : ''}</span></div>`
+  : '';
+
 function pintar(d) {
   const f = d.factura;
   const caja = $('p-cuenta');
   if (!f) {
+    const plan = d.medida
+      ? (d.monto_plan ? `Tu mensualidad es de ${pesos(d.monto_plan)}` : '')
+      : `Tu plan es de ${d.negocio.plan} (${pesos(d.monto_plan)} al mes)`;
     caja.innerHTML = `
-      <div class="chip ok">Estás al día</div>
+      <div class="chip ok">${d.ultimo_pago ? 'Pago aprobado · estás al día' : 'Estás al día'}</div>
       <h2 style="font-size:20px;font-weight:800;margin-bottom:6px">${d.negocio.nombre}</h2>
-      <p class="sub" style="margin:0">No tienes facturas pendientes. Tu plan es de ${d.negocio.plan} (${pesos(d.monto_plan)} al mes)${d.proximo_cobro ? ` y tu próximo cobro es el ${fecha(d.proximo_cobro)}` : ''}.</p>`;
+      <p class="sub" style="margin:0">No tienes facturas pendientes.${plan ? ` ${plan}` : ''}${d.proximo_cobro ? `${plan ? ' y tu' : ' Tu'} próximo cobro es el ${fecha(d.proximo_cobro)}` : ''}.</p>
+      ${pagoRecibido(d)}`;
   } else if (f.reportado) {
     caja.innerHTML = `
       <div class="chip warn">Pago reportado</div>
@@ -125,7 +134,9 @@ function pintar(d) {
         <div class="row"><span>Periodo</span><span>${fecha(f.desde)} — ${fecha(f.hasta)}</span></div>
         ${f.detalle && f.detalle.length > 1
           ? f.detalle.map(l => `<div class="row"><span>${esc(l.concepto)}</span><span style="white-space:nowrap">${pesos(l.monto)}</span></div>`).join('')
-          : `<div class="row"><span>Plan</span><span>${d.negocio.plan} (${d.negocio.mesas} mesas)</span></div>`}
+          : f.detalle && f.detalle.length === 1
+            ? `<div class="row"><span>Concepto</span><span>${esc(f.detalle[0].concepto)}</span></div>`
+            : d.medida ? '' : `<div class="row"><span>Plan</span><span>${d.negocio.plan} (${d.negocio.mesas} mesas)</span></div>`}
         <div class="row"><span>Referencia</span><span><strong>${f.referencia}</strong></span></div>
       </div>
       <a class="btn" href="${d.link_pago}" target="_blank" rel="noopener" id="btn-pagar">Pagar ${pesos(f.monto)} →</a>
