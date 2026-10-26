@@ -159,7 +159,23 @@
    "name": "¿Cuánto tarda en estar funcionando?",
    "acceptedAnswer": {
     "@type": "Answer",
-    "text": "Queda activo apenas te registras, con tu propia dirección. La carta la armas tomándole una foto a tu carta impresa, y desde tu panel imprimes los QR de las mesas."
+    "text": "Queda activo apenas te registras, con tu propia dirección. La carta la armas tomándole una foto a tu carta impresa, y desde tu panel pides los QR de tus mesas: te los enviamos gratis a cualquier parte de Colombia."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "¿Cómo me llegan los códigos QR de las mesas?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Los pides desde tu panel y te los enviamos gratis a cualquier parte de Colombia: todos los que necesiten tus mesas y 2 de repuesto de regalo. Los stickers adicionales valen $3.000 cada uno y se suman a tu siguiente mensualidad. Te recomendamos tener al menos 5 de repuesto, por si los quitan o se dañan."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "¿Cómo es la capacitación?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Es gratis y por Google Meet: en una videollamada capacitamos a todo tu equipo, meseros, cocina y caja, para que arranquen el mismo día. La agendas por WhatsApp a la hora que les quede bien."
    }
   },
   {
@@ -963,6 +979,9 @@ footer{padding:100px 60px 40px;position:relative;z-index:2;background:linear-gra
       <span>✓ Control de inventario y agotados</span>
       <span>✓ Actualizaciones incluidas</span>
       <span>✓ Pedidos a domicilio con tu propio link</span>
+      <span>✓ Stickers QR de tus mesas con envío gratis a toda Colombia</span>
+      <span>✓ 2 stickers de repuesto de regalo (adicionales a $3.000 c/u)</span>
+      <span>✓ Capacitación gratis por Google Meet para todo tu equipo</span>
     </div>
   </div>
 
@@ -1109,7 +1128,9 @@ footer{padding:100px 60px 40px;position:relative;z-index:2;background:linear-gra
     <details class="glass-panel"><summary>¿Puedo facturar electrónicamente ante la DIAN?</summary><div><p>Sí, es opcional. Cada venta sale con su tiquete POS electrónico validado por la DIAN y, si el cliente la pide, con factura a su nombre. Te acompañamos en la habilitación. <a href="/facturacion-electronica-pos">Ver cómo funciona</a>.</p></div></details>
     <details class="glass-panel"><summary>Ya facturo con otro sistema, ¿me puedo cambiar?</summary><div><p>Sí, sin quedarte un día sin facturar: la DIAN permite tener más de un sistema registrado, así que el anterior sigue funcionando hasta el día del cambio. Te recomendamos pedir un prefijo nuevo y guardar los XML de tu proveedor anterior.</p></div></details>
     <details class="glass-panel"><summary>¿Qué pasa si se va el internet?</summary><div><p>El sistema funciona en línea: si se cae el internet del local, puedes seguir trabajando desde un celular con datos. Y la facturación electrónica nunca frena la venta: si la DIAN tarda en responder, el documento sale solo apenas responde.</p></div></details>
-    <details class="glass-panel"><summary>¿Cuánto tarda en estar funcionando?</summary><div><p>Queda activo apenas te registras, con tu propia dirección. La carta la armas tomándole una foto a tu carta impresa, y desde tu panel imprimes los QR de las mesas.</p></div></details>
+    <details class="glass-panel"><summary>¿Cuánto tarda en estar funcionando?</summary><div><p>Queda activo apenas te registras, con tu propia dirección. La carta la armas tomándole una foto a tu carta impresa, y desde tu panel pides los QR de tus mesas: te los enviamos gratis a cualquier parte de Colombia.</p></div></details>
+    <details class="glass-panel"><summary>¿Cómo me llegan los códigos QR de las mesas?</summary><div><p>Los pides desde tu panel y te los enviamos gratis a cualquier parte de Colombia: todos los que necesiten tus mesas y 2 de repuesto de regalo. Los stickers adicionales valen $3.000 cada uno y se suman a tu siguiente mensualidad. Te recomendamos tener al menos 5 de repuesto, por si los quitan o se dañan.</p></div></details>
+    <details class="glass-panel"><summary>¿Cómo es la capacitación?</summary><div><p>Es gratis y por Google Meet: en una videollamada capacitamos a todo tu equipo, meseros, cocina y caja, para que arranquen el mismo día. La agendas por WhatsApp a la hora que les quede bien.</p></div></details>
     <details class="glass-panel"><summary>¿Sirve para bares, cafeterías y comidas rápidas?</summary><div><p>Sí, es el mismo sistema. Mira cómo funciona en <a href="/sistema-pos-bares">bares</a>, <a href="/sistema-pos-cafeterias">cafeterías</a> y <a href="/sistema-pos-comidas-rapidas">comidas rápidas con domicilios</a>.</p></div></details>
     <details class="glass-panel"><summary>¿Hacen software para negocios que no son restaurantes?</summary><div><p>Sí. Hacemos software a la medida y automatizaciones para cualquier negocio: ya tenemos funcionando sistemas para una IPS, una constructora, un taller de motos y un centro de estética. <a href="/software-a-la-medida">Mira lo que hacemos</a>.</p></div></details>
     <details class="glass-panel"><summary>¿Tienen sistema para talleres?</summary><div><p>Sí: JCL Talleres, para talleres de motos, carros, maquinaria o cualquier equipo, con órdenes de trabajo, inventario, caja, abonos y avisos al cliente por WhatsApp. Cuesta $99.900 al mes con 60 órdenes de trabajo incluidas. <a href="/software-taller-motos">Conoce JCL Talleres</a>.</p></div></details>
@@ -1811,7 +1832,7 @@ const Bienvenida = (() => {
         <ol class="bv-lista">
           <li><span>Agrega tu personal<small>Meseros, cocina y caja, cada uno con su código de acceso.</small></span></li>
           <li><span>Configura tus medios de pago<small>Efectivo, Nequi, transferencia o datáfono, y tu llave para recibir.</small></span></li>
-          <li><span>Empieza a subir tu menú<small>Categorías y productos con foto y precio. Después imprimes los QR de tus mesas.</small></span></li>
+          <li><span>Empieza a subir tu menú<small>Categorías y productos con foto y precio. Después pides los QR de tus mesas y te los enviamos gratis.</small></span></li>
         </ol>`,
     });
     return s;
