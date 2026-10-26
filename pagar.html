@@ -111,6 +111,16 @@ const pagoRecibido = d => d.ultimo_pago
 function pintar(d) {
   const f = d.factura;
   const caja = $('p-cuenta');
+  // Varios negocios con el mismo WhatsApp del dueño: que escoja cuál.
+  if (d.opciones) {
+    caja.innerHTML = `
+      <h2 style="font-size:20px;font-weight:800;margin-bottom:6px">¿Cuál de tus negocios?</h2>
+      <p class="sub" style="margin:0 0 14px">Ese WhatsApp tiene ${d.opciones.length} negocios.</p>
+      ${d.opciones.map(o => `<button class="btn btn2" data-slug="${esc(o.slug)}" style="margin-bottom:10px">${esc(o.nombre)}${o.debe ? ' · tiene factura pendiente' : ''}</button>`).join('')}`;
+    caja.querySelectorAll('[data-slug]').forEach(b => b.onclick = () => { $('buscar').value = b.dataset.slug; buscar(); });
+    caja.classList.remove('oculto');
+    return;
+  }
   if (!f) {
     const plan = d.medida
       ? (d.monto_plan ? `Tu mensualidad es de ${pesos(d.monto_plan)}` : '')
