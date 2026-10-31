@@ -550,6 +550,24 @@ h2.sh{font-size:clamp(36px,5vw,60px);font-weight:900;letter-spacing:-.03em;line-
 .res{padding:24px 18px;text-align:center;border-radius:20px}
 .res b{display:block;font-size:clamp(30px,4vw,42px);font-weight:800;line-height:1.1;margin-bottom:8px}
 .res span{display:block;font-size:14px;line-height:1.45;color:var(--text-muted)}
+/* Clientes: logos de los negocios que ya usan el sistema y el video de uno de ellos. */
+.cli-wrap{display:grid;grid-template-columns:340px 1fr;gap:28px;max-width:1100px;margin:0 auto;align-items:stretch}
+.cli-video{padding:14px;border-radius:24px;display:flex;flex-direction:column;gap:12px}
+.cli-video iframe{width:100%;aspect-ratio:9/16;border:0;border-radius:16px;background:#000;display:block}
+.cli-video p{font-size:14px;color:var(--text-muted);text-align:center;line-height:1.45}
+.cli-video a{color:var(--text-main);font-weight:700}
+.cli-lado{display:flex;flex-direction:column;gap:20px}
+.cli-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.cli{margin:0;padding:18px 14px;border-radius:20px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:12px}
+.cli img{width:104px;height:104px;border-radius:22px;object-fit:cover;background:#fff;box-shadow:0 10px 24px rgba(0,0,0,.35)}
+.cli b{display:block;font-size:15px;font-weight:800;line-height:1.25}
+.cli span{display:block;font-size:13px;color:var(--text-muted);margin-top:2px}
+.cli-oferta{padding:28px 30px;border-radius:24px;display:flex;flex-direction:column;gap:10px;justify-content:center;background:linear-gradient(135deg,rgba(139,47,201,.22),rgba(232,56,107,.16));border-color:rgba(232,56,107,.32)}
+.cli-oferta b{font-size:clamp(22px,2.4vw,28px);font-weight:900;letter-spacing:-.02em;line-height:1.15}
+.cli-oferta span{font-size:16px;color:var(--text-muted);line-height:1.5}
+.cli-oferta .bp{align-self:flex-start;margin-top:8px;padding:15px 30px;font-size:15px}
+@media(max-width:900px){.cli-wrap{grid-template-columns:1fr}.cli-video{max-width:340px;margin:0 auto;width:100%}}
+@media(max-width:560px){.cli-grid{grid-template-columns:repeat(2,1fr)}.cli-grid .cli:last-child:nth-child(odd){grid-column:span 2;max-width:50%;justify-self:center;width:100%}.cli img{width:88px;height:88px}}
 /* Comparación con otros sistemas POS, sin nombrar a ninguno. */
 .cmp{max-width:900px;margin:28px auto 0;padding:10px 8px;border-radius:22px;overflow-x:auto}
 .cmp table{width:100%;border-collapse:collapse;font-size:15px}
@@ -829,13 +847,41 @@ footer{padding:100px 60px 40px;position:relative;z-index:2;background:linear-gra
   </div>
 </div>
 
+<!-- CLIENTES -->
+<div id="clientes" class="sec" style="padding-top:80px;padding-bottom:40px">
+  <div class="rv svc-header">
+    <div class="stag">Ya trabajan con nosotros</div>
+    <h2 class="sh">Negocios reales, funcionando hoy.</h2>
+    <p class="ssub" style="margin:0 auto">Restaurantes de pollo, de comida y parrilla, y un taller de motos manejan sus pedidos, su caja y su día con nuestro sistema.</p>
+  </div>
+  <div class="cli-wrap rv">
+    <div class="cli-video glass-panel">
+      <iframe src="https://www.tiktok.com/player/v1/7687001487356054802?autoplay=1&muted=1&loop=1&music_info=0&description=0&rel=0" title="Video de Frit's Chicken trabajando con JCL Pedidos" allow="autoplay; encrypted-media; fullscreen; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+      <p>Así trabaja Frit's Chicken con el sistema · <a href="https://www.tiktok.com/@jclagencia/video/7687001487356054802" target="_blank" rel="noopener">Verlo en TikTok</a></p>
+    </div>
+    <div class="cli-lado">
+      <div class="cli-grid">
+        <figure class="cli glass-panel"><img src="/clientes/frits-chicken.webp" alt="Logo de Frit's Chicken" width="104" height="104" loading="lazy"><figcaption><b>Frit's Chicken</b><span>Pollo frito</span></figcaption></figure>
+        <figure class="cli glass-panel"><img src="/clientes/frits-chicken-broaster.webp" alt="Logo de Frit's Chicken Broaster" width="104" height="104" loading="lazy"><figcaption><b>Frit's Chicken Broaster</b><span>Pollo broaster</span></figcaption></figure>
+        <figure class="cli glass-panel"><img src="/clientes/krispy.webp" alt="Logo de Krispy Pollos y Pollos" width="104" height="104" loading="lazy"><figcaption><b>Krispy Pollos &amp; Pollos</b><span>Pollo frito y broaster</span></figcaption></figure>
+        <figure class="cli glass-panel"><img src="/clientes/boyacomer.webp" alt="Logo de BoyaComer" width="104" height="104" loading="lazy"><figcaption><b>BoyaComer</b><span>Restaurante, burger y parrilla</span></figcaption></figure>
+        <figure class="cli glass-panel"><img src="/clientes/sa-motos.webp" alt="Logo de S&amp;A Motos" width="104" height="104" loading="lazy" style="background:#11131a;object-fit:contain"><figcaption><b>S&amp;A Motos</b><span>Taller de motos</span></figcaption></figure>
+      </div>
+      <div class="cli-oferta glass-panel">
+        <b>Te lo dejamos instalado y funcionando.</b>
+        <span>Primer mes gratis, con acompañamiento: montamos tu carta, enviamos los QR y capacitamos a tu equipo.</span>
+        <a href="#registro" class="bp">Quiero el mío →</a>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- PEDIDOS QR -->
 <div id="pedidos" class="sec">
   <div class="rv svc-header">
     <div class="stag">Cómo Funciona</div>
     <h2 class="sh">Todo tu restaurante en un solo sistema POS.</h2>
     <p class="ssub" style="margin:0 auto 24px">El cliente escanea el QR de su mesa y pide desde su celular, sin descargar ninguna app. El pedido llega a cocina, el mesero recibe el aviso y caja cobra y cierra el día. Tú lo ves todo desde tu panel.</p>
-    <p id="stats-badge" class="stag" style="background:linear-gradient(135deg,rgba(139,47,201,.18),rgba(232,56,107,.14));border-color:rgba(232,56,107,.3)">Sé de los primeros negocios en registrarte</p>
   </div>
 
   <div class="svc-grid rv">
@@ -1295,18 +1341,14 @@ const rvo = new IntersectionObserver(entries => {
 }, {threshold: window.innerWidth < 768 ? 0.04 : 0.08});
 document.querySelectorAll('.rv').forEach(el => rvo.observe(el));
 
-// Contador en vivo de negocios registrados
+// Los pedidos del mes en la franja de resultados, en vivo
 fetch('https://jcl-pedidos-app-production.up.railway.app/api/stats')
   .then(r => r.json())
   .then(d => {
-    const n = d.negocios || 0;
     // Los pedidos del mes, redondeados hacia abajo para no exagerar nunca.
     const p = d.pedidos_mes || 0;
     const res = document.getElementById('res-pedidos');
     if (res && p >= 100) res.textContent = `+${(p >= 1000 ? Math.floor(p / 500) * 500 : Math.floor(p / 100) * 100).toLocaleString('es-CO')}`;
-    const badge = document.getElementById('stats-badge');
-    if (!badge) return;
-    if (n > 0) badge.textContent = `🔥 ${n} negocio${n !== 1 ? 's' : ''} ya está${n !== 1 ? 'n' : ''} usando el sistema`;
   })
   .catch(() => {});
 

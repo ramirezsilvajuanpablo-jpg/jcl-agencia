@@ -64,6 +64,10 @@
     {
       "src": "icons/**",
       "use": "@vercel/static"
+    },
+    {
+      "src": "clientes/**",
+      "use": "@vercel/static"
     }
   ],
   "routes": [
