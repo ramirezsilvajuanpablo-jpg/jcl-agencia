@@ -550,6 +550,26 @@ h2.sh{font-size:clamp(36px,5vw,60px);font-weight:900;letter-spacing:-.03em;line-
 .res{padding:24px 18px;text-align:center;border-radius:20px}
 .res b{display:block;font-size:clamp(30px,4vw,42px);font-weight:800;line-height:1.1;margin-bottom:8px}
 .res span{display:block;font-size:14px;line-height:1.45;color:var(--text-muted)}
+/* Testimonio de BoyaComer: el video en vertical al lado de sus cifras (las dicen ellos en cámara). */
+.tst-wrap{display:grid;grid-template-columns:1fr 360px;gap:44px;max-width:1100px;margin:0 auto;align-items:center}
+.tst-texto .sh{text-wrap:balance}
+.tst-texto .ssub{margin-top:14px}
+.tst-datos{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:28px 0 30px}
+.tst-dato{padding:18px 14px;border-radius:18px;text-align:center}
+.tst-dato b{display:block;font-size:clamp(20px,2.2vw,26px);font-weight:800;letter-spacing:-.02em;line-height:1.15;margin-bottom:6px;white-space:nowrap}
+.tst-dato span{display:block;font-size:13px;line-height:1.4;color:var(--text-muted)}
+.tst-cta{display:inline-block}
+.tst-video{padding:12px;border-radius:26px;display:flex;flex-direction:column;gap:12px}
+.tst-marco{position:relative;border-radius:18px;overflow:hidden;background:#000;aspect-ratio:9/16}
+.tst-marco video{width:100%;height:100%;object-fit:cover;display:block}
+.tst-sonido{position:absolute;left:50%;bottom:18px;transform:translateX(-50%);white-space:nowrap;border:1px solid rgba(255,255,255,.22);border-radius:100px;padding:12px 20px;
+  font:700 14px/1 inherit;font-family:inherit;color:#fff;cursor:pointer;background:rgba(15,12,22,.6);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:0 10px 26px rgba(0,0,0,.35);transition:opacity .3s,transform .3s}
+.tst-sonido:hover{transform:translateX(-50%) translateY(-2px)}
+.tst-sonido:focus-visible{outline:2px solid #fff;outline-offset:3px}
+.tst-sonido.on{opacity:.82;font-size:13px;padding:9px 16px}
+.tst-video p{font-size:14px;color:var(--text-muted);text-align:center;line-height:1.45}
+@media(max-width:900px){.tst-wrap{grid-template-columns:1fr;gap:30px}.tst-texto{text-align:center}.tst-texto .ssub{margin-left:auto;margin-right:auto}.tst-video{max-width:360px;margin:0 auto;width:100%;order:-1}}
+@media(max-width:560px){.tst-datos{grid-template-columns:1fr;max-width:320px;margin-left:auto;margin-right:auto}}
 /* Clientes: logos de los negocios que ya usan el sistema y el video de uno de ellos. */
 .cli-wrap{display:grid;grid-template-columns:340px 1fr;gap:28px;max-width:1100px;margin:0 auto;align-items:stretch}
 .cli-video{padding:14px;border-radius:24px;display:flex;flex-direction:column;gap:12px}
@@ -844,6 +864,31 @@ footer{padding:100px 60px 40px;position:relative;z-index:2;background:linear-gra
     <div class="res glass-panel"><b class="gt">+80</b><span>pedidos al día en un solo asadero, sin libreta</span></div>
     <div class="res glass-panel"><b class="gt">+100</b><span>clientes atendidos en un mes por el chatbot de un restaurante</span></div>
     <div class="res glass-panel"><b class="gt">1 mes</b><span>gratis, con los QR enviados sin costo a toda Colombia</span></div>
+  </div>
+</div>
+
+<!-- TESTIMONIO: los dueños de BoyaComer contándolo en cámara -->
+<div id="testimonio" class="sec" style="padding-top:72px;padding-bottom:24px">
+  <div class="tst-wrap">
+    <div class="tst-texto rv">
+      <div class="stag">Lo que dicen nuestros clientes</div>
+      <h2 class="sh">“Antes esperaban hasta 40 minutos. Ahora, máximo 20.”</h2>
+      <p class="ssub">Natalia y Nixon, dueños de BoyaComer en Sogamoso, cuentan qué les cambió el sistema: los pedidos llegan del QR directo a cocina, las mesas se desocupan más rápido y llega más gente a almorzar.</p>
+      <div class="tst-datos">
+        <div class="tst-dato glass-panel"><b class="gt">40 → 20 min</b><span>de espera en la hora pico</span></div>
+        <div class="tst-dato glass-panel"><b class="gt">1 semana</b><span>para que todo el equipo se adaptara</span></div>
+        <div class="tst-dato glass-panel"><b class="gt">10 años</b><span>de restaurante, y ahora con el sistema</span></div>
+      </div>
+      <a href="#registro" class="bp tst-cta">Quiero esto en mi restaurante →</a>
+    </div>
+    <div class="tst-video glass-panel rv">
+      <div class="tst-marco">
+        <video id="tst-video" src="/clientes/testimonio-boyacomer.mp4" poster="/clientes/testimonio-boyacomer.webp" muted playsinline loop preload="none"
+          aria-label="Testimonio de Natalia Ramírez y Nixon Torres, dueños de BoyaComer, sobre JCL Pedidos"></video>
+        <button type="button" id="tst-sonido" class="tst-sonido" aria-pressed="false">🔊 Escuchar a Natalia y Nixon</button>
+      </div>
+      <p>Natalia Ramírez y Nixon Torres · BoyaComer, Sogamoso</p>
+    </div>
   </div>
 </div>
 
@@ -1340,6 +1385,28 @@ const rvo = new IntersectionObserver(entries => {
   entries.forEach(e => { if(e.isIntersecting) { e.target.classList.add('in'); rvo.unobserve(e.target); }});
 }, {threshold: window.innerWidth < 768 ? 0.04 : 0.08});
 document.querySelectorAll('.rv').forEach(el => rvo.observe(el));
+
+// Testimonio de BoyaComer: no se descarga hasta que se ve (pesa ~12 MB).
+// Arranca sin sonido (los subtítulos cuentan la historia); el botón lo pone
+// con sonido desde el principio. Con "reducir movimiento" no arranca solo.
+(() => {
+  const v = document.getElementById('tst-video'), b = document.getElementById('tst-sonido');
+  if (!v || !b) return;
+  const quieto = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let conSonido = false;
+  new IntersectionObserver(es => es.forEach(e => {
+    if (e.isIntersecting) { if (!quieto || conSonido) v.play().catch(() => {}); }
+    else v.pause();
+  }), { threshold: 0.45 }).observe(v);
+  const pintar = () => { b.textContent = conSonido ? '🔇 Silenciar' : '🔊 Escuchar a Natalia y Nixon'; b.classList.toggle('on', conSonido); b.setAttribute('aria-pressed', String(conSonido)); };
+  b.addEventListener('click', () => {
+    conSonido = !conSonido;
+    v.muted = !conSonido;
+    if (conSonido) { v.currentTime = 0; v.loop = false; v.play().catch(() => {}); } else v.loop = true;
+    pintar();
+  });
+  v.addEventListener('ended', () => { conSonido = false; v.muted = true; v.loop = true; v.play().catch(() => {}); pintar(); });
+})();
 
 // Los pedidos del mes en la franja de resultados, en vivo
 fetch('https://jcl-pedidos-app-production.up.railway.app/api/stats')
